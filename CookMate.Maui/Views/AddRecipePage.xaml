@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CookMate.Maui.ViewModels"
+             x:Class="CookMate.Maui.Views.AddRecipePage"
+             x:DataType="viewmodels:AddRecipeViewModel"
+             Title="Neues Rezept"
+             BackgroundColor="{StaticResource Gray50}">
+
+    <!-- 
+    Add Recipe page matching the original React AddRecipe component.
+    Features:
+    - Form for recipe details
+    - Dynamic ingredients and instructions lists
+    - Image URL input with preview
+    - Tag management
+    - Form validation
+    -->
+
+    <ScrollView>
+        <Grid Padding="32">
+            <VerticalStackLayout Spacing="32">
+                
+                <!-- Back Button -->
+                <Button Text="← Zurück"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray600}"
+                        HorizontalOptions="Start"
+                        Command="{Binding CancelCommand}"
+                        Padding="12,8" />
+
+                <!-- Form Grid -->
+                <Grid ColumnDefinitions="2*,*" ColumnSpacing="32">
+                    
+                    <!-- Main Form Column -->
+                    <VerticalStackLayout Spacing="32">
+                        
+                        <!-- Basic Info Card -->
+                        <Border StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="32"
+                                Shadow="{StaticResource SmallShadow}">
+                            <VerticalStackLayout Spacing="24">
+                                <Label Text="Grundinformationen"
+                                       Style="{StaticResource Title2}"
+                                       TextColor="{StaticResource Gray900}" />
+
+                                <!-- Recipe Name -->
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Rezeptname *"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Gray700}" />
+                                    <Entry Placeholder="z.B. Spaghetti Carbonara"
+                                           Text="{Binding Title}"
+                                           FontSize="16" />
+                                </VerticalStackLayout>
+
+                                <!-- Category and Difficulty Row -->
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="24">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="Kategorie"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray700}" />
+                                        <Picker ItemsSource="{Binding Categories}"
+                                                SelectedItem="{Binding SelectedCategory}"
+                                                FontSize="16" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="8">
+                                        <Label Text="Schwierigkeit"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray700}" />
+                                        <Picker ItemsSource="{Binding Difficulties}"
+                                                SelectedItem="{Binding SelectedDifficulty}"
+                                                FontSize="16" />
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                                <!-- Time and Servings Row -->
+                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="24">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="Vorbereitung (Min)"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray700}" />
+                                        <Entry Text="{Binding PrepTime}"
+                                               Keyboard="Numeric"
+                                               FontSize="16" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="8">
+                                        <Label Text="Kochzeit (Min)"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray700}" />
+                                        <Entry Text="{Binding CookTime}"
+                                               Keyboard="Numeric"
+                                               FontSize="16" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2" Spacing="8">
+                                        <Label Text="Portionen"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray700}" />
+                                        <Entry Text="{Binding Servings}"
+                                               Keyboard="Numeric"
+                                               FontSize="16" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Ingredients Card -->
+                        <Border StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="32"
+                                Shadow="{StaticResource SmallShadow}">
+                            <VerticalStackLayout Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="Zutaten"
+                                           Style="{StaticResource Title2}"
+                                           TextColor="{StaticResource Gray900}" />
+                                    <Button Grid.Column="1"
+                                            Text="＋ Zutat hinzufügen"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{StaticResource Teal600}"
+                                            Command="{Binding AddIngredientCommand}" />
+                                </Grid>
+
+                                <!-- Ingredients are managed by the ViewModel -->
+                                <Label Text="Zutaten werden dynamisch hinzugefügt"
+                                       TextColor="{StaticResource Gray500}"
+                                       FontSize="14"
+                                       FontStyle="Italic" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Instructions Card -->
+                        <Border StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="32"
+                                Shadow="{StaticResource SmallShadow}">
+                            <VerticalStackLayout Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="Zubereitung"
+                                           Style="{StaticResource Title2}"
+                                           TextColor="{StaticResource Gray900}" />
+                                    <Button Grid.Column="1"
+                                            Text="＋ Schritt hinzufügen"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{StaticResource Teal600}"
+                                            Command="{Binding AddInstructionCommand}" />
+                                </Grid>
+
+                                <!-- Instructions are managed by the ViewModel -->
+                                <Label Text="Schritte werden dynamisch hinzugefügt"
+                                       TextColor="{StaticResource Gray500}"
+                                       FontSize="14"
+                                       FontStyle="Italic" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Sidebar Column -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="32">
+                        
+                        <!-- Image Card -->
+                        <Border StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="32"
+                                Shadow="{StaticResource SmallShadow}">
+                            <VerticalStackLayout Spacing="24">
+                                <Label Text="Rezeptbild"
+                                       Style="{StaticResource Subtitle}"
+                                       TextColor="{StaticResource Gray900}" />
+
+                                <!-- Image Preview or Placeholder -->
+                                <Border StrokeShape="RoundRectangle 16"
+                                        Stroke="{StaticResource Gray200}"
+                                        StrokeThickness="2"
+                                        HeightRequest="256"
+                                        BackgroundColor="{StaticResource Gray50}">
+                                    <Grid>
+                                        <!-- Image Preview -->
+                                        <Image Source="{Binding ImageUrl}"
+                                               Aspect="AspectFill"
+                                               IsVisible="{Binding HasImage}" />
+                                        
+                                        <!-- Clear Button -->
+                                        <Button Text="✕"
+                                                BackgroundColor="{StaticResource Red500}"
+                                                TextColor="{StaticResource White}"
+                                                WidthRequest="40"
+                                                HeightRequest="40"
+                                                CornerRadius="20"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Start"
+                                                Margin="12"
+                                                Command="{Binding ClearImageCommand}"
+                                                IsVisible="{Binding HasImage}"
+                                                Shadow="{StaticResource MediumShadow}" />
+
+                                        <!-- Placeholder -->
+                                        <VerticalStackLayout HorizontalOptions="Center"
+                                                             VerticalOptions="Center"
+                                                             IsVisible="{Binding HasImage, Converter={StaticResource InverseBool}}">
+                                            <Label Text="🖼️"
+                                                   FontSize="64"
+                                                   HorizontalOptions="Center"
+                                                   TextColor="{StaticResource Gray300}" />
+                                            <Label Text="Bild-URL hinzufügen"
+                                                   TextColor="{StaticResource Gray600}"
+                                                   HorizontalOptions="Center"
+                                                   Margin="0,12,0,0" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+
+                                <Entry Placeholder="https://..."
+                                       Text="{Binding ImageUrl}"
+                                       FontSize="14" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Tags Card -->
+                        <Border StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="32"
+                                Shadow="{StaticResource SmallShadow}">
+                            <VerticalStackLayout Spacing="16">
+                                <Label Text="Tags"
+                                       Style="{StaticResource Subtitle}"
+                                       TextColor="{StaticResource Gray900}" />
+
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                    <Entry Placeholder="Tag eingeben..."
+                                           Text="{Binding CurrentTag}"
+                                           FontSize="14" />
+                                    <Button Grid.Column="1"
+                                            Text="＋"
+                                            BackgroundColor="{StaticResource Teal500}"
+                                            TextColor="{StaticResource White}"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            CornerRadius="8"
+                                            Command="{Binding AddTagCommand}" />
+                                </Grid>
+
+                                <!-- Tags Display -->
+                                <FlexLayout Wrap="Wrap"
+                                            BindableLayout.ItemsSource="{Binding Tags}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="x:String">
+                                            <Border BackgroundColor="{StaticResource Orange50}"
+                                                    StrokeShape="RoundRectangle 16"
+                                                    StrokeThickness="0"
+                                                    Padding="12,6"
+                                                    Margin="0,0,8,8">
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label Text="{Binding StringFormat='#{0}'}"
+                                                           TextColor="{StaticResource Orange700}" />
+                                                    <Button Text="✕"
+                                                            BackgroundColor="Transparent"
+                                                            TextColor="{StaticResource Orange900}"
+                                                            WidthRequest="20"
+                                                            HeightRequest="20"
+                                                            Padding="0"
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AddRecipeViewModel}}, Path=RemoveTagCommand}"
+                                                            CommandParameter="{Binding}" />
+                                                </HorizontalStackLayout>
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Action Buttons -->
+                        <Button Text="Rezept speichern"
+                                BackgroundColor="{StaticResource Orange500}"
+                                TextColor="{StaticResource White}"
+                                Command="{Binding SaveRecipeCommand}"
+                                CornerRadius="16"
+                                HeightRequest="56"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Shadow="{StaticResource SmallShadow}"
+                                IsEnabled="{Binding IsSaving, Converter={StaticResource InverseBool}}" />
+
+                        <Button Text="Abbrechen"
+                                BackgroundColor="{StaticResource Gray100}"
+                                TextColor="{StaticResource Gray700}"
+                                Command="{Binding CancelCommand}"
+                                CornerRadius="16"
+                                HeightRequest="56"
+                                FontSize="16" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Saving Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsSaving}"
+                                   IsVisible="{Binding IsSaving}"
+                                   Color="{StaticResource Orange500}"
+                                   HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

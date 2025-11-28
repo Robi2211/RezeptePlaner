@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:converters="clr-namespace:CookMate.Maui.Converters"
+                    x:Class="CookMate.Maui.Resources.Styles.Styles">
+    
+    <!--
+    Global styles for CookMate app.
+    Implements a consistent design system matching the original React/Tailwind implementation.
+    Includes typography, component styles, and animations.
+    -->
+
+    <!-- Value Converters -->
+    <converters:CategoryToStringConverter x:Key="CategoryToString" />
+    <converters:DifficultyToStringConverter x:Key="DifficultyToString" />
+    <converters:MealTypeToStringConverter x:Key="MealTypeToString" />
+    <converters:FavoriteToColorConverter x:Key="FavoriteToColor" />
+    <converters:InverseBoolConverter x:Key="InverseBool" />
+    <converters:CountToVisibilityConverter x:Key="CountToVisibility" />
+
+    <!-- Simple converters for today highlighting -->
+    <converters:TodayToBorderColorConverter x:Key="TodayToBorderColor" />
+    <converters:TodayToBackgroundColorConverter x:Key="TodayToBackgroundColor" />
+    <converters:TodayToTextColorConverter x:Key="TodayToTextColor" />
+    <converters:TodayToShadowConverter x:Key="TodayToShadow" />
+    <converters:FavoriteToIconConverter x:Key="FavoriteToIcon" />
+
+    <!-- Shadows (simulating Tailwind shadow utilities) -->
+    <Shadow x:Key="SmallShadow"
+            Brush="#0000001A"
+            Offset="0,1"
+            Radius="3"
+            Opacity="0.1" />
+    
+    <Shadow x:Key="MediumShadow"
+            Brush="#0000001A"
+            Offset="0,4"
+            Radius="6"
+            Opacity="0.15" />
+    
+    <Shadow x:Key="LargeShadow"
+            Brush="#0000001A"
+            Offset="0,10"
+            Radius="15"
+            Opacity="0.2" />
+
+    <!-- Typography Styles -->
+    
+    <!-- Title1 - Main page titles (24px, bold) -->
+    <Style x:Key="Title1" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+        <Setter Property="LineHeight" Value="1.2" />
+    </Style>
+
+    <!-- Title2 - Section titles (18px, semibold) -->
+    <Style x:Key="Title2" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+    </Style>
+
+    <!-- Subtitle - Card titles (16px, semibold) -->
+    <Style x:Key="Subtitle" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+    </Style>
+
+    <!-- Body - Regular text (14px) -->
+    <Style x:Key="Body" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Gray700}" />
+        <Setter Property="LineHeight" Value="1.5" />
+    </Style>
+
+    <!-- Caption - Small text (12px) -->
+    <Style x:Key="Caption" TargetType="Label">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+    </Style>
+
+    <!-- Button Styles -->
+    
+    <!-- Primary Button -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Orange500}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="24,16" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Orange600}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Orange700}" />
+                            <Setter Property="Scale" Value="0.98" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray300}" />
+                            <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Secondary Button -->
+    <Style x:Key="SecondaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray100}" />
+        <Setter Property="TextColor" Value="{StaticResource Gray700}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="24,16" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray200}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray300}" />
+                            <Setter Property="Scale" Value="0.98" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Ghost Button (text only) -->
+    <Style x:Key="GhostButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource Orange600}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Orange50}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Orange100}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Input Styles -->
+    
+    <!-- Default Entry -->
+    <Style TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray400}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <!-- Focus styling handled by Border parent -->
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Default Picker -->
+    <Style TargetType="Picker">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!-- Card Style for Borders -->
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Stroke" Value="{StaticResource Gray200}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="Padding" Value="24" />
+        <Setter Property="Shadow" Value="{StaticResource SmallShadow}" />
+    </Style>
+
+    <!-- Tag/Badge Style -->
+    <Style x:Key="Tag" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="8,4" />
+    </Style>
+
+    <!-- CollectionView Item Animation -->
+    <Style TargetType="CollectionView">
+        <Setter Property="SelectionMode" Value="None" />
+    </Style>
+
+    <!-- ActivityIndicator -->
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{StaticResource Orange500}" />
+    </Style>
+
+    <!-- ScrollView -->
+    <Style TargetType="ScrollView">
+        <Setter Property="VerticalScrollBarVisibility" Value="Always" />
+    </Style>
+
+</ResourceDictionary>

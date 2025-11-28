@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CookMate.Maui.ViewModels"
+             xmlns:models="clr-namespace:CookMate.Maui.Models"
+             x:Class="CookMate.Maui.Views.WeekPlannerPage"
+             x:DataType="viewmodels:WeekPlannerViewModel"
+             Title="Wochenplan"
+             BackgroundColor="{StaticResource Gray50}">
+
+    <!-- 
+    Week Planner page matching the original React WeekPlanner component.
+    Features:
+    - Week navigation header
+    - 7-day grid with meal cards
+    - Add/remove meal functionality
+    - Today highlight
+    -->
+
+    <Grid RowDefinitions="Auto,*" Padding="24">
+        
+        <!-- Week Navigation Header -->
+        <Border StrokeShape="RoundRectangle 24"
+                Stroke="{StaticResource Gray200}"
+                BackgroundColor="{StaticResource White}"
+                Padding="16"
+                Shadow="{StaticResource SmallShadow}">
+            <Grid ColumnDefinitions="48,*,48">
+                <!-- Previous Week Button -->
+                <Button Text="‹"
+                        FontSize="24"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray600}"
+                        Command="{Binding PreviousWeekCommand}"
+                        WidthRequest="48"
+                        HeightRequest="48" />
+
+                <!-- Week Info -->
+                <VerticalStackLayout Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     Spacing="4">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                        <Label Text="📅"
+                               FontSize="24"
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding WeekDateRange}"
+                               Style="{StaticResource Subtitle}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding TotalPlannedMeals, StringFormat='{0} Mahlzeiten geplant'}"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Next Week Button -->
+                <Button Grid.Column="2"
+                        Text="›"
+                        FontSize="24"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray600}"
+                        Command="{Binding NextWeekCommand}"
+                        WidthRequest="48"
+                        HeightRequest="48" />
+            </Grid>
+        </Border>
+
+        <!-- Day Plans Grid -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding DayPlans}"
+                        ItemsLayout="HorizontalList"
+                        Margin="0,24,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DayPlan">
+                    <Border Margin="8"
+                            WidthRequest="260"
+                            MinimumHeightRequest="600"
+                            StrokeShape="RoundRectangle 24"
+                            Stroke="{Binding IsToday, Converter={StaticResource TodayToBorderColor}}"
+                            StrokeThickness="2"
+                            BackgroundColor="{StaticResource White}"
+                            Shadow="{Binding IsToday, Converter={StaticResource TodayToShadow}}">
+                        <Grid RowDefinitions="Auto,*">
+                            <!-- Day Header -->
+                            <Border StrokeShape="RoundRectangle 24,24,0,0"
+                                    StrokeThickness="0"
+                                    BackgroundColor="{Binding IsToday, Converter={StaticResource TodayToBackgroundColor}}"
+                                    Padding="24">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="{Binding DateString}"
+                                           FontSize="13"
+                                           TextColor="{Binding IsToday, Converter={StaticResource TodayToTextColor}}" />
+                                    <Label Text="{Binding DayName}"
+                                           Style="{StaticResource Subtitle}"
+                                           TextColor="{Binding IsToday, Converter={StaticResource TodayToTextColor}}" />
+                                    <Border IsVisible="{Binding IsToday}"
+                                            BackgroundColor="{StaticResource Orange100}"
+                                            StrokeShape="RoundRectangle 12"
+                                            StrokeThickness="0"
+                                            Padding="8,4"
+                                            HorizontalOptions="Start"
+                                            Margin="0,4,0,0">
+                                        <Label Text="Heute"
+                                               FontSize="11"
+                                               TextColor="{StaticResource Orange600}" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <!-- Meals List -->
+                            <ScrollView Grid.Row="1" Padding="16">
+                                <VerticalStackLayout Spacing="12">
+                                    <!-- Meal Cards -->
+                                    <BindableLayout.ItemsSource>
+                                        <Binding Path="Meals" />
+                                    </BindableLayout.ItemsSource>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:PlannedMeal">
+                                            <Border StrokeShape="RoundRectangle 16"
+                                                    Stroke="{StaticResource Gray200}"
+                                                    BackgroundColor="{StaticResource Gray50}">
+                                                <Grid RowDefinitions="128,Auto">
+                                                    <!-- Meal Image -->
+                                                    <Grid>
+                                                        <Image Source="{Binding Recipe.Image}"
+                                                               Aspect="AspectFill"
+                                                               HeightRequest="128" />
+                                                        <!-- Meal Type Badge -->
+                                                        <Border BackgroundColor="#FFFFFFF2"
+                                                                StrokeShape="RoundRectangle 12"
+                                                                StrokeThickness="0"
+                                                                Padding="8,4"
+                                                                Margin="12"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="Start">
+                                                            <Label Text="{Binding MealType, Converter={StaticResource MealTypeToString}}"
+                                                                   FontSize="11"
+                                                                   TextColor="{StaticResource Teal700}" />
+                                                        </Border>
+                                                    </Grid>
+
+                                                    <!-- Meal Info -->
+                                                    <VerticalStackLayout Grid.Row="1"
+                                                                         Padding="12"
+                                                                         Spacing="4">
+                                                        <Label Text="{Binding Recipe.Title}"
+                                                               FontSize="13"
+                                                               FontAttributes="Bold"
+                                                               LineBreakMode="TailTruncation"
+                                                               MaxLines="2" />
+                                                        <HorizontalStackLayout Spacing="4">
+                                                            <Label Text="⏱️" FontSize="11" />
+                                                            <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} Min'}"
+                                                                   FontSize="11"
+                                                                   TextColor="{StaticResource Gray500}" />
+                                                        </HorizontalStackLayout>
+                                                    </VerticalStackLayout>
+                                                </Grid>
+
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=ViewRecipeCommand}"
+                                                        CommandParameter="{Binding Recipe.Id}" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+
+                                    <!-- Add Meal Button -->
+                                    <Button Text="＋ Mahlzeit hinzufügen"
+                                            BackgroundColor="Transparent"
+                                            BorderColor="{StaticResource Gray300}"
+                                            BorderWidth="2"
+                                            TextColor="{StaticResource Gray400}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=AddMealCommand}"
+                                            CommandParameter="{Binding DayName}"
+                                            CornerRadius="16"
+                                            HeightRequest="100"
+                                            Margin="0,8,0,0" />
+                                </VerticalStackLayout>
+                            </ScrollView>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="{StaticResource Orange500}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+    </Grid>
+
+</ContentPage>

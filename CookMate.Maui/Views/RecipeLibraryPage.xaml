@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CookMate.Maui.ViewModels"
+             xmlns:models="clr-namespace:CookMate.Maui.Models"
+             x:Class="CookMate.Maui.Views.RecipeLibraryPage"
+             x:DataType="viewmodels:RecipeLibraryViewModel"
+             Title="Rezeptbibliothek"
+             BackgroundColor="{StaticResource Gray50}">
+
+    <!-- 
+    Recipe Library page matching the original React RecipeLibrary component.
+    Features:
+    - Search bar
+    - Category, difficulty, and time filters
+    - Responsive recipe grid
+    - Favorite toggle
+    -->
+
+    <Grid RowDefinitions="Auto,*" Padding="32">
+        
+        <!-- Header and Filters -->
+        <VerticalStackLayout Grid.Row="0" Spacing="24">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Rezeptbibliothek"
+                       Style="{StaticResource Title1}"
+                       TextColor="{StaticResource Gray900}" />
+                <Label Text="Entdecke und verwalte all deine Lieblingsrezepte."
+                       Style="{StaticResource Body}"
+                       TextColor="{StaticResource Gray600}" />
+            </VerticalStackLayout>
+
+            <!-- Search and Filters Card -->
+            <Border StrokeShape="RoundRectangle 16"
+                    Stroke="{StaticResource Gray200}"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="24"
+                    Shadow="{StaticResource SmallShadow}">
+                <VerticalStackLayout Spacing="16">
+                    
+                    <!-- Filter Row -->
+                    <FlexLayout Wrap="Wrap" 
+                                JustifyContent="Start"
+                                AlignItems="Center">
+                        
+                        <!-- Search Box -->
+                        <Border StrokeShape="RoundRectangle 8"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Padding="0"
+                                Margin="0,0,12,12"
+                                WidthRequest="300"
+                                HeightRequest="48">
+                            <Grid ColumnDefinitions="48,*">
+                                <Label Text="🔍"
+                                       FontSize="18"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Entry Grid.Column="1"
+                                       Placeholder="Rezepte oder Zutaten suchen..."
+                                       Text="{Binding SearchQuery}"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Category Picker -->
+                        <Border StrokeShape="RoundRectangle 8"
+                                Stroke="{StaticResource Gray200}"
+                                Padding="8,0"
+                                Margin="0,0,12,12"
+                                HeightRequest="48"
+                                MinimumWidthRequest="180">
+                            <Picker Title="Kategorie"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding SelectedCategory}"
+                                    VerticalOptions="Center" />
+                        </Border>
+
+                        <!-- Difficulty Picker -->
+                        <Border StrokeShape="RoundRectangle 8"
+                                Stroke="{StaticResource Gray200}"
+                                Padding="8,0"
+                                Margin="0,0,12,12"
+                                HeightRequest="48"
+                                MinimumWidthRequest="160">
+                            <Picker Title="Schwierigkeit"
+                                    ItemsSource="{Binding Difficulties}"
+                                    SelectedItem="{Binding SelectedDifficulty}"
+                                    VerticalOptions="Center" />
+                        </Border>
+
+                        <!-- Time Slider -->
+                        <Border StrokeShape="RoundRectangle 8"
+                                Stroke="{StaticResource Gray200}"
+                                Padding="12,0"
+                                Margin="0,0,0,12"
+                                HeightRequest="48"
+                                MinimumWidthRequest="200">
+                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Label Text="⏱️" FontSize="16" />
+                                <Slider Minimum="15"
+                                        Maximum="120"
+                                        Value="{Binding MaxTimeMinutes}"
+                                        WidthRequest="100"
+                                        MinimumTrackColor="{StaticResource Orange500}"
+                                        MaximumTrackColor="{StaticResource Gray200}"
+                                        ThumbColor="{StaticResource Orange500}" />
+                                <Label Text="{Binding MaxTimeMinutes, StringFormat='{0} Min'}"
+                                       WidthRequest="50"
+                                       TextColor="{StaticResource Gray600}"
+                                       FontSize="13" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </FlexLayout>
+
+                    <!-- Results Count -->
+                    <BoxView HeightRequest="1"
+                             Color="{StaticResource Gray100}" />
+                    <Label Text="{Binding ResultCount, StringFormat='{0} Rezepte gefunden'}"
+                           TextColor="{StaticResource Gray600}"
+                           FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Recipe Grid -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FilteredRecipes}"
+                        Margin="0,24,0,0"
+                        ItemsLayout="VerticalGrid, 3">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Padding="40">
+                    <Label Text="Keine Rezepte gefunden"
+                           TextColor="{StaticResource Gray400}"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                    <Label Text="Versuche andere Filter oder Suchbegriffe"
+                           TextColor="{StaticResource Gray500}"
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           Margin="0,8,0,0" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Recipe">
+                    <Border Margin="8"
+                            StrokeShape="RoundRectangle 16"
+                            Stroke="{StaticResource Gray200}"
+                            BackgroundColor="{StaticResource White}"
+                            Shadow="{StaticResource SmallShadow}">
+                        <Grid RowDefinitions="192,*">
+                            <!-- Recipe Image -->
+                            <Grid>
+                                <Border StrokeShape="RoundRectangle 16,16,0,0"
+                                        StrokeThickness="0">
+                                    <Image Source="{Binding Image}"
+                                           Aspect="AspectFill" />
+                                </Border>
+                                
+                                <!-- Favorite Button -->
+                                <Border BackgroundColor="#FFFFFFE6"
+                                        StrokeShape="RoundRectangle 20"
+                                        StrokeThickness="0"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Margin="12">
+                                    <Button Text="{Binding IsFavorite, Converter={StaticResource FavoriteToIcon}}"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{Binding IsFavorite, Converter={StaticResource FavoriteToColor}}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecipeLibraryViewModel}}, Path=ToggleFavoriteCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            WidthRequest="40"
+                                            HeightRequest="40" />
+                                </Border>
+
+                                <!-- Tap Gesture for Image -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecipeLibraryViewModel}}, Path=ViewRecipeCommand}"
+                                        CommandParameter="{Binding Id}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <!-- Recipe Info -->
+                            <VerticalStackLayout Grid.Row="1" 
+                                                 Padding="20"
+                                                 Spacing="8">
+                                <!-- Category & Difficulty Tags -->
+                                <HorizontalStackLayout Spacing="8">
+                                    <Border BackgroundColor="{StaticResource Orange50}"
+                                            StrokeShape="RoundRectangle 4"
+                                            StrokeThickness="0"
+                                            Padding="8,4">
+                                        <Label Text="{Binding Category, Converter={StaticResource CategoryToString}}"
+                                               FontSize="11"
+                                               TextColor="{StaticResource Orange700}" />
+                                    </Border>
+                                    <Border BackgroundColor="{StaticResource Gray100}"
+                                            StrokeShape="RoundRectangle 4"
+                                            StrokeThickness="0"
+                                            Padding="8,4">
+                                        <Label Text="{Binding Difficulty, Converter={StaticResource DifficultyToString}}"
+                                               FontSize="11"
+                                               TextColor="{StaticResource Gray600}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <!-- Title -->
+                                <Label Text="{Binding Title}"
+                                       Style="{StaticResource Subtitle}"
+                                       TextColor="{StaticResource Gray900}"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecipeLibraryViewModel}}, Path=ViewRecipeCommand}"
+                                            CommandParameter="{Binding Id}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <!-- Time & Servings -->
+                                <HorizontalStackLayout Spacing="16">
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Label Text="⏱️" FontSize="14" />
+                                        <Label Text="{Binding TotalTime, StringFormat='{0} Min'}"
+                                               FontSize="13"
+                                               TextColor="{StaticResource Gray600}" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Label Text="👥" FontSize="14" />
+                                        <Label Text="{Binding Servings, StringFormat='{0} Portionen'}"
+                                               FontSize="13"
+                                               TextColor="{StaticResource Gray600}" />
+                                    </HorizontalStackLayout>
+                                </HorizontalStackLayout>
+
+                                <!-- Tags -->
+                                <HorizontalStackLayout Spacing="4" Margin="0,4,0,0">
+                                    <BindableLayout.ItemsSource>
+                                        <Binding Path="Tags" />
+                                    </BindableLayout.ItemsSource>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="{StaticResource Orange500}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+build/
+dist/
+*.tsbuildinfo
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# .NET MAUI / C# specific
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vs/
+.vs/
+*.DotSettings.user
+packages/
+*.nupkg
+
+# Build artifacts
+*.app
+*.ipa
+*.apk
+*.aab
+*.msix
+*.appxbundle
+
+# Platform specific
+Platforms/Android/*.keystore
+Platforms/iOS/*.p12
+Platforms/iOS/*.mobileprovision
+
+# Rider
+.idea/
+
+# Visual Studio
+*.csproj.user
+*.sln.docstates
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Test results
+TestResults/
+*.trx
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CookMate.Maui.ViewModels"
+             xmlns:models="clr-namespace:CookMate.Maui.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="CookMate.Maui.Views.DashboardPage"
+             x:DataType="viewmodels:DashboardViewModel"
+             Title="Dashboard"
+             BackgroundColor="{StaticResource Gray50}">
+
+    <!-- 
+    Dashboard page matching the original React Dashboard component.
+    Features:
+    - Header with date display
+    - Today's planned meals section
+    - Weekly overview with quick navigation
+    - Trending recipes sidebar
+    - Quick stats panel
+    -->
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="24">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Dashboard"
+                       Style="{StaticResource Title1}"
+                       TextColor="{StaticResource Gray900}" />
+                <Label Text="{Binding DateDisplay}"
+                       Style="{StaticResource Body}"
+                       TextColor="{StaticResource Gray600}" />
+            </VerticalStackLayout>
+
+            <!-- Today's Planned Meals Section -->
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Heute geplant"
+                       Style="{StaticResource Title2}"
+                       TextColor="{StaticResource Gray900}" />
+
+                <!-- Today's Meals Grid -->
+                <CollectionView ItemsSource="{Binding TodayPlan.Meals}"
+                                ItemsLayout="VerticalGrid, 2"
+                                HeightRequest="200"
+                                EmptyView="Keine Mahlzeiten für heute geplant">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:PlannedMeal">
+                            <Border Margin="4"
+                                    Padding="12"
+                                    StrokeShape="RoundRectangle 12"
+                                    Stroke="{StaticResource Orange200}"
+                                    BackgroundColor="{StaticResource Orange50}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DashboardViewModel}}, Path=ViewRecipeCommand}"
+                                        CommandParameter="{Binding Recipe.Id}" />
+                                </Border.GestureRecognizers>
+                                
+                                <Grid ColumnDefinitions="80,*" ColumnSpacing="12">
+                                    <!-- Recipe Image -->
+                                    <Border StrokeShape="RoundRectangle 8"
+                                            StrokeThickness="0"
+                                            HeightRequest="80">
+                                        <Image Source="{Binding Recipe.Image}"
+                                               Aspect="AspectFill" />
+                                    </Border>
+
+                                    <!-- Recipe Info -->
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                         VerticalOptions="Center"
+                                                         Spacing="4">
+                                        <!-- Category Badge -->
+                                        <Border BackgroundColor="{StaticResource Orange100}"
+                                                Stroke="{StaticResource Orange300}"
+                                                StrokeShape="RoundRectangle 4"
+                                                Padding="8,2"
+                                                HorizontalOptions="Start">
+                                            <Label Text="{Binding Recipe.Category, Converter={StaticResource CategoryToString}}"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Orange900}" />
+                                        </Border>
+                                        
+                                        <Label Text="{Binding Recipe.Title}"
+                                               Style="{StaticResource Subtitle}"
+                                               LineBreakMode="TailTruncation"
+                                               MaxLines="2"
+                                               TextColor="{StaticResource Gray900}" />
+                                        
+                                        <!-- Time and Servings -->
+                                        <HorizontalStackLayout Spacing="16">
+                                            <HorizontalStackLayout Spacing="4">
+                                                <Image Source="clock.png"
+                                                       WidthRequest="12"
+                                                       HeightRequest="12" />
+                                                <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} Min'}"
+                                                       FontSize="11"
+                                                       TextColor="{StaticResource Gray600}" />
+                                            </HorizontalStackLayout>
+                                            <HorizontalStackLayout Spacing="4">
+                                                <Image Source="users.png"
+                                                       WidthRequest="12"
+                                                       HeightRequest="12" />
+                                                <Label Text="{Binding Recipe.Servings, StringFormat='{0} Port.'}"
+                                                       FontSize="11"
+                                                       TextColor="{StaticResource Gray600}" />
+                                            </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- Main Content Grid -->
+            <Grid ColumnDefinitions="2*,*" ColumnSpacing="16">
+                
+                <!-- Week Overview Card -->
+                <Border Grid.Column="0"
+                        StrokeShape="RoundRectangle 12"
+                        Stroke="{StaticResource Gray200}"
+                        BackgroundColor="{StaticResource White}"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="16">
+                        <!-- Header -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Wochenübersicht"
+                                   Style="{StaticResource Title2}"
+                                   TextColor="{StaticResource Gray900}" />
+                            <Button Grid.Column="1"
+                                    Text="Zum Wochenplan →"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource Orange600}"
+                                    Command="{Binding GoToWeekPlannerCommand}"
+                                    FontSize="13" />
+                        </Grid>
+
+                        <!-- Week Days List -->
+                        <CollectionView ItemsSource="{Binding WeekPlans}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:DayPlan">
+                                    <Border Margin="0,0,0,8"
+                                            Padding="12"
+                                            BackgroundColor="{StaticResource Orange50}"
+                                            StrokeShape="RoundRectangle 8"
+                                            StrokeThickness="0">
+                                        <Grid ColumnDefinitions="100,*" ColumnSpacing="16">
+                                            <!-- Day Info -->
+                                            <VerticalStackLayout>
+                                                <Label Text="{Binding DayName}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="13"
+                                                       TextColor="{StaticResource Gray900}" />
+                                                <Label Text="{Binding DateString}"
+                                                       FontSize="11"
+                                                       TextColor="{StaticResource Gray500}" />
+                                            </VerticalStackLayout>
+
+                                            <!-- Meals -->
+                                            <CollectionView Grid.Column="1"
+                                                            ItemsSource="{Binding Meals}"
+                                                            ItemsLayout="HorizontalList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="models:PlannedMeal">
+                                                        <Border Margin="0,0,8,0"
+                                                                Padding="8"
+                                                                BackgroundColor="{StaticResource White}"
+                                                                Stroke="{StaticResource Gray200}"
+                                                                StrokeShape="RoundRectangle 8"
+                                                                MinimumWidthRequest="180">
+                                                            <HorizontalStackLayout Spacing="8">
+                                                                <Border StrokeShape="RoundRectangle 6"
+                                                                        WidthRequest="48"
+                                                                        HeightRequest="48"
+                                                                        StrokeThickness="0">
+                                                                    <Image Source="{Binding Recipe.Image}"
+                                                                           Aspect="AspectFill" />
+                                                                </Border>
+                                                                <VerticalStackLayout VerticalOptions="Center">
+                                                                    <Label Text="{Binding Recipe.Title}"
+                                                                           FontSize="11"
+                                                                           FontAttributes="Bold"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           MaxLines="1"
+                                                                           WidthRequest="100" />
+                                                                    <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} Min'}"
+                                                                           FontSize="10"
+                                                                           TextColor="{StaticResource Gray500}" />
+                                                                </VerticalStackLayout>
+                                                            </HorizontalStackLayout>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Sidebar -->
+                <VerticalStackLayout Grid.Column="1" Spacing="16">
+                    
+                    <!-- Trending Recipes -->
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="{StaticResource Green200}"
+                            BackgroundColor="{StaticResource Green50}"
+                            Padding="20"
+                            Shadow="{StaticResource SmallShadow}">
+                        <VerticalStackLayout Spacing="16">
+                            <HorizontalStackLayout Spacing="8">
+                                <Border BackgroundColor="{StaticResource Green500}"
+                                        StrokeShape="RoundRectangle 8"
+                                        WidthRequest="32"
+                                        HeightRequest="32">
+                                    <Label Text="📈"
+                                           FontSize="16"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Border>
+                                <Label Text="Beliebt"
+                                       Style="{StaticResource Subtitle}"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+
+                            <!-- Trending Recipes List -->
+                            <CollectionView ItemsSource="{Binding TrendingRecipes}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Recipe">
+                                        <Border Margin="0,0,0,8"
+                                                Padding="8"
+                                                BackgroundColor="#FFFFFF80"
+                                                StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="0">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DashboardViewModel}}, Path=ViewRecipeCommand}"
+                                                    CommandParameter="{Binding Id}" />
+                                            </Border.GestureRecognizers>
+                                            
+                                            <HorizontalStackLayout Spacing="12">
+                                                <Border StrokeShape="RoundRectangle 8"
+                                                        WidthRequest="56"
+                                                        HeightRequest="56"
+                                                        StrokeThickness="0"
+                                                        Shadow="{StaticResource SmallShadow}">
+                                                    <Image Source="{Binding Image}"
+                                                           Aspect="AspectFill" />
+                                                </Border>
+                                                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                                    <Label Text="{Binding Title}"
+                                                           FontSize="13"
+                                                           FontAttributes="Bold"
+                                                           LineBreakMode="TailTruncation"
+                                                           MaxLines="2" />
+                                                    <Label Text="{Binding TotalTime, StringFormat='{0} Min'}"
+                                                           FontSize="11"
+                                                           TextColor="{StaticResource Gray600}" />
+                                                </VerticalStackLayout>
+                                            </HorizontalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Quick Stats -->
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="{StaticResource Orange200}"
+                            BackgroundColor="{StaticResource Orange50}"
+                            Padding="20"
+                            Shadow="{StaticResource SmallShadow}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="Schnellinfo"
+                                   Style="{StaticResource Subtitle}" />
+
+                            <!-- Recipes Count -->
+                            <Border Padding="12"
+                                    BackgroundColor="#FFFFFFCC"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="0">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="Rezepte"
+                                           TextColor="{StaticResource Gray600}" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding TotalRecipes}"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Orange600}" />
+                                </Grid>
+                            </Border>
+
+                            <!-- Favorites Count -->
+                            <Border Padding="12"
+                                    BackgroundColor="#FFFFFFCC"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="0">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="Favoriten"
+                                           TextColor="{StaticResource Gray600}" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding TotalFavorites}"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Green600}" />
+                                </Grid>
+                            </Border>
+
+                            <!-- Open Planner Button -->
+                            <Button Text="📅 WOCHENPLAN ÖFFNEN →"
+                                    BackgroundColor="{StaticResource Orange500}"
+                                    TextColor="{StaticResource White}"
+                                    Command="{Binding GoToWeekPlannerCommand}"
+                                    CornerRadius="8"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    HeightRequest="44"
+                                    Margin="0,8,0,0"
+                                    Shadow="{StaticResource MediumShadow}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource Orange500}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

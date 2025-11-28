@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:CookMate.Maui.Views"
+       x:Class="CookMate.Maui.AppShell"
+       Title="CookMate"
+       FlyoutBehavior="Disabled">
+
+    <!--
+    AppShell provides the main navigation structure.
+    Uses TabBar for bottom navigation matching the React TopNavigation component.
+    
+    Navigation matches the original React app:
+    - Dashboard (Home icon)
+    - Rezepte (Recipes/BookOpen icon)
+    - Wochenplan (Week Planner/Calendar icon)
+    - Favoriten (Favorites/Heart icon)
+    - Design (DesignSystem/Palette icon - optional)
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <!-- Shell styling to match the original design -->
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource Gray900}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource Gray900}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Orange600}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Gray500}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Orange600}" />
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!-- Tab Bar Navigation -->
+    <TabBar>
+        <!-- Dashboard Tab -->
+        <ShellContent Title="Dashboard"
+                      Icon="home.png"
+                      Route="dashboard"
+                      ContentTemplate="{DataTemplate views:DashboardPage}" />
+
+        <!-- Recipes Tab -->
+        <ShellContent Title="Rezepte"
+                      Icon="book.png"
+                      Route="recipes"
+                      ContentTemplate="{DataTemplate views:RecipeLibraryPage}" />
+
+        <!-- Week Planner Tab -->
+        <ShellContent Title="Wochenplan"
+                      Icon="calendar.png"
+                      Route="planner"
+                      ContentTemplate="{DataTemplate views:WeekPlannerPage}" />
+
+        <!-- Favorites Tab -->
+        <ShellContent Title="Favoriten"
+                      Icon="heart.png"
+                      Route="favorites"
+                      ContentTemplate="{DataTemplate views:FavoritesPage}" />
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+    <!-- CookMate App Icon Background -->
+    <rect width="456" height="456" fill="#F97316"/>
+    
+    <!-- Chef Hat Symbol -->
+    <g transform="translate(128, 108)">
+        <!-- Hat body -->
+        <ellipse cx="100" cy="200" rx="80" ry="30" fill="white"/>
+        <rect x="20" y="120" width="160" height="80" fill="white"/>
+        
+        <!-- Hat puffs -->
+        <circle cx="60" cy="100" r="50" fill="white"/>
+        <circle cx="100" cy="80" r="55" fill="white"/>
+        <circle cx="140" cy="100" r="50" fill="white"/>
+    </g>
+</svg>

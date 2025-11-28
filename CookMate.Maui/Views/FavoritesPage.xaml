@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CookMate.Maui.ViewModels"
+             xmlns:models="clr-namespace:CookMate.Maui.Models"
+             x:Class="CookMate.Maui.Views.FavoritesPage"
+             x:DataType="viewmodels:FavoritesViewModel"
+             Title="Favoriten"
+             BackgroundColor="{StaticResource Gray50}">
+
+    <!-- 
+    Favorites page matching the original React Favorites component.
+    Features:
+    - Header with heart icon and count
+    - Search bar
+    - Empty state
+    - Recipe cards with remove option
+    -->
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="32">
+        
+        <!-- Header Section -->
+        <HorizontalStackLayout Spacing="16" Margin="0,0,0,24">
+            <!-- Heart Icon Badge -->
+            <Border BackgroundColor="{StaticResource Red500}"
+                    StrokeShape="RoundRectangle 16"
+                    StrokeThickness="0"
+                    WidthRequest="64"
+                    HeightRequest="64"
+                    Shadow="{StaticResource MediumShadow}">
+                <Label Text="❤️"
+                       FontSize="28"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Border>
+            
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="Meine Favoriten"
+                       Style="{StaticResource Title1}"
+                       TextColor="{StaticResource Gray900}" />
+                <Label Text="{Binding FavoriteCount, StringFormat='{0} Lieblingsrezepte gespeichert'}"
+                       Style="{StaticResource Body}"
+                       TextColor="{StaticResource Gray600}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+
+        <!-- Search Bar -->
+        <Border Grid.Row="1"
+                StrokeShape="RoundRectangle 16"
+                Stroke="{StaticResource Gray200}"
+                BackgroundColor="{StaticResource White}"
+                Padding="0"
+                MaximumWidthRequest="600"
+                HorizontalOptions="Start"
+                HeightRequest="56"
+                Margin="0,0,0,32"
+                Shadow="{StaticResource SmallShadow}"
+                IsVisible="{Binding HasNoFavorites, Converter={StaticResource InverseBool}}">
+            <Grid ColumnDefinitions="56,*">
+                <Label Text="🔍"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                <Entry Grid.Column="1"
+                       Placeholder="Favoriten durchsuchen..."
+                       Text="{Binding SearchQuery}"
+                       FontSize="16"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <!-- Content Area -->
+        <Grid Grid.Row="2">
+            
+            <!-- Empty State: No Favorites -->
+            <Border IsVisible="{Binding HasNoFavorites}"
+                    StrokeShape="RoundRectangle 24"
+                    Stroke="{StaticResource Gray200}"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="64"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Shadow="{StaticResource SmallShadow}">
+                <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Border BackgroundColor="{StaticResource Gray100}"
+                            StrokeShape="RoundRectangle 48"
+                            StrokeThickness="0"
+                            WidthRequest="96"
+                            HeightRequest="96"
+                            HorizontalOptions="Center">
+                        <Label Text="🤍"
+                               FontSize="48"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+                    <Label Text="Noch keine Favoriten"
+                           Style="{StaticResource Title2}"
+                           TextColor="{StaticResource Gray900}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Markiere Rezepte mit einem Herz, um sie hier zu speichern und schnell wiederzufinden."
+                           TextColor="{StaticResource Gray600}"
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           MaximumWidthRequest="400" />
+                    <Button Text="Rezepte entdecken"
+                            BackgroundColor="{StaticResource Orange500}"
+                            TextColor="{StaticResource White}"
+                            Command="{Binding DiscoverRecipesCommand}"
+                            CornerRadius="12"
+                            HeightRequest="48"
+                            WidthRequest="200"
+                            Margin="0,16,0,0" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- No Search Results -->
+            <Border IsVisible="{Binding HasNoSearchResults}"
+                    StrokeShape="RoundRectangle 24"
+                    Stroke="{StaticResource Gray200}"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="64"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Label Text="Keine Rezepte gefunden"
+                           FontSize="18"
+                           TextColor="{StaticResource Gray600}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Versuche andere Suchbegriffe"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray500}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Favorites Grid -->
+            <CollectionView ItemsSource="{Binding FilteredFavorites}"
+                            ItemsLayout="VerticalGrid, 3"
+                            IsVisible="{Binding HasNoFavorites, Converter={StaticResource InverseBool}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Recipe">
+                        <Border Margin="12"
+                                StrokeShape="RoundRectangle 24"
+                                Stroke="{StaticResource Gray200}"
+                                BackgroundColor="{StaticResource White}"
+                                Shadow="{StaticResource SmallShadow}">
+                            <Grid RowDefinitions="288,*">
+                                <!-- Recipe Image with Favorite Button -->
+                                <Grid>
+                                    <Image Source="{Binding Image}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="288" />
+                                    
+                                    <!-- Favorite Toggle Button -->
+                                    <Button Text="❤️"
+                                            BackgroundColor="#FFFFFFF2"
+                                            TextColor="{StaticResource Red500}"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            CornerRadius="24"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}}, Path=ToggleFavoriteCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Start"
+                                            Margin="16"
+                                            Shadow="{StaticResource MediumShadow}" />
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}}, Path=ViewRecipeCommand}"
+                                            CommandParameter="{Binding Id}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+
+                                <!-- Recipe Info -->
+                                <VerticalStackLayout Grid.Row="1" 
+                                                     Padding="24"
+                                                     Spacing="12">
+                                    <!-- Tags -->
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Border BackgroundColor="{StaticResource Orange50}"
+                                                StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="0"
+                                                Padding="12,4">
+                                            <Label Text="{Binding Category, Converter={StaticResource CategoryToString}}"
+                                                   FontSize="13"
+                                                   TextColor="{StaticResource Orange700}" />
+                                        </Border>
+                                        <Border BackgroundColor="{StaticResource Gray100}"
+                                                StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="0"
+                                                Padding="12,4">
+                                            <Label Text="{Binding Difficulty, Converter={StaticResource DifficultyToString}}"
+                                                   FontSize="13"
+                                                   TextColor="{StaticResource Gray600}" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Title -->
+                                    <Label Text="{Binding Title}"
+                                           Style="{StaticResource Subtitle}"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}}, Path=ViewRecipeCommand}"
+                                                CommandParameter="{Binding Id}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!-- Time & Servings -->
+                                    <HorizontalStackLayout Spacing="24">
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Label Text="⏱️" FontSize="16" />
+                                            <Label Text="{Binding TotalTime, StringFormat='{0} Min'}"
+                                                   FontSize="14"
+                                                   TextColor="{StaticResource Gray600}" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Label Text="👥" FontSize="16" />
+                                            <Label Text="{Binding Servings, StringFormat='{0} Portionen'}"
+                                                   FontSize="14"
+                                                   TextColor="{StaticResource Gray600}" />
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Recipe Tags -->
+                                    <HorizontalStackLayout Spacing="4"
+                                                           BindableLayout.ItemsSource="{Binding Tags}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="x:String">
+                                                <Border BackgroundColor="{StaticResource Gray50}"
+                                                        StrokeShape="RoundRectangle 12"
+                                                        StrokeThickness="0"
+                                                        Padding="12,4">
+                                                    <Label Text="{Binding StringFormat='#{0}'}"
+                                                           FontSize="13"
+                                                           TextColor="{StaticResource Gray500}" />
+                                                </Border>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Saved Status -->
+                                    <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                                        <Label Text="📖" FontSize="14" />
+                                        <Label Text="Als Favorit gespeichert"
+                                               FontSize="13"
+                                               TextColor="{StaticResource Teal600}" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="2"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="{StaticResource Orange500}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+    </Grid>
+
+</ContentPage>
