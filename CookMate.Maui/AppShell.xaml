@@ -39,25 +39,25 @@
     <TabBar>
         <!-- Dashboard Tab -->
         <ShellContent Title="Dashboard"
-                      Icon="home.png"
+                      Icon="home.svg"
                       Route="dashboard"
                       ContentTemplate="{DataTemplate views:DashboardPage}" />
 
         <!-- Recipes Tab -->
         <ShellContent Title="Rezepte"
-                      Icon="book.png"
+                      Icon="book.svg"
                       Route="recipes"
                       ContentTemplate="{DataTemplate views:RecipeLibraryPage}" />
 
         <!-- Week Planner Tab -->
         <ShellContent Title="Wochenplan"
-                      Icon="calendar.png"
+                      Icon="calendar.svg"
                       Route="planner"
                       ContentTemplate="{DataTemplate views:WeekPlannerPage}" />
 
         <!-- Favorites Tab -->
         <ShellContent Title="Favoriten"
-                      Icon="heart.png"
+                      Icon="heart.svg"
                       Route="favorites"
                       ContentTemplate="{DataTemplate views:FavoritesPage}" />
     </TabBar>

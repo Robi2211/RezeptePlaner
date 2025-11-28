@@ -109,11 +109,8 @@
 
                             <!-- Meals List -->
                             <ScrollView Grid.Row="1" Padding="16">
-                                <VerticalStackLayout Spacing="12">
-                                    <!-- Meal Cards -->
-                                    <BindableLayout.ItemsSource>
-                                        <Binding Path="Meals" />
-                                    </BindableLayout.ItemsSource>
+                                <VerticalStackLayout Spacing="12"
+                                                     BindableLayout.ItemsSource="{Binding Meals}">
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="models:PlannedMeal">
                                             <Border StrokeShape="RoundRectangle 16"

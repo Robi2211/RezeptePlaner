@@ -237,9 +237,9 @@
                                TextColor="{StaticResource Gray900}" />
 
                         <!-- Instructions List -->
-                        <CollectionView ItemsSource="{Binding Recipe.Instructions}">
+                        <CollectionView ItemsSource="{Binding NumberedInstructions}">
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="x:String">
+                                <DataTemplate x:DataType="viewmodels:NumberedInstruction">
                                     <HorizontalStackLayout Spacing="12" Padding="0,8">
                                         <!-- Step Number Circle -->
                                         <Border BackgroundColor="{StaticResource Orange500}"
@@ -248,15 +248,14 @@
                                                 WidthRequest="28"
                                                 HeightRequest="28"
                                                 Shadow="{StaticResource SmallShadow}">
-                                            <!-- Note: Index not directly available in MAUI, using placeholder -->
-                                            <Label Text="•"
+                                            <Label Text="{Binding StepNumber}"
                                                    FontSize="12"
                                                    FontAttributes="Bold"
                                                    TextColor="{StaticResource White}"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center" />
                                         </Border>
-                                        <Label Text="{Binding}"
+                                        <Label Text="{Binding Text}"
                                                FontSize="14"
                                                TextColor="{StaticResource Gray800}"
                                                LineBreakMode="WordWrap"

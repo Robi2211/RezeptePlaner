@@ -84,7 +84,7 @@ public class MealTypeToStringConverter : IValueConverter
 
 /// <summary>
 /// Converts boolean favorite status to icon character.
-/// Uses filled heart for favorites, outline for non-favorites.
+/// Uses emoji hearts for cross-platform compatibility.
 /// </summary>
 public class FavoriteToIconConverter : IValueConverter
 {
@@ -92,10 +92,10 @@ public class FavoriteToIconConverter : IValueConverter
     {
         if (value is bool isFavorite)
         {
-            // Using FontAwesome or Material icons - the filled vs outline heart
-            return isFavorite ? "\uf004" : "\uf08a"; // FontAwesome heart icons
+            // Using emoji hearts for universal cross-platform display
+            return isFavorite ? "❤️" : "🤍";
         }
-        return "\uf08a";
+        return "🤍";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

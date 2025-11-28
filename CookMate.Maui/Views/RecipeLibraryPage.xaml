@@ -242,10 +242,21 @@
                                 </HorizontalStackLayout>
 
                                 <!-- Tags -->
-                                <HorizontalStackLayout Spacing="4" Margin="0,4,0,0">
-                                    <BindableLayout.ItemsSource>
-                                        <Binding Path="Tags" />
-                                    </BindableLayout.ItemsSource>
+                                <HorizontalStackLayout Spacing="4" 
+                                                       Margin="0,4,0,0"
+                                                       BindableLayout.ItemsSource="{Binding Tags}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="x:String">
+                                            <Border BackgroundColor="{StaticResource Gray50}"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="0"
+                                                    Padding="8,4">
+                                                <Label Text="{Binding StringFormat='#{0}'}"
+                                                       FontSize="11"
+                                                       TextColor="{StaticResource Gray500}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Grid>

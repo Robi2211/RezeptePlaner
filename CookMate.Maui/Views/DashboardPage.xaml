@@ -90,17 +90,17 @@
                                         <!-- Time and Servings -->
                                         <HorizontalStackLayout Spacing="16">
                                             <HorizontalStackLayout Spacing="4">
-                                                <Image Source="clock.png"
-                                                       WidthRequest="12"
-                                                       HeightRequest="12" />
+                                                <Label Text="⏱️"
+                                                       FontSize="11"
+                                                       VerticalOptions="Center" />
                                                 <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} Min'}"
                                                        FontSize="11"
                                                        TextColor="{StaticResource Gray600}" />
                                             </HorizontalStackLayout>
                                             <HorizontalStackLayout Spacing="4">
-                                                <Image Source="users.png"
-                                                       WidthRequest="12"
-                                                       HeightRequest="12" />
+                                                <Label Text="👥"
+                                                       FontSize="11"
+                                                       VerticalOptions="Center" />
                                                 <Label Text="{Binding Recipe.Servings, StringFormat='{0} Port.'}"
                                                        FontSize="11"
                                                        TextColor="{StaticResource Gray600}" />

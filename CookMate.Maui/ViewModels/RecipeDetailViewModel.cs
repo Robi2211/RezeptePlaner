@@ -2,8 +2,18 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CookMate.Maui.Models;
 using CookMate.Maui.Services;
+using System.Collections.ObjectModel;
 
 namespace CookMate.Maui.ViewModels;
+
+/// <summary>
+/// Represents an instruction step with its number for display.
+/// </summary>
+public class NumberedInstruction
+{
+    public int StepNumber { get; set; }
+    public string Text { get; set; } = string.Empty;
+}
 
 /// <summary>
 /// ViewModel for the Recipe Detail page.
@@ -30,6 +40,9 @@ public partial class RecipeDetailViewModel : ObservableObject
     
     [ObservableProperty]
     private string _difficultyLabel = string.Empty;
+    
+    [ObservableProperty]
+    private ObservableCollection<NumberedInstruction> _numberedInstructions = new();
     
     public RecipeDetailViewModel(
         IRecipeService recipeService,
@@ -69,6 +82,14 @@ public partial class RecipeDetailViewModel : ObservableObject
             {
                 CategoryLabel = GetCategoryLabel(Recipe.Category);
                 DifficultyLabel = GetDifficultyLabel(Recipe.Difficulty);
+                
+                // Create numbered instructions for display
+                NumberedInstructions = new ObservableCollection<NumberedInstruction>(
+                    Recipe.Instructions.Select((text, index) => new NumberedInstruction
+                    {
+                        StepNumber = index + 1,
+                        Text = text
+                    }));
             }
         }
         catch (Exception ex)
