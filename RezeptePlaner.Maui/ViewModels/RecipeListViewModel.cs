@@ -31,6 +31,12 @@ public partial class RecipeListViewModel : ObservableObject
     [ObservableProperty]
     private Recipe? selectedRecipe;
 
+    /// <summary>
+    /// Available categories for filtering
+    /// </summary>
+    public ObservableCollection<RecipeCategory> Categories { get; } = 
+        new(Enum.GetValues<RecipeCategory>());
+
     public RecipeListViewModel(RecipeService recipeService)
     {
         _recipeService = recipeService;

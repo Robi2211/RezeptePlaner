@@ -25,6 +25,9 @@ public partial class SummaryViewModel : ObservableObject
     [ObservableProperty]
     private string successMessage = "Ihr Rezept wurde erfolgreich gespeichert!";
 
+    [ObservableProperty]
+    private string? errorMessage;
+
     public SummaryViewModel(RecipeService recipeService)
     {
         _recipeService = recipeService;
@@ -39,12 +42,28 @@ public partial class SummaryViewModel : ObservableObject
     /// Load the recipe details
     /// </summary>
     [RelayCommand]
-    private void LoadRecipe()
+    private async Task LoadRecipe()
     {
-        if (!string.IsNullOrEmpty(RecipeId))
+        ErrorMessage = null;
+        
+        if (string.IsNullOrEmpty(RecipeId))
         {
-            Recipe = _recipeService.GetRecipeById(RecipeId);
-            IsLoaded = Recipe != null;
+            IsLoaded = false;
+            ErrorMessage = "Keine Rezept-ID angegeben.";
+            return;
+        }
+
+        Recipe = _recipeService.GetRecipeById(RecipeId);
+        
+        if (Recipe == null)
+        {
+            IsLoaded = false;
+            ErrorMessage = "Das Rezept konnte nicht gefunden werden.";
+            await Shell.Current.DisplayAlert("Fehler", ErrorMessage, "OK");
+        }
+        else
+        {
+            IsLoaded = true;
         }
     }
 
@@ -67,14 +86,21 @@ public partial class SummaryViewModel : ObservableObject
     }
 
     /// <summary>
-    /// Toggle favorite
+    /// Toggle favorite and refresh UI
     /// </summary>
     [RelayCommand]
-    private void ToggleFavorite()
+    private async Task ToggleFavorite()
     {
         if (Recipe != null)
         {
             _recipeService.ToggleFavorite(Recipe.Id);
+            // Refresh the recipe to update UI
+            Recipe = _recipeService.GetRecipeById(Recipe.Id);
+            
+            var statusMessage = Recipe?.IsFavorite == true 
+                ? "Zu Favoriten hinzugefügt!" 
+                : "Von Favoriten entfernt.";
+            await Shell.Current.DisplayAlert("Favoriten", statusMessage, "OK");
         }
     }
 }

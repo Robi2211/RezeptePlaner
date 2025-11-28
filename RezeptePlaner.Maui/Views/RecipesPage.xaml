@@ -53,7 +53,7 @@
                     <Label Text="Kategorie:" 
                            TextColor="{StaticResource ForegroundMuted}"
                            VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding Source={x:Static models:RecipeCategory.Frühstück}}"
+                    <Picker ItemsSource="{Binding Categories}"
                             SelectedItem="{Binding SelectedCategory}"
                             Title="Alle Kategorien"
                             TextColor="{StaticResource Foreground}"
