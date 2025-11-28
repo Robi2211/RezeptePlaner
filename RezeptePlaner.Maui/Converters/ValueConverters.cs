@@ -1,0 +1,87 @@
+using System.Globalization;
+
+namespace RezeptePlaner.Maui.Converters;
+
+/// <summary>
+/// Converts a boolean to its inverse
+/// </summary>
+public class InvertedBoolConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool boolValue)
+        {
+            return !boolValue;
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool boolValue)
+        {
+            return !boolValue;
+        }
+        return false;
+    }
+}
+
+/// <summary>
+/// Converts a string to boolean (true if not empty)
+/// </summary>
+public class StringToBoolConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string stringValue)
+        {
+            return !string.IsNullOrWhiteSpace(stringValue);
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Converts a boolean to expand/collapse icon
+/// </summary>
+public class BoolToExpandIconConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isExpanded)
+        {
+            return isExpanded ? "▲" : "▼";
+        }
+        return "▼";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Converts a boolean to favorite icon
+/// </summary>
+public class BoolToFavoriteIconConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isFavorite)
+        {
+            return isFavorite ? "⭐" : "☆";
+        }
+        return "☆";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
