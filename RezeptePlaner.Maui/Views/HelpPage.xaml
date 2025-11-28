@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
+             xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             x:Class="RezeptePlaner.Maui.Views.HelpPage"
+             x:DataType="viewmodels:HelpViewModel"
+             Title="Hilfe"
+             BackgroundColor="{StaticResource Background}">
+
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*,Auto">
+        
+        <!-- Page Header -->
+        <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
+            <Label Text="❓ Hilfe &amp; FAQ" 
+                   Style="{StaticResource PageTitle}" />
+            <Label Text="Häufig gestellte Fragen und Antworten"
+                   TextColor="{StaticResource ForegroundMuted}"
+                   FontSize="14" />
+        </VerticalStackLayout>
+
+        <!-- Search and Filter -->
+        <Frame Grid.Row="1" 
+               Style="{StaticResource CardFrame}"
+               Margin="0,0,0,20">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                
+                <!-- Search Entry -->
+                <Border Grid.Column="0"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8">
+                    <Entry Text="{Binding SearchText}"
+                           Placeholder="FAQ durchsuchen..."
+                           PlaceholderColor="{StaticResource ForegroundMuted}"
+                           TextColor="{StaticResource Foreground}"
+                           BackgroundColor="Transparent"
+                           FontSize="14" />
+                </Border>
+                
+                <!-- Category Picker -->
+                <Border Grid.Column="1"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8"
+                        WidthRequest="180">
+                    <Picker ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding SelectedCategory}"
+                            TextColor="{StaticResource Foreground}"
+                            TitleColor="{StaticResource ForegroundMuted}"
+                            BackgroundColor="Transparent"
+                            Title="Kategorie" />
+                </Border>
+            </Grid>
+        </Frame>
+
+        <!-- FAQ List -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding FilteredFaqItems}">
+            
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" 
+                                     VerticalOptions="Center"
+                                     Padding="40">
+                    <Label Text="🔍"
+                           FontSize="60"
+                           HorizontalOptions="Center" />
+                    <Label Text="Keine Ergebnisse gefunden"
+                           TextColor="{StaticResource ForegroundMuted}"
+                           FontSize="18"
+                           HorizontalOptions="Center"
+                           Margin="0,10,0,0" />
+                    <Label Text="Versuchen Sie eine andere Suche"
+                           TextColor="{StaticResource ForegroundMuted}"
+                           FontSize="14"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:FaqItem">
+                    <Frame Style="{StaticResource CardFrame}"
+                           Margin="0,0,0,10">
+                        <VerticalStackLayout>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <!-- Category Badge -->
+                                    <Frame BackgroundColor="{StaticResource Primary}"
+                                           CornerRadius="8"
+                                           Padding="8,4"
+                                           HorizontalOptions="Start"
+                                           Margin="0,0,0,8">
+                                        <Label Text="{Binding Category}"
+                                               TextColor="{StaticResource Background}"
+                                               FontSize="10" />
+                                    </Frame>
+                                    
+                                    <!-- Question -->
+                                    <Label Text="{Binding Question}"
+                                           TextColor="{StaticResource Foreground}"
+                                           FontSize="16"
+                                           FontAttributes="Bold" />
+                                </VerticalStackLayout>
+                                
+                                <!-- Expand Icon -->
+                                <Label Grid.Column="1"
+                                       Text="{Binding IsExpanded, Converter={StaticResource BoolToExpandIconConverter}}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="20"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                            
+                            <!-- Answer (visible when expanded) -->
+                            <Frame BackgroundColor="{StaticResource Muted}"
+                                   CornerRadius="8"
+                                   Padding="15"
+                                   Margin="0,15,0,0"
+                                   IsVisible="{Binding IsExpanded}">
+                                <Label Text="{Binding Answer}"
+                                       TextColor="{StaticResource ForegroundMuted}"
+                                       FontSize="14"
+                                       LineHeight="1.5" />
+                            </Frame>
+                        </VerticalStackLayout>
+                        
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HelpViewModel}}, Path=ToggleFaqItemCommand}"
+                                                  CommandParameter="{Binding}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Contact Support Section -->
+        <Frame Grid.Row="3" 
+               Style="{StaticResource CardFrame}"
+               Margin="0,20,0,0">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                <Label Text="Noch Fragen?"
+                       TextColor="{StaticResource Foreground}"
+                       FontSize="14"
+                       VerticalOptions="Center" />
+                <Button Text="📧 Support kontaktieren"
+                        Command="{Binding ContactSupportCommand}"
+                        Style="{StaticResource PrimaryButton}" />
+            </HorizontalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
