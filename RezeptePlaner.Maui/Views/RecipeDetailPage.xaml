@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
+             xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             x:Class="RezeptePlaner.Maui.Views.RecipeDetailPage"
+             x:DataType="viewmodels:RecipeDetailViewModel"
+             Title="{Binding Recipe.Title}"
+             BackgroundColor="{StaticResource Background}">
+
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,*">
+            
+            <!-- Back Button -->
+            <Button Grid.Row="0"
+                    Text="← Zurück"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource ForegroundMuted}"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,16" />
+
+            <!-- Header Card -->
+            <Frame Grid.Row="1" 
+                   Style="{StaticResource CardFrame}"
+                   Padding="0"
+                   Margin="0,0,0,20">
+                <Grid RowDefinitions="280,*">
+                    
+                    <!-- Recipe Image -->
+                    <Grid Grid.Row="0">
+                        <BoxView Color="{StaticResource Muted}"
+                                 CornerRadius="12,12,0,0" />
+                        <Label Text="🍽️"
+                               FontSize="100"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Grid>
+
+                    <!-- Recipe Info -->
+                    <VerticalStackLayout Grid.Row="1" Padding="24" Spacing="16">
+                        
+                        <!-- Category & Difficulty Badges -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Frame BackgroundColor="{StaticResource Primary}"
+                                   CornerRadius="10"
+                                   Padding="12,6">
+                                <Label Text="{Binding Recipe.CategoryDisplay}"
+                                       TextColor="{StaticResource Background}"
+                                       FontSize="12" />
+                            </Frame>
+                            <Frame BackgroundColor="{StaticResource Muted}"
+                                   CornerRadius="10"
+                                   Padding="12,6">
+                                <Label Text="{Binding Recipe.DifficultyDisplay}"
+                                       TextColor="{StaticResource ForegroundMuted}"
+                                       FontSize="12" />
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Title -->
+                        <Label Text="{Binding Recipe.Title}"
+                               TextColor="{StaticResource Foreground}"
+                               FontSize="28"
+                               FontAttributes="Bold" />
+
+                        <!-- Meta Info Cards -->
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="16">
+                            <!-- Time -->
+                            <Frame Grid.Column="0"
+                                   BackgroundColor="{StaticResource Muted}"
+                                   CornerRadius="12"
+                                   Padding="12">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame BackgroundColor="#FF6B35"
+                                           CornerRadius="10"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Padding="0">
+                                        <Label Text="⏱️"
+                                               FontSize="20"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Frame>
+                                    <VerticalStackLayout>
+                                        <Label Text="Zeit"
+                                               TextColor="{StaticResource ForegroundMuted}"
+                                               FontSize="11" />
+                                        <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="14"
+                                               FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                            
+                            <!-- Servings -->
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="{StaticResource Muted}"
+                                   CornerRadius="12"
+                                   Padding="12">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame BackgroundColor="#2196F3"
+                                           CornerRadius="10"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Padding="0">
+                                        <Label Text="👥"
+                                               FontSize="20"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Frame>
+                                    <VerticalStackLayout>
+                                        <Label Text="Portionen"
+                                               TextColor="{StaticResource ForegroundMuted}"
+                                               FontSize="11" />
+                                        <Label Text="{Binding Recipe.Servings, StringFormat='{0} Pers.'}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="14"
+                                               FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                            
+                            <!-- Difficulty -->
+                            <Frame Grid.Column="2"
+                                   BackgroundColor="{StaticResource Muted}"
+                                   CornerRadius="12"
+                                   Padding="12">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame BackgroundColor="#9C27B0"
+                                           CornerRadius="10"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Padding="0">
+                                        <Label Text="👨‍🍳"
+                                               FontSize="20"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Frame>
+                                    <VerticalStackLayout>
+                                        <Label Text="Level"
+                                               TextColor="{StaticResource ForegroundMuted}"
+                                               FontSize="11" />
+                                        <Label Text="{Binding Recipe.DifficultyDisplay}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="14"
+                                               FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </Grid>
+
+                        <!-- Tags -->
+                        <CollectionView ItemsSource="{Binding Recipe.Tags}"
+                                        HeightRequest="36">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Frame BackgroundColor="{StaticResource Muted}"
+                                           CornerRadius="16"
+                                           Padding="12,6">
+                                        <Label Text="{Binding StringFormat='#{0}'}"
+                                               TextColor="{StaticResource ForegroundMuted}"
+                                               FontSize="12" />
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Content Grid: Ingredients & Instructions -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,2*" ColumnSpacing="20">
+                
+                <!-- Ingredients Card -->
+                <Frame Grid.Column="0" 
+                       Style="{StaticResource CardFrame}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="Zutaten"
+                                   TextColor="{StaticResource Foreground}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="{StaticResource Success}"
+                                   CornerRadius="10"
+                                   Padding="8,4">
+                                <Label Text="{Binding Recipe.Ingredients.Count, StringFormat='{0} Zutaten'}"
+                                       TextColor="{StaticResource White}"
+                                       FontSize="11" />
+                            </Frame>
+                        </Grid>
+                        
+                        <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <HorizontalStackLayout Spacing="10" Padding="0,6">
+                                        <Frame BackgroundColor="{StaticResource Primary}"
+                                               CornerRadius="4"
+                                               WidthRequest="8"
+                                               HeightRequest="8"
+                                               Padding="0"
+                                               VerticalOptions="Center" />
+                                        <Label Text="{Binding}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="14" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Instructions Card -->
+                <Frame Grid.Column="1" 
+                       Style="{StaticResource CardFrame}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Zubereitung"
+                               TextColor="{StaticResource Foreground}"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+                        
+                        <CollectionView ItemsSource="{Binding Recipe.Instructions}"
+                                        x:Name="InstructionsCollection">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Padding="0,8">
+                                        <Frame Grid.Column="0"
+                                               BackgroundColor="{StaticResource Primary}"
+                                               CornerRadius="20"
+                                               WidthRequest="32"
+                                               HeightRequest="32"
+                                               Padding="0"
+                                               VerticalOptions="Start">
+                                            <Label Text="{Binding Source={RelativeSource Self}, Path=Parent.Parent.BindingContext}"
+                                                   TextColor="{StaticResource Background}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </Frame>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="14"
+                                               LineBreakMode="WordWrap" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -85,3 +85,43 @@ public class BoolToFavoriteIconConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts a boolean to today's border color
+/// </summary>
+public class BoolToTodayBorderConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isToday && isToday)
+        {
+            return Color.FromArgb("#F4C15A"); // Primary color
+        }
+        return Color.FromArgb("#2F2F36"); // Border color
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Converts a boolean to today's background color
+/// </summary>
+public class BoolToTodayBackgroundConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isToday && isToday)
+        {
+            return Color.FromArgb("#2A2510"); // Amber tinted dark
+        }
+        return Color.FromArgb("#1F1F24"); // Slightly lighter surface
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

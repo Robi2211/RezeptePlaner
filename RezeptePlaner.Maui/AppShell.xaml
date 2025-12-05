@@ -28,35 +28,62 @@
     </Shell.FlyoutHeader>
 
     <!-- Main Navigation Items -->
-    <FlyoutItem Title="Rezepte" Icon="recipe_icon.png">
+    <FlyoutItem Title="Dashboard" Icon="home_icon.svg">
+        <ShellContent
+            Title="Dashboard"
+            ContentTemplate="{DataTemplate views:DashboardPage}"
+            Route="DashboardPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Rezepte" Icon="recipe_icon.svg">
         <ShellContent
             Title="Übersicht"
             ContentTemplate="{DataTemplate views:RecipesPage}"
             Route="RecipesPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Neues Rezept" Icon="add_icon.png">
+    <FlyoutItem Title="Wochenplan" Icon="calendar_icon.svg">
+        <ShellContent
+            Title="Wochenplan"
+            ContentTemplate="{DataTemplate views:WeekPlannerPage}"
+            Route="WeekPlannerPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Favoriten" Icon="heart_icon.svg">
+        <ShellContent
+            Title="Favoriten"
+            ContentTemplate="{DataTemplate views:FavoritesPage}"
+            Route="FavoritesPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Neues Rezept" Icon="add_icon.svg">
         <ShellContent
             Title="Rezept hinzufügen"
             ContentTemplate="{DataTemplate views:AddRecipePage}"
             Route="AddRecipePage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Info" Icon="info_icon.png">
+    <FlyoutItem Title="Info" Icon="info_icon.svg">
         <ShellContent
             Title="Über CookMate"
             ContentTemplate="{DataTemplate views:InfoPage}"
             Route="InfoPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Hilfe" Icon="help_icon.png">
+    <FlyoutItem Title="Hilfe" Icon="help_icon.svg">
         <ShellContent
             Title="FAQ &amp; Hilfe"
             ContentTemplate="{DataTemplate views:HelpPage}"
             Route="HelpPage" />
     </FlyoutItem>
 
-    <!-- Summary Page (not in Flyout, accessed via navigation) -->
+    <!-- Detail Pages (not in Flyout, accessed via navigation) -->
+    <ShellContent
+        Title="Rezeptdetails"
+        ContentTemplate="{DataTemplate views:RecipeDetailPage}"
+        Route="RecipeDetailPage"
+        FlyoutItemIsVisible="False" />
+
     <ShellContent
         Title="Zusammenfassung"
         ContentTemplate="{DataTemplate views:SummaryPage}"
