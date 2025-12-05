@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
+             xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             x:Class="RezeptePlaner.Maui.Views.DashboardPage"
+             x:DataType="viewmodels:DashboardViewModel"
+             Title="Dashboard"
+             BackgroundColor="{StaticResource Background}">
+
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,*">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
+                <Label Text="🏠 Dashboard" 
+                       Style="{StaticResource PageTitle}" />
+                <Label Text="{Binding CurrentDate}"
+                       TextColor="{StaticResource ForegroundMuted}"
+                       FontSize="14" />
+            </VerticalStackLayout>
+
+            <!-- Today's Meals Section -->
+            <Frame Grid.Row="1" 
+                   Style="{StaticResource CardFrame}"
+                   Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Heute geplant" 
+                           Style="{StaticResource SectionTitle}" />
+                    
+                    <CollectionView ItemsSource="{Binding TodayRecipes}"
+                                    HeightRequest="130">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Recipe">
+                                <Frame BackgroundColor="{StaticResource Muted}"
+                                       BorderColor="{StaticResource Border}"
+                                       CornerRadius="12"
+                                       Padding="12"
+                                       WidthRequest="280">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DashboardViewModel}}, Path=ViewRecipeCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnDefinitions="80,*" ColumnSpacing="12">
+                                        <!-- Recipe Image Placeholder -->
+                                        <Frame Grid.Column="0"
+                                               BackgroundColor="{StaticResource Surface}"
+                                               CornerRadius="10"
+                                               Padding="0"
+                                               WidthRequest="80"
+                                               HeightRequest="80">
+                                            <Label Text="🍽️"
+                                                   FontSize="35"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </Frame>
+                                        
+                                        <!-- Recipe Info -->
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                            <Frame BackgroundColor="{StaticResource Primary}"
+                                                   CornerRadius="8"
+                                                   Padding="6,2"
+                                                   HorizontalOptions="Start"
+                                                   Margin="0,0,0,5">
+                                                <Label Text="{Binding CategoryDisplay}"
+                                                       TextColor="{StaticResource Background}"
+                                                       FontSize="10" />
+                                            </Frame>
+                                            <Label Text="{Binding Title}"
+                                                   TextColor="{StaticResource Foreground}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   LineBreakMode="TailTruncation"
+                                                   MaxLines="1" />
+                                            <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+                                                <HorizontalStackLayout Spacing="4">
+                                                    <Label Text="⏱️" FontSize="11" />
+                                                    <Label Text="{Binding TotalTime, StringFormat='{0} min'}"
+                                                           TextColor="{StaticResource ForegroundMuted}"
+                                                           FontSize="11" />
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout Spacing="4">
+                                                    <Label Text="👥" FontSize="11" />
+                                                    <Label Text="{Binding Servings, StringFormat='{0} Port.'}"
+                                                           TextColor="{StaticResource ForegroundMuted}"
+                                                           FontSize="11" />
+                                                </HorizontalStackLayout>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Week Overview and Stats -->
+            <Grid Grid.Row="2" ColumnDefinitions="2*,*" ColumnSpacing="20">
+                
+                <!-- Week Overview -->
+                <Frame Grid.Column="0" 
+                       Style="{StaticResource CardFrame}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="Wochenübersicht" 
+                                   Style="{StaticResource SectionTitle}" />
+                            <Button Grid.Column="1"
+                                    Text="Zum Wochenplan →"
+                                    Command="{Binding NavigateToPlannerCommand}"
+                                    TextColor="{StaticResource Primary}"
+                                    BackgroundColor="Transparent"
+                                    FontSize="12" />
+                        </Grid>
+                        
+                        <CollectionView ItemsSource="{Binding WeekDays}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewmodels:WeekDay">
+                                    <Frame BackgroundColor="{StaticResource Muted}"
+                                           BorderColor="{StaticResource Border}"
+                                           CornerRadius="8"
+                                           Padding="12"
+                                           Margin="0,0,0,8">
+                                        <Grid ColumnDefinitions="100,*">
+                                            <VerticalStackLayout Grid.Column="0">
+                                                <Label Text="{Binding DayName}"
+                                                       TextColor="{StaticResource Foreground}"
+                                                       FontSize="13"
+                                                       FontAttributes="Bold" />
+                                                <Label Text="{Binding DateString}"
+                                                       TextColor="{StaticResource ForegroundMuted}"
+                                                       FontSize="11" />
+                                                <Frame BackgroundColor="{StaticResource Primary}"
+                                                       CornerRadius="8"
+                                                       Padding="4,2"
+                                                       HorizontalOptions="Start"
+                                                       Margin="0,3,0,0"
+                                                       IsVisible="{Binding IsToday}">
+                                                    <Label Text="Heute"
+                                                           TextColor="{StaticResource Background}"
+                                                           FontSize="9" />
+                                                </Frame>
+                                            </VerticalStackLayout>
+                                            
+                                            <CollectionView Grid.Column="1"
+                                                            ItemsSource="{Binding Recipes}"
+                                                            HeightRequest="50">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="models:Recipe">
+                                                        <Frame BackgroundColor="{StaticResource Surface}"
+                                                               BorderColor="{StaticResource Border}"
+                                                               CornerRadius="6"
+                                                               Padding="8,4"
+                                                               WidthRequest="180">
+                                                            <HorizontalStackLayout Spacing="8">
+                                                                <Label Text="🍽️" FontSize="16" VerticalOptions="Center" />
+                                                                <VerticalStackLayout>
+                                                                    <Label Text="{Binding Title}"
+                                                                           TextColor="{StaticResource Foreground}"
+                                                                           FontSize="11"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           MaxLines="1"
+                                                                           WidthRequest="120" />
+                                                                    <Label Text="{Binding TotalTime, StringFormat='⏱️ {0} min'}"
+                                                                           TextColor="{StaticResource ForegroundMuted}"
+                                                                           FontSize="9" />
+                                                                </VerticalStackLayout>
+                                                            </HorizontalStackLayout>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Sidebar: Trending and Stats -->
+                <VerticalStackLayout Grid.Column="1" Spacing="20">
+                    
+                    <!-- Trending Recipes -->
+                    <Frame Style="{StaticResource CardFrame}"
+                           BackgroundColor="#1A3A2A">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Frame BackgroundColor="{StaticResource Success}"
+                                       CornerRadius="8"
+                                       WidthRequest="32"
+                                       HeightRequest="32"
+                                       Padding="0">
+                                    <Label Text="📈"
+                                           FontSize="16"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Frame>
+                                <Label Text="Beliebt"
+                                       TextColor="{StaticResource Foreground}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            
+                            <CollectionView ItemsSource="{Binding TrendingRecipes}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Recipe">
+                                        <Frame BackgroundColor="#0D2015"
+                                               CornerRadius="8"
+                                               Padding="10"
+                                               Margin="0,0,0,8">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DashboardViewModel}}, Path=ViewRecipeCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+                                            <Grid ColumnDefinitions="50,*" ColumnSpacing="10">
+                                                <Frame Grid.Column="0"
+                                                       BackgroundColor="{StaticResource Surface}"
+                                                       CornerRadius="8"
+                                                       Padding="0"
+                                                       WidthRequest="50"
+                                                       HeightRequest="50">
+                                                    <Label Text="🍽️"
+                                                           FontSize="24"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center" />
+                                                </Frame>
+                                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                                    <Label Text="{Binding Title}"
+                                                           TextColor="{StaticResource Foreground}"
+                                                           FontSize="12"
+                                                           FontAttributes="Bold"
+                                                           LineBreakMode="TailTruncation"
+                                                           MaxLines="2" />
+                                                    <Label Text="{Binding TotalTime, StringFormat='⏱️ {0} min'}"
+                                                           TextColor="{StaticResource ForegroundMuted}"
+                                                           FontSize="10" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Quick Stats -->
+                    <Frame Style="{StaticResource CardFrame}"
+                           BackgroundColor="#2A1F10">
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="Schnellinfo"
+                                   TextColor="{StaticResource Foreground}"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+                            
+                            <Frame BackgroundColor="#1F1710"
+                                   CornerRadius="8"
+                                   Padding="12">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="Rezepte"
+                                           TextColor="{StaticResource ForegroundMuted}"
+                                           FontSize="14" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding TotalRecipes}"
+                                           TextColor="{StaticResource Primary}"
+                                           FontSize="14"
+                                           FontAttributes="Bold" />
+                                </Grid>
+                            </Frame>
+                            
+                            <Frame BackgroundColor="#1F1710"
+                                   CornerRadius="8"
+                                   Padding="12">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="Favoriten"
+                                           TextColor="{StaticResource ForegroundMuted}"
+                                           FontSize="14" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding TotalFavorites}"
+                                           TextColor="{StaticResource Success}"
+                                           FontSize="14"
+                                           FontAttributes="Bold" />
+                                </Grid>
+                            </Frame>
+                            
+                            <Button Text="📅 WOCHENPLAN ÖFFNEN →"
+                                    Command="{Binding NavigateToPlannerCommand}"
+                                    Style="{StaticResource PrimaryButton}"
+                                    FontSize="12"
+                                    Margin="0,10,0,0" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

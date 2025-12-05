@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
+             xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             x:Class="RezeptePlaner.Maui.Views.WeekPlannerPage"
+             x:DataType="viewmodels:WeekPlannerViewModel"
+             Title="Wochenplan"
+             BackgroundColor="{StaticResource Background}">
+
+    <Grid Padding="20" RowDefinitions="Auto,*">
+        
+        <!-- Week Navigation Header -->
+        <Frame Grid.Row="0" 
+               Style="{StaticResource CardFrame}"
+               Margin="0,0,0,20">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0"
+                        Text="◀"
+                        Command="{Binding NavigatePreviousWeekCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="24"
+                        WidthRequest="50" />
+                
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Label Text="📅"
+                               FontSize="24"
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding WeekDateRange}"
+                               TextColor="{StaticResource Foreground}"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding TotalPlannedMeals, StringFormat='{0} Mahlzeiten geplant'}"
+                           TextColor="{StaticResource ForegroundMuted}"
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           Margin="0,5,0,0" />
+                </VerticalStackLayout>
+                
+                <Button Grid.Column="2"
+                        Text="▶"
+                        Command="{Binding NavigateNextWeekCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="24"
+                        WidthRequest="50" />
+            </Grid>
+        </Frame>
+
+        <!-- Calendar Grid -->
+        <ScrollView Grid.Row="1" Orientation="Horizontal">
+            <CollectionView ItemsSource="{Binding WeekDays}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="16" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:PlannerDay">
+                        <Frame BackgroundColor="{StaticResource Surface}"
+                               BorderColor="{Binding IsToday, Converter={StaticResource BoolToTodayBorderConverter}}"
+                               CornerRadius="16"
+                               Padding="0"
+                               WidthRequest="220"
+                               MinimumHeightRequest="550">
+                            <Grid RowDefinitions="Auto,*">
+                                
+                                <!-- Day Header -->
+                                <Frame Grid.Row="0"
+                                       BackgroundColor="{Binding IsToday, Converter={StaticResource BoolToTodayBackgroundConverter}}"
+                                       CornerRadius="16,16,0,0"
+                                       Padding="16">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding DateString}"
+                                               TextColor="{StaticResource ForegroundMuted}"
+                                               FontSize="12" />
+                                        <Label Text="{Binding DayName}"
+                                               TextColor="{StaticResource Foreground}"
+                                               FontSize="18"
+                                               FontAttributes="Bold" />
+                                        <Frame BackgroundColor="{StaticResource Primary}"
+                                               CornerRadius="10"
+                                               Padding="8,4"
+                                               HorizontalOptions="Start"
+                                               Margin="0,8,0,0"
+                                               IsVisible="{Binding IsToday}">
+                                            <Label Text="Heute"
+                                                   TextColor="{StaticResource Background}"
+                                                   FontSize="10" />
+                                        </Frame>
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                                <!-- Meals List -->
+                                <VerticalStackLayout Grid.Row="1" Padding="12" Spacing="12">
+                                    <CollectionView ItemsSource="{Binding Meals}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="viewmodels:PlannedMeal">
+                                                <Frame BackgroundColor="{StaticResource Muted}"
+                                                       BorderColor="{StaticResource Border}"
+                                                       CornerRadius="12"
+                                                       Padding="0"
+                                                       Margin="0,0,0,8">
+                                                    <Grid RowDefinitions="100,Auto">
+                                                        <!-- Meal Image -->
+                                                        <Grid Grid.Row="0">
+                                                            <BoxView Color="{StaticResource Surface}"
+                                                                     CornerRadius="12,12,0,0" />
+                                                            <Label Text="🍽️"
+                                                                   FontSize="40"
+                                                                   HorizontalOptions="Center"
+                                                                   VerticalOptions="Center" />
+                                                            
+                                                            <!-- Meal Type Badge -->
+                                                            <Frame BackgroundColor="{StaticResource Surface}"
+                                                                   CornerRadius="10"
+                                                                   Padding="8,4"
+                                                                   Margin="8"
+                                                                   HorizontalOptions="Start"
+                                                                   VerticalOptions="Start">
+                                                                <Label Text="{Binding MealType}"
+                                                                       TextColor="{StaticResource Teal}"
+                                                                       FontSize="10" />
+                                                            </Frame>
+                                                            
+                                                            <!-- Remove Button -->
+                                                            <Frame BackgroundColor="{StaticResource Destructive}"
+                                                                   CornerRadius="12"
+                                                                   WidthRequest="24"
+                                                                   HeightRequest="24"
+                                                                   Padding="0"
+                                                                   Margin="8"
+                                                                   HorizontalOptions="End"
+                                                                   VerticalOptions="Start">
+                                                                <Frame.GestureRecognizers>
+                                                                    <TapGestureRecognizer 
+                                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=RemoveMealCommand}"
+                                                                        CommandParameter="{Binding .}" />
+                                                                </Frame.GestureRecognizers>
+                                                                <Label Text="✕"
+                                                                       FontSize="12"
+                                                                       TextColor="{StaticResource White}"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center" />
+                                                            </Frame>
+                                                        </Grid>
+                                                        
+                                                        <!-- Meal Info -->
+                                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                                            <VerticalStackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer 
+                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=ViewRecipeCommand}"
+                                                                    CommandParameter="{Binding Recipe}" />
+                                                            </VerticalStackLayout.GestureRecognizers>
+                                                            <Label Text="{Binding Recipe.Title}"
+                                                                   TextColor="{StaticResource Foreground}"
+                                                                   FontSize="12"
+                                                                   FontAttributes="Bold"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   MaxLines="2" />
+                                                            <Label Text="{Binding Recipe.TotalTime, StringFormat='⏱️ {0} Min'}"
+                                                                   TextColor="{StaticResource ForegroundMuted}"
+                                                                   FontSize="10"
+                                                                   Margin="0,4,0,0" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <!-- Add Meal Button -->
+                                    <Frame BackgroundColor="Transparent"
+                                           BorderColor="{StaticResource Border}"
+                                           CornerRadius="12"
+                                           Padding="16">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=AddMealCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+                                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+                                            <Label Text="+"
+                                                   TextColor="{StaticResource ForegroundMuted}"
+                                                   FontSize="24"
+                                                   HorizontalOptions="Center" />
+                                            <Label Text="Mahlzeit hinzufügen"
+                                                   TextColor="{StaticResource ForegroundMuted}"
+                                                   FontSize="12"
+                                                   HorizontalOptions="Center" />
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+</ContentPage>
