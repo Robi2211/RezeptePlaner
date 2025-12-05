@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
+             xmlns:controls="clr-namespace:RezeptePlaner.Maui.Controls"
+             x:Class="RezeptePlaner.Maui.Views.DesignPage"
+             x:DataType="viewmodels:DesignViewModel"
+             Title="Design"
+             BackgroundColor="{StaticResource Background}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Navigation Header -->
+        <controls:NavigationHeader Grid.Row="0" CurrentPage="Design" />
+
+        <ScrollView Grid.Row="1">
+            <Grid Padding="20" RowDefinitions="Auto,*">
+            
+                <!-- Page Header -->
+                <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
+                    <Label Text="🎨 Design" 
+                           Style="{StaticResource PageTitle}" />
+                    <Label Text="Passen Sie das Aussehen der App an"
+                           TextColor="{StaticResource ForegroundMuted}"
+                           FontSize="14" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="1" Spacing="20">
+                
+                    <!-- Theme Settings Card -->
+                    <Frame Style="{StaticResource CardFrame}">
+                        <VerticalStackLayout Spacing="15">
+                            <Label Text="Design-Einstellungen" 
+                                   Style="{StaticResource SectionTitle}" />
+                            <Label Text="Weitere Design-Optionen werden in zukünftigen Updates verfügbar sein."
+                                   TextColor="{StaticResource ForegroundMuted}"
+                                   FontSize="14" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

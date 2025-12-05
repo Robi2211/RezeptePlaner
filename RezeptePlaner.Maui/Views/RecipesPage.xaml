@@ -3,12 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
              xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             xmlns:controls="clr-namespace:RezeptePlaner.Maui.Controls"
              x:Class="RezeptePlaner.Maui.Views.RecipesPage"
              x:DataType="viewmodels:RecipeListViewModel"
              Title="Rezepte"
              BackgroundColor="{StaticResource Background}">
 
-    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Navigation Header -->
+        <controls:NavigationHeader Grid.Row="0" CurrentPage="Rezepte" />
+
+        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,Auto,*">
         
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
@@ -195,5 +200,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+    </Grid>
     </Grid>
 </ContentPage>
