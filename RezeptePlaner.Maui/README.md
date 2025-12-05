@@ -99,20 +99,45 @@ RezeptePlaner.Maui/
 - **MVVM-Architektur** mit CommunityToolkit.Mvvm
 - **Dependency Injection** für Services
 
-## 🚀 Build
+## 🚀 Build & Run
+
+### Terminal (empfohlen für JetBrains Rider)
 
 ```bash
+# In das MAUI-Projektverzeichnis wechseln
+cd RezeptePlaner.Maui
+
 # Restore packages
 dotnet restore
 
 # Build (nur auf Windows möglich)
 dotnet build
 
-# Run
+# Projekt starten
 dotnet run
+
+# Alternativ: Mit explizitem Target Framework
+dotnet run -f net9.0-windows10.0.19041.0
 ```
 
-> ⚠️ **Hinweis**: Die vollständige Kompilierung ist nur auf Windows möglich, da der XAML-Compiler plattformspezifisch ist.
+### JetBrains Rider
+
+**Option 1: Terminal in Rider verwenden**
+1. Öffne das Terminal in Rider (Alt+F12 oder View → Tool Windows → Terminal)
+2. Navigiere zum MAUI-Projekt: `cd RezeptePlaner.Maui`
+3. Starte das Projekt: `dotnet run`
+
+**Option 2: Run Configuration erstellen**
+1. Klicke auf "Add Configuration" (oben rechts)
+2. Wähle ".NET Project" 
+3. Wähle `RezeptePlaner.Maui.csproj` als Projekt
+4. Setze das Target Framework auf `net9.0-windows10.0.19041.0`
+5. Klicke auf "Run" (Shift+F10) oder "Debug" (Shift+F9)
+
+**Option 3: Schnellstart**
+- Rechtsklick auf `RezeptePlaner.Maui.csproj` → "Run"
+
+> ⚠️ **Hinweis**: Die vollständige Kompilierung ist nur auf Windows möglich, da der XAML-Compiler plattformspezifisch ist. JetBrains Rider muss auf Windows ausgeführt werden.
 
 ## 📱 Features
 
