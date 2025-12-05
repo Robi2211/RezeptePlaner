@@ -4,107 +4,62 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:RezeptePlaner.Maui.Views"
+    x:Name="MainShell"
     Title="CookMate"
-    FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="{StaticResource Surface}"
-    FlyoutWidth="280">
+    FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
 
-    <!-- Flyout Header with Logo -->
-    <Shell.FlyoutHeader>
-        <Grid BackgroundColor="{StaticResource Surface}" 
-              HeightRequest="120"
-              Padding="20">
-            <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="🍳 CookMate"
-                       TextColor="{StaticResource Primary}"
-                       FontSize="28"
-                       FontAttributes="Bold" />
-                <Label Text="Ihr Rezepteplaner"
-                       TextColor="{StaticResource ForegroundMuted}"
-                       FontSize="14"
-                       Margin="0,5,0,0" />
-            </VerticalStackLayout>
-        </Grid>
-    </Shell.FlyoutHeader>
-
-    <!-- Main Navigation Items -->
-    <FlyoutItem Title="Dashboard" Icon="home_icon.svg">
+    <!-- Main navigation pages using TabBar with hidden tabs -->
+    <TabBar>
         <ShellContent
             Title="Dashboard"
             ContentTemplate="{DataTemplate views:DashboardPage}"
             Route="DashboardPage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Rezepte" Icon="recipe_icon.svg">
         <ShellContent
-            Title="Übersicht"
+            Title="Rezepte"
             ContentTemplate="{DataTemplate views:RecipesPage}"
             Route="RecipesPage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Wochenplan" Icon="calendar_icon.svg">
         <ShellContent
             Title="Wochenplan"
             ContentTemplate="{DataTemplate views:WeekPlannerPage}"
             Route="WeekPlannerPage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Favoriten" Icon="heart_icon.svg">
         <ShellContent
             Title="Favoriten"
             ContentTemplate="{DataTemplate views:FavoritesPage}"
             Route="FavoritesPage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Neues Rezept" Icon="add_icon.svg">
         <ShellContent
-            Title="Rezept hinzufügen"
+            Title="Design"
+            ContentTemplate="{DataTemplate views:DesignPage}"
+            Route="DesignPage" />
+
+        <ShellContent
+            Title="Neues Rezept"
             ContentTemplate="{DataTemplate views:AddRecipePage}"
             Route="AddRecipePage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Info" Icon="info_icon.svg">
         <ShellContent
-            Title="Über CookMate"
+            Title="Rezeptdetails"
+            ContentTemplate="{DataTemplate views:RecipeDetailPage}"
+            Route="RecipeDetailPage" />
+
+        <ShellContent
+            Title="Zusammenfassung"
+            ContentTemplate="{DataTemplate views:SummaryPage}"
+            Route="SummaryPage" />
+
+        <ShellContent
+            Title="Info"
             ContentTemplate="{DataTemplate views:InfoPage}"
             Route="InfoPage" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Hilfe" Icon="help_icon.svg">
         <ShellContent
-            Title="FAQ &amp; Hilfe"
+            Title="Hilfe"
             ContentTemplate="{DataTemplate views:HelpPage}"
             Route="HelpPage" />
-    </FlyoutItem>
-
-    <!-- Detail Pages (not in Flyout, accessed via navigation) -->
-    <ShellContent
-        Title="Rezeptdetails"
-        ContentTemplate="{DataTemplate views:RecipeDetailPage}"
-        Route="RecipeDetailPage"
-        FlyoutItemIsVisible="False" />
-
-    <ShellContent
-        Title="Zusammenfassung"
-        ContentTemplate="{DataTemplate views:SummaryPage}"
-        Route="SummaryPage"
-        FlyoutItemIsVisible="False" />
-
-    <!-- Shell Flyout Item Styling -->
-    <Shell.ItemTemplate>
-        <DataTemplate>
-            <Grid ColumnDefinitions="Auto,*" Padding="20,12" ColumnSpacing="15">
-                <Image Source="{Binding FlyoutIcon}"
-                       WidthRequest="24"
-                       HeightRequest="24"
-                       VerticalOptions="Center" />
-                <Label Grid.Column="1"
-                       Text="{Binding Title}"
-                       TextColor="{StaticResource Foreground}"
-                       FontSize="16"
-                       VerticalOptions="Center" />
-            </Grid>
-        </DataTemplate>
-    </Shell.ItemTemplate>
+    </TabBar>
 
 </Shell>

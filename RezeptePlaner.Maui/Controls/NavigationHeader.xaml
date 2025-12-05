@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RezeptePlaner.Maui.Controls.NavigationHeader">
+    
+    <Border BackgroundColor="{StaticResource Surface}"
+            StrokeThickness="0"
+            Padding="20,12">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+            
+            <!-- Logo and Title -->
+            <HorizontalStackLayout Grid.Column="0" 
+                                   Spacing="10"
+                                   VerticalOptions="Center">
+                <Border BackgroundColor="{StaticResource Muted}"
+                        StrokeThickness="1"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="8"
+                        VerticalOptions="Center">
+                    <Label Text="🍳"
+                           FontSize="20"
+                           VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout VerticalOptions="Center" Spacing="0">
+                    <Label Text="CookMate"
+                           TextColor="{StaticResource Foreground}"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="RECIPE PLANNER"
+                           TextColor="{StaticResource ForegroundMuted}"
+                           FontSize="8"
+                           CharacterSpacing="1" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <!-- Navigation Items -->
+            <HorizontalStackLayout Grid.Column="1" 
+                                   HorizontalOptions="Center"
+                                   Spacing="8"
+                                   VerticalOptions="Center">
+                
+                <Button x:Name="DashboardButton"
+                        Text="🏠 Dashboard"
+                        Clicked="OnDashboardClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="14"
+                        Padding="12,8" />
+                
+                <Button x:Name="RecipesButton"
+                        Text="📖 Rezepte"
+                        Clicked="OnRecipesClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="14"
+                        Padding="12,8" />
+                
+                <Button x:Name="WeekPlanButton"
+                        Text="📅 Wochenplan"
+                        Clicked="OnWeekPlanClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="14"
+                        Padding="12,8" />
+                
+                <Button x:Name="FavoritesButton"
+                        Text="♡ Favoriten"
+                        Clicked="OnFavoritesClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="14"
+                        Padding="12,8" />
+                
+                <Button x:Name="DesignButton"
+                        Text="🎨 Design"
+                        Clicked="OnDesignClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource ForegroundMuted}"
+                        FontSize="14"
+                        Padding="12,8" />
+                
+            </HorizontalStackLayout>
+
+            <!-- New Recipe Button -->
+            <Button Grid.Column="2"
+                    Text="+ Neues Rezept"
+                    Clicked="OnNewRecipeClicked"
+                    BackgroundColor="{StaticResource Surface}"
+                    TextColor="{StaticResource Foreground}"
+                    BorderColor="{StaticResource Border}"
+                    BorderWidth="1"
+                    CornerRadius="8"
+                    FontSize="14"
+                    Padding="16,10"
+                    VerticalOptions="Center" />
+
+        </Grid>
+    </Border>
+    
+</ContentView>

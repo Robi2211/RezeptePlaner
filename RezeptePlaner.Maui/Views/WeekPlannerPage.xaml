@@ -3,12 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
              xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
+             xmlns:controls="clr-namespace:RezeptePlaner.Maui.Controls"
              x:Class="RezeptePlaner.Maui.Views.WeekPlannerPage"
              x:DataType="viewmodels:WeekPlannerViewModel"
              Title="Wochenplan"
              BackgroundColor="{StaticResource Background}">
 
-    <Grid Padding="20" RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Navigation Header -->
+        <controls:NavigationHeader Grid.Row="0" CurrentPage="Wochenplan" />
+
+        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,*">
         
         <!-- Week Navigation Header -->
         <Frame Grid.Row="0" 
@@ -199,5 +204,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+    </Grid>
     </Grid>
 </ContentPage>
