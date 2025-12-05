@@ -44,6 +44,10 @@
     <Color x:Key="Gray700">#616161</Color>
     <Color x:Key="Gray800">#424242</Color>
     <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#121212</Color>
+    
+    <!-- Additional UI Colors -->
+    <Color x:Key="PrimaryDarkText">#1A1A1A</Color>
     
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>

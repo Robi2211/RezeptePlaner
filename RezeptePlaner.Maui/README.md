@@ -99,9 +99,32 @@ RezeptePlaner.Maui/
 - **MVVM-Architektur** mit CommunityToolkit.Mvvm
 - **Dependency Injection** für Services
 
-## 🚀 Build
+## 🚀 Build & Run
+
+### Voraussetzungen
+
+1. **.NET 9 SDK** installiert
+2. **MAUI Workload** installiert:
+   ```bash
+   dotnet workload install maui
+   ```
+3. **Windows 10/11** für das Ausführen der App
+
+### Mit JetBrains Rider
+
+1. Öffnen Sie die Solution-Datei `RezeptePlaner.sln` im Root-Verzeichnis
+2. Stellen Sie sicher, dass das .NET MAUI Plugin in Rider aktiviert ist
+3. Wählen Sie als Run Configuration: **Windows Machine**
+4. Klicken Sie auf Run (F5) oder Debug
+
+> 💡 **Tipp**: In Rider unter **Settings > Build, Execution, Deployment > Toolset and Build** die .NET SDK Version prüfen.
+
+### Via Command Line
 
 ```bash
+# MAUI Workload installieren (falls nicht vorhanden)
+dotnet workload install maui
+
 # Restore packages
 dotnet restore
 
@@ -109,10 +132,10 @@ dotnet restore
 dotnet build
 
 # Run
-dotnet run
+dotnet run --project RezeptePlaner.Maui/RezeptePlaner.Maui.csproj
 ```
 
-> ⚠️ **Hinweis**: Die vollständige Kompilierung ist nur auf Windows möglich, da der XAML-Compiler plattformspezifisch ist.
+> ⚠️ **Hinweis**: Die vollständige Kompilierung und Ausführung ist nur auf Windows möglich, da die App speziell für Windows Desktop entwickelt wurde.
 
 ## 📱 Features
 
