@@ -19,6 +19,7 @@
     <!-- Text Colors -->
     <Color x:Key="Foreground">#F5EADA</Color>
     <Color x:Key="ForegroundMuted">#C9BBA4</Color>
+    <Color x:Key="PrimaryDarkText">#1A1A1A</Color>
     
     <!-- Status Colors -->
     <Color x:Key="Success">#4CAF50</Color>
@@ -45,9 +46,6 @@
     <Color x:Key="Gray800">#424242</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#121212</Color>
-    
-    <!-- Additional UI Colors -->
-    <Color x:Key="PrimaryDarkText">#1A1A1A</Color>
     
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
