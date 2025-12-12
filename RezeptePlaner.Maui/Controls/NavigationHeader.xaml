@@ -72,14 +72,6 @@
                         FontSize="14"
                         Padding="12,8" />
                 
-                <Button x:Name="DesignButton"
-                        Text="🎨 Design"
-                        Clicked="OnDesignClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource ForegroundMuted}"
-                        FontSize="14"
-                        Padding="12,8" />
-                
             </HorizontalStackLayout>
 
             <!-- New Recipe Button -->
