@@ -21,7 +21,8 @@
                     <Image Source="logo.svg"
                            WidthRequest="20"
                            HeightRequest="20"
-                           VerticalOptions="Center" />
+                           VerticalOptions="Center"
+                           SemanticProperties.Description="CookMate Logo" />
                 </Border>
                 <VerticalStackLayout VerticalOptions="Center" Spacing="0">
                     <Label Text="CookMate"
