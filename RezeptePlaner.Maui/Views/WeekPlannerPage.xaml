@@ -13,7 +13,8 @@
         <!-- Navigation Header -->
         <controls:NavigationHeader Grid.Row="0" CurrentPage="Wochenplan" />
 
-        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,*">
+        <ScrollView Grid.Row="1" Orientation="Vertical">
+            <Grid Padding="20" RowDefinitions="Auto,*">
         
         <!-- Week Navigation Header -->
         <Frame Grid.Row="0" 
@@ -204,6 +205,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-    </Grid>
+            </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>

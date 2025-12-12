@@ -13,7 +13,8 @@
         <!-- Navigation Header -->
         <controls:NavigationHeader Grid.Row="0" CurrentPage="Rezepte" />
 
-        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,Auto,*">
+        <ScrollView Grid.Row="1">
+            <Grid Padding="20" RowDefinitions="Auto,Auto,*">
         
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
@@ -200,6 +201,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+            </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>

@@ -13,7 +13,8 @@
         <!-- Navigation Header -->
         <controls:NavigationHeader Grid.Row="0" CurrentPage="Favoriten" />
 
-        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,Auto,*">
+        <ScrollView Grid.Row="1">
+            <Grid Padding="20" RowDefinitions="Auto,Auto,*">
         
         <!-- Page Header -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,30">
@@ -254,6 +255,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-    </Grid>
+            </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>
