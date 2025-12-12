@@ -109,4 +109,19 @@ public partial class RecipeListViewModel : ObservableObject
     {
         FilterRecipes();
     }
+
+    partial void OnSelectedRecipeChanged(Recipe? value)
+    {
+        if (value != null)
+        {
+            NavigateToRecipeDetail(value);
+            SelectedRecipe = null; // Reset selection
+        }
+    }
+
+    [RelayCommand]
+    private async Task NavigateToRecipeDetail(Recipe recipe)
+    {
+        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={recipe.Id}");
+    }
 }
