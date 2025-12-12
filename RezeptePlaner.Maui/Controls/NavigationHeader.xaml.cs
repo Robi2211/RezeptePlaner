@@ -34,7 +34,6 @@ public partial class NavigationHeader : ContentView
         RecipesButton.TextColor = defaultColor;
         WeekPlanButton.TextColor = defaultColor;
         FavoritesButton.TextColor = defaultColor;
-        DesignButton.TextColor = defaultColor;
 
         // Set active button color
         switch (currentPage)
@@ -50,9 +49,6 @@ public partial class NavigationHeader : ContentView
                 break;
             case "Favoriten":
                 FavoritesButton.TextColor = activeColor;
-                break;
-            case "Design":
-                DesignButton.TextColor = activeColor;
                 break;
         }
     }
@@ -75,11 +71,6 @@ public partial class NavigationHeader : ContentView
     private async void OnFavoritesClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//FavoritesPage");
-    }
-
-    private async void OnDesignClicked(object? sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//DesignPage");
     }
 
     private async void OnNewRecipeClicked(object? sender, EventArgs e)
