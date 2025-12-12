@@ -13,7 +13,8 @@
         <!-- Navigation Header -->
         <controls:NavigationHeader Grid.Row="0" CurrentPage="" />
 
-        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,Auto,*,Auto">
+        <ScrollView Grid.Row="1">
+            <Grid Padding="20" RowDefinitions="Auto,Auto,*,Auto">
         
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
@@ -63,7 +64,8 @@
 
         <!-- FAQ List -->
         <CollectionView Grid.Row="2"
-                        ItemsSource="{Binding FilteredFaqItems}">
+                        ItemsSource="{Binding FilteredFaqItems}"
+                        HeightRequest="600">
             
             <CollectionView.EmptyView>
                 <VerticalStackLayout HorizontalOptions="Center" 
@@ -153,6 +155,7 @@
                         Style="{StaticResource PrimaryButton}" />
             </HorizontalStackLayout>
         </Frame>
-    </Grid>
+            </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>

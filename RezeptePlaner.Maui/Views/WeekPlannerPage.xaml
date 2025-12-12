@@ -13,7 +13,8 @@
         <!-- Navigation Header -->
         <controls:NavigationHeader Grid.Row="0" CurrentPage="Wochenplan" />
 
-        <Grid Grid.Row="1" Padding="20" RowDefinitions="Auto,*">
+        <ScrollView Grid.Row="1" Orientation="Vertical">
+            <Grid Padding="20" RowDefinitions="Auto,*">
         
         <!-- Week Navigation Header -->
         <Frame Grid.Row="0" 
@@ -58,7 +59,8 @@
 
         <!-- Calendar Grid -->
         <ScrollView Grid.Row="1" Orientation="Horizontal">
-            <CollectionView ItemsSource="{Binding WeekDays}">
+            <CollectionView ItemsSource="{Binding WeekDays}"
+                            HeightRequest="600">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="16" />
                 </CollectionView.ItemsLayout>
@@ -204,6 +206,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-    </Grid>
+            </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>
