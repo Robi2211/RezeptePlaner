@@ -74,8 +74,7 @@
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding FilteredRecipes}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedRecipe}"
-                        HeightRequest="600">
+                        SelectedItem="{Binding SelectedRecipe}">
             
             <CollectionView.EmptyView>
                 <VerticalStackLayout HorizontalOptions="Center" 

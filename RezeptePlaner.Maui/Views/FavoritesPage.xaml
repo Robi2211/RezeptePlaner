@@ -100,8 +100,7 @@
             <!-- Favorites Grid -->
             <CollectionView ItemsSource="{Binding FilteredRecipes}"
                             SelectionMode="None"
-                            IsVisible="{Binding FavoriteCount}"
-                            HeightRequest="600">
+                            IsVisible="{Binding FavoriteCount}">
                 
                 <CollectionView.EmptyView>
                     <VerticalStackLayout HorizontalOptions="Center" 
@@ -255,7 +254,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-                </Grid>
+        </Grid>
             </Grid>
         </ScrollView>
     </Grid>

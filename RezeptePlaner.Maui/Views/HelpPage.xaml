@@ -64,8 +64,7 @@
 
         <!-- FAQ List -->
         <CollectionView Grid.Row="2"
-                        ItemsSource="{Binding FilteredFaqItems}"
-                        HeightRequest="600">
+                        ItemsSource="{Binding FilteredFaqItems}">
             
             <CollectionView.EmptyView>
                 <VerticalStackLayout HorizontalOptions="Center" 

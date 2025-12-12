@@ -59,8 +59,7 @@
 
         <!-- Calendar Grid -->
         <ScrollView Grid.Row="1" Orientation="Horizontal">
-            <CollectionView ItemsSource="{Binding WeekDays}"
-                            HeightRequest="600">
+            <CollectionView ItemsSource="{Binding WeekDays}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="16" />
                 </CollectionView.ItemsLayout>
