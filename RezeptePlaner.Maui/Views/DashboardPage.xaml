@@ -196,7 +196,7 @@
                     
                     <!-- Trending Recipes -->
                     <Frame Style="{StaticResource CardFrame}"
-                           BackgroundColor="#1A3A2A">
+                           BackgroundColor="#E8F5E9">
                         <VerticalStackLayout Spacing="10">
                             <HorizontalStackLayout Spacing="8">
                                 <Frame BackgroundColor="{StaticResource Success}"
@@ -219,7 +219,8 @@
                             <CollectionView ItemsSource="{Binding TrendingRecipes}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:Recipe">
-                                        <Frame BackgroundColor="#0D2015"
+                                        <Frame BackgroundColor="{StaticResource Surface}"
+                                               BorderColor="{StaticResource Border}"
                                                CornerRadius="8"
                                                Padding="10"
                                                Margin="0,0,0,8">
@@ -261,14 +262,15 @@
 
                     <!-- Quick Stats -->
                     <Frame Style="{StaticResource CardFrame}"
-                           BackgroundColor="#2A1F10">
+                           BackgroundColor="#FFF8F0">
                         <VerticalStackLayout Spacing="12">
                             <Label Text="Schnellinfo"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
                                    FontAttributes="Bold" />
                             
-                            <Frame BackgroundColor="#1F1710"
+                            <Frame BackgroundColor="{StaticResource Surface}"
+                                   BorderColor="{StaticResource Border}"
                                    CornerRadius="8"
                                    Padding="12">
                                 <Grid ColumnDefinitions="*,Auto">
@@ -284,7 +286,8 @@
                                 </Grid>
                             </Frame>
                             
-                            <Frame BackgroundColor="#1F1710"
+                            <Frame BackgroundColor="{StaticResource Surface}"
+                                   BorderColor="{StaticResource Border}"
                                    CornerRadius="8"
                                    Padding="12">
                                 <Grid ColumnDefinitions="*,Auto">
