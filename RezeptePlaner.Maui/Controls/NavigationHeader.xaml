@@ -18,9 +18,11 @@
                         StrokeShape="RoundRectangle 8"
                         Padding="8"
                         VerticalOptions="Center">
-                    <Label Text="🍳"
-                           FontSize="20"
-                           VerticalOptions="Center" />
+                    <Image Source="logo.svg"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"
+                           SemanticProperties.Description="CookMate Logo" />
                 </Border>
                 <VerticalStackLayout VerticalOptions="Center" Spacing="0">
                     <Label Text="CookMate"
@@ -41,7 +43,7 @@
                                    VerticalOptions="Center">
                 
                 <Button x:Name="DashboardButton"
-                        Text="🏠 Dashboard"
+                        Text="Dashboard"
                         Clicked="OnDashboardClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
@@ -49,7 +51,7 @@
                         Padding="12,8" />
                 
                 <Button x:Name="RecipesButton"
-                        Text="📖 Rezepte"
+                        Text="Rezepte"
                         Clicked="OnRecipesClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
@@ -57,7 +59,7 @@
                         Padding="12,8" />
                 
                 <Button x:Name="WeekPlanButton"
-                        Text="📅 Wochenplan"
+                        Text="Wochenplan"
                         Clicked="OnWeekPlanClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
@@ -65,7 +67,7 @@
                         Padding="12,8" />
                 
                 <Button x:Name="FavoritesButton"
-                        Text="♡ Favoriten"
+                        Text="Favoriten"
                         Clicked="OnFavoritesClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
