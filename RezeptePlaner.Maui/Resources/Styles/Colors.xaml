@@ -5,30 +5,32 @@
 
     <!-- CookMate Design System Colors -->
     
-    <!-- Primary Colors (Gold/Warm theme) -->
-    <Color x:Key="Primary">#F4C15A</Color>
-    <Color x:Key="PrimaryDark">#D7A94B</Color>
-    <Color x:Key="Secondary">#D7A94B</Color>
+    <!-- Primary Colors (Orange/Warm theme) -->
+    <Color x:Key="Primary">#FF8C42</Color>
+    <Color x:Key="PrimaryDark">#E67A32</Color>
+    <Color x:Key="Secondary">#FFA500</Color>
     
-    <!-- Background Colors (Dark theme) -->
-    <Color x:Key="Background">#0B0B0D</Color>
-    <Color x:Key="Surface">#17171B</Color>
-    <Color x:Key="Muted">#2A2A30</Color>
-    <Color x:Key="Border">#2F2F36</Color>
+    <!-- Background Colors (Light theme) -->
+    <Color x:Key="Background">#F8F9FA</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="Muted">#F0F0F0</Color>
+    <Color x:Key="Border">#E0E0E0</Color>
     
     <!-- Text Colors -->
-    <Color x:Key="Foreground">#F5EADA</Color>
-    <Color x:Key="ForegroundMuted">#C9BBA4</Color>
+    <Color x:Key="Foreground">#2C2C2C</Color>
+    <Color x:Key="ForegroundMuted">#6B7280</Color>
     <Color x:Key="PrimaryDarkText">#1A1A1A</Color>
     
     <!-- Status Colors -->
     <Color x:Key="Success">#4CAF50</Color>
-    <Color x:Key="Warning">#FBC02D</Color>
-    <Color x:Key="Destructive">#E53935</Color>
+    <Color x:Key="Warning">#FFA726</Color>
+    <Color x:Key="Destructive">#EF4444</Color>
     
     <!-- Accent Colors -->
-    <Color x:Key="Orange">#FF6B35</Color>
-    <Color x:Key="Teal">#26A69A</Color>
+    <Color x:Key="Orange">#FF8C42</Color>
+    <Color x:Key="Teal">#14B8A6</Color>
+    <Color x:Key="TodayHighlight">#FFF3E0</Color>
+    <Color x:Key="TodayBorder">#FFB74D</Color>
     
     <!-- Basic Colors -->
     <Color x:Key="White">#FFFFFF</Color>

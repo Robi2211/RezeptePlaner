@@ -95,9 +95,9 @@ public class BoolToTodayBorderConverter : IValueConverter
     {
         if (value is bool isToday && isToday)
         {
-            return Color.FromArgb("#F4C15A"); // Primary color
+            return Color.FromArgb("#FFB74D"); // TodayBorder color (orange/yellow)
         }
-        return Color.FromArgb("#2F2F36"); // Border color
+        return Color.FromArgb("#E0E0E0"); // Border color
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -115,9 +115,9 @@ public class BoolToTodayBackgroundConverter : IValueConverter
     {
         if (value is bool isToday && isToday)
         {
-            return Color.FromArgb("#2A2510"); // Amber tinted dark
+            return Color.FromArgb("#FFF3E0"); // TodayHighlight color (light orange/yellow)
         }
-        return Color.FromArgb("#1F1F24"); // Slightly lighter surface
+        return Color.FromArgb("#FFFFFF"); // Surface color (white)
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
