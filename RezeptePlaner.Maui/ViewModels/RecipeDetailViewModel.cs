@@ -11,8 +11,15 @@ namespace RezeptePlaner.Maui.ViewModels;
 /// </summary>
 public class InstructionStep
 {
-    public int Number { get; set; }
-    public string Text { get; set; } = string.Empty;
+    /// <summary>
+    /// The step number in the instruction sequence
+    /// </summary>
+    public int Number { get; init; }
+    
+    /// <summary>
+    /// The instruction text
+    /// </summary>
+    public string Text { get; init; } = string.Empty;
 }
 
 /// <summary>
@@ -50,22 +57,31 @@ public partial class RecipeDetailViewModel : ObservableObject
     {
         if (string.IsNullOrEmpty(RecipeId)) return;
 
-        IsLoading = true;
-        Recipe = _recipeService.GetRecipeById(RecipeId);
-        
-        // Create indexed instruction steps
-        if (Recipe?.Instructions != null)
+        try
         {
-            InstructionSteps = new ObservableCollection<InstructionStep>(
-                Recipe.Instructions.Select((text, index) => new InstructionStep
-                {
-                    Number = index + 1,
-                    Text = text
-                })
-            );
+            IsLoading = true;
+            Recipe = _recipeService.GetRecipeById(RecipeId);
+            
+            // Create indexed instruction steps
+            if (Recipe?.Instructions != null)
+            {
+                InstructionSteps = new ObservableCollection<InstructionStep>(
+                    Recipe.Instructions.Select((text, index) => new InstructionStep
+                    {
+                        Number = index + 1,
+                        Text = text
+                    })
+                );
+            }
+            else
+            {
+                InstructionSteps = new ObservableCollection<InstructionStep>();
+            }
         }
-        
-        IsLoading = false;
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
     [RelayCommand]

@@ -110,11 +110,15 @@ public partial class RecipeListViewModel : ObservableObject
         FilterRecipes();
     }
 
-    partial void OnSelectedRecipeChanged(Recipe? value)
+    /// <summary>
+    /// Handles recipe selection and navigates to detail page
+    /// Resets selection after navigation to allow selecting the same recipe again
+    /// </summary>
+    async partial void OnSelectedRecipeChanged(Recipe? value)
     {
         if (value != null)
         {
-            NavigateToRecipeDetail(value);
+            await NavigateToRecipeDetail(value);
             SelectedRecipe = null; // Reset selection
         }
     }
