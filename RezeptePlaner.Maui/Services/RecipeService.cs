@@ -86,7 +86,7 @@ public class RecipeService
                     "Avocado auf Toast verteilen",
                     "Pochiertes Ei darauf legen und mit Chiliflocken garnieren"
                 },
-                ImageUrl = "avocado_toast.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
                 IsFavorite = true,
                 IsVegetarian = true,
                 Tags = new ObservableCollection<string> { "gesund", "schnell", "vegetarisch" }
@@ -118,7 +118,7 @@ public class RecipeService
                     "Heiße Pasta mit Guanciale mischen, dann Ei-Käse-Mischung unterrühren",
                     "Mit Nudelwasser die gewünschte Konsistenz erreichen"
                 },
-                ImageUrl = "carbonara.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400",
                 IsFavorite = true,
                 Tags = new ObservableCollection<string> { "italienisch", "klassiker", "pasta" }
             },
@@ -152,7 +152,7 @@ public class RecipeService
                     "Hähnchen in Streifen schneiden",
                     "Salat mit Hähnchen, Croutons und gehobeltem Parmesan servieren"
                 },
-                ImageUrl = "caesar_salad.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400",
                 IsFavorite = false,
                 Tags = new ObservableCollection<string> { "salat", "proteinreich", "amerikanisch" }
             },
@@ -181,7 +181,7 @@ public class RecipeService
                     "Am nächsten Morgen mit frischen Beeren und Nüssen toppen",
                     "Optional: zusätzlich mit Honig oder Ahornsirup süßen"
                 },
-                ImageUrl = "overnight_oats.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400",
                 IsFavorite = true,
                 IsVegetarian = true,
                 Tags = new ObservableCollection<string> { "gesund", "vorbereitung", "vegetarisch" }
@@ -218,7 +218,7 @@ public class RecipeService
                     "Mit Fischsauce und Limettensaft abschmecken",
                     "Mit Basilikum garnieren und mit Reis servieren"
                 },
-                ImageUrl = "thai_curry.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400",
                 IsFavorite = false,
                 IsGlutenFree = true,
                 Tags = new ObservableCollection<string> { "asiatisch", "würzig", "curry" }
@@ -248,7 +248,7 @@ public class RecipeService
                     "Granola, frische Früchte und Mandeln darauf verteilen",
                     "Mit Minzblättern dekorieren"
                 },
-                ImageUrl = "yogurt_bowl.svg",
+                ImageUrl = "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
                 IsFavorite = false,
                 IsVegetarian = true,
                 Tags = new ObservableCollection<string> { "gesund", "schnell", "vegetarisch" }
