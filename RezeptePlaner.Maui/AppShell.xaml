@@ -7,7 +7,8 @@
     x:Name="MainShell"
     Title="CookMate"
     FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <!-- Main navigation pages without TabBar to avoid double navigation -->
     <ShellContent
