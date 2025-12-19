@@ -61,7 +61,7 @@
                                             <Image Source="{Binding ImageUrl}"
                                                    Aspect="AspectFill">
                                                 <Image.Clip>
-                                                    <RoundRectangleGeometry CornerRadius="10" 
+                                                    <RoundRectangleGeometry CornerRadius="0" 
                                                                            Rect="0,0,80,80" />
                                                 </Image.Clip>
                                             </Image>
@@ -183,7 +183,7 @@
                                                                     <Image Source="{Binding ImageUrl}"
                                                                            Aspect="AspectFill">
                                                                         <Image.Clip>
-                                                                            <RoundRectangleGeometry CornerRadius="6,0,0,6" 
+                                                                            <RoundRectangleGeometry CornerRadius="0" 
                                                                                                    Rect="0,0,50,50" />
                                                                         </Image.Clip>
                                                                     </Image>
@@ -259,7 +259,7 @@
                                                     <Image Source="{Binding ImageUrl}"
                                                            Aspect="AspectFill">
                                                         <Image.Clip>
-                                                            <RoundRectangleGeometry CornerRadius="8" 
+                                                            <RoundRectangleGeometry CornerRadius="0" 
                                                                                    Rect="0,0,50,50" />
                                                         </Image.Clip>
                                                     </Image>
