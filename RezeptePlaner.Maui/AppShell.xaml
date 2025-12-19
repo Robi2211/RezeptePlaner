@@ -9,57 +9,55 @@
     FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
-    <!-- Main navigation pages using TabBar with hidden tabs -->
-    <TabBar>
-        <ShellContent
-            Title="Dashboard"
-            ContentTemplate="{DataTemplate views:DashboardPage}"
-            Route="DashboardPage" />
+    <!-- Main navigation pages without TabBar to avoid double navigation -->
+    <ShellContent
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate views:DashboardPage}"
+        Route="DashboardPage" />
 
-        <ShellContent
-            Title="Rezepte"
-            ContentTemplate="{DataTemplate views:RecipesPage}"
-            Route="RecipesPage" />
+    <ShellContent
+        Title="Rezepte"
+        ContentTemplate="{DataTemplate views:RecipesPage}"
+        Route="RecipesPage" />
 
-        <ShellContent
-            Title="Wochenplan"
-            ContentTemplate="{DataTemplate views:WeekPlannerPage}"
-            Route="WeekPlannerPage" />
+    <ShellContent
+        Title="Wochenplan"
+        ContentTemplate="{DataTemplate views:WeekPlannerPage}"
+        Route="WeekPlannerPage" />
 
-        <ShellContent
-            Title="Favoriten"
-            ContentTemplate="{DataTemplate views:FavoritesPage}"
-            Route="FavoritesPage" />
+    <ShellContent
+        Title="Favoriten"
+        ContentTemplate="{DataTemplate views:FavoritesPage}"
+        Route="FavoritesPage" />
 
-        <ShellContent
-            Title="Design"
-            ContentTemplate="{DataTemplate views:DesignPage}"
-            Route="DesignPage" />
+    <ShellContent
+        Title="Design"
+        ContentTemplate="{DataTemplate views:DesignPage}"
+        Route="DesignPage" />
 
-        <ShellContent
-            Title="Neues Rezept"
-            ContentTemplate="{DataTemplate views:AddRecipePage}"
-            Route="AddRecipePage" />
+    <ShellContent
+        Title="Neues Rezept"
+        ContentTemplate="{DataTemplate views:AddRecipePage}"
+        Route="AddRecipePage" />
 
-        <ShellContent
-            Title="Rezeptdetails"
-            ContentTemplate="{DataTemplate views:RecipeDetailPage}"
-            Route="RecipeDetailPage" />
+    <ShellContent
+        Title="Rezeptdetails"
+        ContentTemplate="{DataTemplate views:RecipeDetailPage}"
+        Route="RecipeDetailPage" />
 
-        <ShellContent
-            Title="Zusammenfassung"
-            ContentTemplate="{DataTemplate views:SummaryPage}"
-            Route="SummaryPage" />
+    <ShellContent
+        Title="Zusammenfassung"
+        ContentTemplate="{DataTemplate views:SummaryPage}"
+        Route="SummaryPage" />
 
-        <ShellContent
-            Title="Info"
-            ContentTemplate="{DataTemplate views:InfoPage}"
-            Route="InfoPage" />
+    <ShellContent
+        Title="Info"
+        ContentTemplate="{DataTemplate views:InfoPage}"
+        Route="InfoPage" />
 
-        <ShellContent
-            Title="Hilfe"
-            ContentTemplate="{DataTemplate views:HelpPage}"
-            Route="HelpPage" />
-    </TabBar>
+    <ShellContent
+        Title="Hilfe"
+        ContentTemplate="{DataTemplate views:HelpPage}"
+        Route="HelpPage" />
 
 </Shell>
