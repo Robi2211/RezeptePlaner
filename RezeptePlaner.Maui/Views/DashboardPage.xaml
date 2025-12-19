@@ -59,7 +59,7 @@
                                                WidthRequest="80"
                                                HeightRequest="80">
                                             <Image Source="{Binding ImageUrl}"
-                                                   Aspect="AspectFit">
+                                                   Aspect="AspectFill">
                                                 <Image.Clip>
                                                     <RoundRectangleGeometry CornerRadius="0" 
                                                                            Rect="0,0,80,80" />
@@ -159,7 +159,7 @@
                                                             ItemsSource="{Binding Recipes}"
                                                             HeightRequest="50">
                                                 <CollectionView.ItemsLayout>
-                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
                                                 </CollectionView.ItemsLayout>
                                                 <CollectionView.ItemTemplate>
                                                     <DataTemplate x:DataType="models:Recipe">
@@ -181,7 +181,7 @@
                                                                        WidthRequest="50"
                                                                        HeightRequest="50">
                                                                     <Image Source="{Binding ImageUrl}"
-                                                                           Aspect="AspectFit">
+                                                                           Aspect="AspectFill">
                                                                         <Image.Clip>
                                                                             <RoundRectangleGeometry CornerRadius="0" 
                                                                                                    Rect="0,0,50,50" />
@@ -257,7 +257,7 @@
                                                        WidthRequest="50"
                                                        HeightRequest="50">
                                                     <Image Source="{Binding ImageUrl}"
-                                                           Aspect="AspectFit">
+                                                           Aspect="AspectFill">
                                                         <Image.Clip>
                                                             <RoundRectangleGeometry CornerRadius="0" 
                                                                                    Rect="0,0,50,50" />
