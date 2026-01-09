@@ -65,12 +65,13 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels:PlannerDay">
-                        <Frame BackgroundColor="{StaticResource Surface}"
-                               BorderColor="{Binding IsToday, Converter={StaticResource BoolToTodayBorderConverter}}"
-                               CornerRadius="16"
-                               Padding="0"
-                               WidthRequest="220"
-                               MinimumHeightRequest="550">
+                        <Border BackgroundColor="{StaticResource Surface}"
+                                Stroke="{Binding IsToday, Converter={StaticResource BoolToTodayBorderConverter}}"
+                                StrokeThickness="2"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="0"
+                                WidthRequest="220"
+                                MinimumHeightRequest="550">
                             <Grid RowDefinitions="Auto,*">
                                 
                                 <!-- Day Header -->
@@ -102,13 +103,16 @@
                                 <!-- Meals List -->
                                 <VerticalStackLayout Grid.Row="1" Padding="12" Spacing="12">
                                     <CollectionView ItemsSource="{Binding Meals}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                                        </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="viewmodels:PlannedMeal">
                                                 <Frame BackgroundColor="{StaticResource Muted}"
                                                        BorderColor="{StaticResource Border}"
                                                        CornerRadius="12"
                                                        Padding="0"
-                                                       Margin="0,0,0,16">
+                                                       Margin="0">
                                                     <Grid RowDefinitions="100,Auto">
                                                         <!-- Meal Image -->
                                                         <Grid Grid.Row="0">
@@ -211,7 +215,7 @@
                                     </Frame>
                                 </VerticalStackLayout>
                             </Grid>
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
