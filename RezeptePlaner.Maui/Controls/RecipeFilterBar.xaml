@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RezeptePlaner.Maui.Controls.RecipeFilterBar"
+             x:Name="FilterBarControl">
+    
+    <Frame BackgroundColor="{StaticResource Surface}"
+           BorderColor="{StaticResource Border}"
+           CornerRadius="20"
+           Padding="20"
+           HasShadow="True">
+        <Grid RowDefinitions="Auto,Auto" RowSpacing="15">
+            
+            <!-- Top Row: Search + Filter Controls -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10">
+                
+                <!-- Search Bar with Icon -->
+                <Border Grid.Column="0"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <!-- Search Icon -->
+                        <Label Grid.Column="0"
+                               Text="🔍"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               Margin="0,0,8,0" />
+                        <!-- Search Entry -->
+                        <Entry Grid.Column="1"
+                               Text="{Binding Source={x:Reference FilterBarControl}, Path=SearchText, Mode=TwoWay}"
+                               Placeholder="Rezepte oder Zutaten suchen..."
+                               PlaceholderColor="{StaticResource ForegroundMuted}"
+                               TextColor="{StaticResource Foreground}"
+                               BackgroundColor="Transparent"
+                               FontSize="14"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+                
+                <!-- Category Dropdown -->
+                <Border Grid.Column="1"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8"
+                        WidthRequest="180">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Picker Grid.Column="0"
+                                ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Categories}"
+                                SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, Mode=TwoWay}"
+                                Title="Alle Kategorien"
+                                TextColor="{StaticResource Foreground}"
+                                TitleColor="{StaticResource ForegroundMuted}"
+                                BackgroundColor="Transparent"
+                                FontSize="14"
+                                VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               Text="▼"
+                               TextColor="{StaticResource ForegroundMuted}"
+                               FontSize="10"
+                               VerticalOptions="Center"
+                               Margin="4,0,0,0" />
+                    </Grid>
+                </Border>
+                
+                <!-- Difficulty Dropdown -->
+                <Border Grid.Column="2"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8"
+                        WidthRequest="200">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Picker Grid.Column="0"
+                                ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Difficulties}"
+                                SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, Mode=TwoWay}"
+                                Title="Alle Schwierigkeiten"
+                                TextColor="{StaticResource Foreground}"
+                                TitleColor="{StaticResource ForegroundMuted}"
+                                BackgroundColor="Transparent"
+                                FontSize="14"
+                                VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               Text="▼"
+                               TextColor="{StaticResource ForegroundMuted}"
+                               FontSize="10"
+                               VerticalOptions="Center"
+                               Margin="4,0,0,0" />
+                    </Grid>
+                </Border>
+                
+                <!-- Time Slider -->
+                <Border Grid.Column="3"
+                        BackgroundColor="{StaticResource Muted}"
+                        Stroke="{StaticResource Border}"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8"
+                        WidthRequest="220">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                        <!-- Clock Icon -->
+                        <Label Grid.Column="0"
+                               Text="🕐"
+                               TextColor="{StaticResource Primary}"
+                               FontSize="16"
+                               VerticalOptions="Center" />
+                        <!-- Slider -->
+                        <Slider Grid.Column="1"
+                                Minimum="0"
+                                Maximum="180"
+                                Value="{Binding Source={x:Reference FilterBarControl}, Path=MaxTimeMinutes, Mode=TwoWay}"
+                                MinimumTrackColor="{StaticResource Primary}"
+                                MaximumTrackColor="{StaticResource Gray300}"
+                                ThumbColor="{StaticResource Primary}"
+                                VerticalOptions="Center" />
+                        <!-- Time Label -->
+                        <Label Grid.Column="2"
+                               Text="{Binding Source={x:Reference FilterBarControl}, Path=MaxTimeMinutes, StringFormat='{0}+ Min'}"
+                               TextColor="{StaticResource Foreground}"
+                               FontSize="12"
+                               VerticalOptions="Center"
+                               WidthRequest="60" />
+                    </Grid>
+                </Border>
+                
+            </Grid>
+            
+            <!-- Result Count Label -->
+            <Label Grid.Row="1"
+                   Text="{Binding Source={x:Reference FilterBarControl}, Path=ResultCount, StringFormat='{0} Rezepte gefunden'}"
+                   TextColor="{StaticResource ForegroundMuted}"
+                   FontSize="14"
+                   Margin="0,5,0,0" />
+            
+        </Grid>
+    </Frame>
+    
+</ContentView>

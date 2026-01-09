@@ -18,57 +18,23 @@
         
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
-            <Label Text="🍳 Rezepte" 
+            <Label Text="Rezeptbibliothek" 
                    Style="{StaticResource PageTitle}" />
-            <Label Text="Entdecken Sie Ihre Rezeptsammlung"
+            <Label Text="Entdecke und verwalte all deine Lieblingsrezepte."
                    TextColor="{StaticResource ForegroundMuted}"
                    FontSize="14" />
         </VerticalStackLayout>
 
         <!-- Search and Filter Section -->
-        <Frame Grid.Row="1" 
-               Style="{StaticResource CardFrame}"
-               Margin="0,0,0,20">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
-                
-                <!-- Search Entry -->
-                <Border Grid.Row="0" Grid.Column="0"
-                        BackgroundColor="{StaticResource Muted}"
-                        Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="12,8"
-                        Margin="0,0,10,0">
-                    <Entry Text="{Binding SearchText}"
-                           Placeholder="Rezept suchen..."
-                           PlaceholderColor="{StaticResource ForegroundMuted}"
-                           TextColor="{StaticResource Foreground}"
-                           BackgroundColor="Transparent"
-                           FontSize="14" />
-                </Border>
-                
-                <!-- Clear Button -->
-                <Button Grid.Row="0" Grid.Column="1"
-                        Text="Zurücksetzen"
-                        Command="{Binding ClearFiltersCommand}"
-                        Style="{StaticResource SecondaryButton}"
-                        WidthRequest="120" />
-                
-                <!-- Category Filter -->
-                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" 
-                                       Margin="0,15,0,0" Spacing="10">
-                    <Label Text="Kategorie:" 
-                           TextColor="{StaticResource ForegroundMuted}"
-                           VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding Categories}"
-                            SelectedItem="{Binding SelectedCategory}"
-                            Title="Alle Kategorien"
-                            TextColor="{StaticResource Foreground}"
-                            TitleColor="{StaticResource ForegroundMuted}"
-                            BackgroundColor="{StaticResource Muted}"
-                            WidthRequest="180" />
-                </HorizontalStackLayout>
-            </Grid>
-        </Frame>
+        <controls:RecipeFilterBar Grid.Row="1"
+                                  Margin="0,0,0,20"
+                                  SearchText="{Binding SearchText, Mode=TwoWay}"
+                                  SelectedCategory="{Binding SelectedCategoryName, Mode=TwoWay}"
+                                  SelectedDifficulty="{Binding SelectedDifficultyName, Mode=TwoWay}"
+                                  MaxTimeMinutes="{Binding MaxTimeMinutes, Mode=TwoWay}"
+                                  Categories="{Binding CategoryNames}"
+                                  Difficulties="{Binding DifficultyNames}"
+                                  ResultCount="{Binding ResultCount}" />
 
         <!-- Recipe List (CollectionView) -->
         <CollectionView Grid.Row="2"
