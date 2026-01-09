@@ -115,7 +115,7 @@ public partial class RecipeListViewModel : ObservableObject
             filtered = filtered.Where(r => r.Difficulty == SelectedDifficulty.Value);
         }
 
-        if (MaxTimeMinutes > 0 && MaxTimeMinutes < 180)
+        if (MaxTimeMinutes > 0)
         {
             filtered = filtered.Where(r => r.TotalTime <= MaxTimeMinutes);
         }
