@@ -113,10 +113,7 @@ public class BoolToTodayBackgroundConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is bool isToday && isToday)
-        {
-            return Color.FromArgb("#FFF3E0"); // TodayHighlight color (light orange/yellow)
-        }
+        // Always return white background - today is indicated by border only
         return Color.FromArgb("#FFFFFF"); // Surface color (white)
     }
 
