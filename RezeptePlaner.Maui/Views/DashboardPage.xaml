@@ -167,7 +167,7 @@
                                                     <DataTemplate x:DataType="models:Recipe">
                                                         <Frame BackgroundColor="{StaticResource Surface}"
                                                                BorderColor="{StaticResource Border}"
-                                                               CornerRadius="6"
+                                                               CornerRadius="0"
                                                                Padding="0"
                                                                WidthRequest="180">
                                                             <Frame.GestureRecognizers>
@@ -178,7 +178,7 @@
                                                             <Grid ColumnDefinitions="50,*" ColumnSpacing="8">
                                                                 <Frame Grid.Column="0"
                                                                        BackgroundColor="{StaticResource Surface}"
-                                                                       CornerRadius="6,0,0,6"
+                                                                       CornerRadius="0"
                                                                        Padding="0"
                                                                        WidthRequest="50"
                                                                        HeightRequest="50">
@@ -187,7 +187,7 @@
                                                                            VerticalOptions="Fill"
                                                                            HorizontalOptions="Fill">
                                                                         <Image.Clip>
-                                                                            <RoundRectangleGeometry CornerRadius="6,0,0,6" 
+                                                                            <RoundRectangleGeometry CornerRadius="0" 
                                                                                                    Rect="0,0,50,50" />
                                                                         </Image.Clip>
                                                                     </Image>
