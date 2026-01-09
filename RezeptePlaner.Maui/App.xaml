@@ -18,6 +18,7 @@
             <converters:BoolToFavoriteIconConverter x:Key="BoolToFavoriteIconConverter" />
             <converters:BoolToTodayBorderConverter x:Key="BoolToTodayBorderConverter" />
             <converters:BoolToTodayBackgroundConverter x:Key="BoolToTodayBackgroundConverter" />
+            <converters:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

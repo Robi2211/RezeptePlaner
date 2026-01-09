@@ -125,3 +125,23 @@ public class BoolToTodayBackgroundConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts a string to boolean (true if null or empty)
+/// </summary>
+public class IsNullOrEmptyConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string stringValue)
+        {
+            return string.IsNullOrWhiteSpace(stringValue);
+        }
+        return true;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
