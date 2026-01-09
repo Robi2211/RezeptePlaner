@@ -114,10 +114,21 @@
                                                         <Grid Grid.Row="0">
                                                             <BoxView Color="{StaticResource Surface}"
                                                                      CornerRadius="12,12,0,0" />
+                                                            <Image Source="{Binding Recipe.ImageUrl}"
+                                                                   Aspect="AspectFill"
+                                                                   HeightRequest="100"
+                                                                   VerticalOptions="Fill"
+                                                                   HorizontalOptions="Fill">
+                                                                <Image.Clip>
+                                                                    <RoundRectangleGeometry CornerRadius="12,12,0,0" 
+                                                                                           Rect="0,0,250,100" />
+                                                                </Image.Clip>
+                                                            </Image>
                                                             <Label Text="🍽️"
                                                                    FontSize="40"
                                                                    HorizontalOptions="Center"
-                                                                   VerticalOptions="Center" />
+                                                                   VerticalOptions="Center"
+                                                                   IsVisible="{Binding Recipe.ImageUrl, Converter={StaticResource IsNullOrEmptyConverter}}" />
                                                             
                                                             <!-- Meal Type Badge -->
                                                             <Frame BackgroundColor="{StaticResource Surface}"

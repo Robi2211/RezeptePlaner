@@ -59,9 +59,11 @@
                                                WidthRequest="80"
                                                HeightRequest="80">
                                             <Image Source="{Binding ImageUrl}"
-                                                   Aspect="AspectFill">
+                                                   Aspect="AspectFill"
+                                                   VerticalOptions="Fill"
+                                                   HorizontalOptions="Fill">
                                                 <Image.Clip>
-                                                    <RoundRectangleGeometry CornerRadius="0" 
+                                                    <RoundRectangleGeometry CornerRadius="10" 
                                                                            Rect="0,0,80,80" />
                                                 </Image.Clip>
                                             </Image>
@@ -181,9 +183,11 @@
                                                                        WidthRequest="50"
                                                                        HeightRequest="50">
                                                                     <Image Source="{Binding ImageUrl}"
-                                                                           Aspect="AspectFill">
+                                                                           Aspect="AspectFill"
+                                                                           VerticalOptions="Fill"
+                                                                           HorizontalOptions="Fill">
                                                                         <Image.Clip>
-                                                                            <RoundRectangleGeometry CornerRadius="0" 
+                                                                            <RoundRectangleGeometry CornerRadius="6,0,0,6" 
                                                                                                    Rect="0,0,50,50" />
                                                                         </Image.Clip>
                                                                     </Image>
@@ -257,9 +261,11 @@
                                                        WidthRequest="50"
                                                        HeightRequest="50">
                                                     <Image Source="{Binding ImageUrl}"
-                                                           Aspect="AspectFill">
+                                                           Aspect="AspectFill"
+                                                           VerticalOptions="Fill"
+                                                           HorizontalOptions="Fill">
                                                         <Image.Clip>
-                                                            <RoundRectangleGeometry CornerRadius="0" 
+                                                            <RoundRectangleGeometry CornerRadius="8" 
                                                                                    Rect="0,0,50,50" />
                                                         </Image.Clip>
                                                     </Image>
