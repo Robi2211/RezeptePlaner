@@ -69,9 +69,9 @@
                                 Stroke="{Binding IsToday, Converter={StaticResource BoolToTodayBorderConverter}}"
                                 StrokeThickness="2"
                                 StrokeShape="RoundRectangle 16"
+                                Padding="0"
                                 WidthRequest="220"
-                                MinimumHeightRequest="550"
-                                Padding="0">
+                                MinimumHeightRequest="550">
                             <Grid RowDefinitions="Auto,*">
                                 
                                 <!-- Day Header -->
