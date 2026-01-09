@@ -113,14 +113,14 @@
                                                         <!-- Meal Image -->
                                                         <Grid Grid.Row="0">
                                                             <BoxView Color="{StaticResource Surface}"
-                                                                     CornerRadius="12,12,0,0" />
+                                                                     CornerRadius="0" />
                                                             <Image Source="{Binding Recipe.ImageUrl}"
                                                                    Aspect="AspectFill"
                                                                    HeightRequest="100"
                                                                    VerticalOptions="Fill"
                                                                    HorizontalOptions="Fill">
                                                                 <Image.Clip>
-                                                                    <RoundRectangleGeometry CornerRadius="12,12,0,0" 
+                                                                    <RoundRectangleGeometry CornerRadius="0" 
                                                                                            Rect="0,0,250,100" />
                                                                 </Image.Clip>
                                                             </Image>
