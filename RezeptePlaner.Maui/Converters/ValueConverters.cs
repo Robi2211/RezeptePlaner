@@ -87,6 +87,26 @@ public class BoolToFavoriteIconConverter : IValueConverter
 }
 
 /// <summary>
+/// Converts a boolean to heart icon (filled red heart or outline gray heart)
+/// </summary>
+public class FavoriteToHeartConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isFavorite)
+        {
+            return isFavorite ? "❤️" : "🤍";
+        }
+        return "🤍";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
 /// Converts a boolean to today's border color
 /// </summary>
 public class BoolToTodayBorderConverter : IValueConverter
