@@ -171,14 +171,9 @@
                                                         StrokeShape="RoundRectangle 12"
                                                         Padding="8,4"
                                                         Margin="0,2">
-                                                    <Label TextColor="{StaticResource ForegroundMuted}"
-                                                           FontSize="10">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}#{0}">
-                                                                <Binding Path="." />
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
+                                                    <Label Text="{Binding ., StringFormat='#{0}'}"
+                                                           TextColor="{StaticResource ForegroundMuted}"
+                                                           FontSize="10" />
                                                 </Border>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>

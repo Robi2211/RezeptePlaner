@@ -118,16 +118,11 @@
                                 VerticalOptions="Center" />
                         <!-- Time Label -->
                         <Label Grid.Column="2"
+                               Text="{Binding Source={x:Reference FilterBarControl}, Path=MaxTimeMinutes, StringFormat='{0}+ Min'}"
                                TextColor="{StaticResource Foreground}"
                                FontSize="12"
                                VerticalOptions="Center"
-                               WidthRequest="70">
-                            <Label.Text>
-                                <MultiBinding StringFormat="{}{0}+ Min">
-                                    <Binding Source="{x:Reference FilterBarControl}" Path="MaxTimeMinutes" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
+                               WidthRequest="70" />
                     </Grid>
                 </Border>
                 
