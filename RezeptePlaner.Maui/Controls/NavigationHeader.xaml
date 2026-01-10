@@ -10,73 +10,96 @@
             
             <!-- Logo and Title -->
             <HorizontalStackLayout Grid.Column="0" 
-                                   Spacing="10"
+                                   Spacing="12"
                                    VerticalOptions="Center">
-                <Border BackgroundColor="{StaticResource Muted}"
-                        StrokeThickness="1"
-                        Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="8"
+                <Border BackgroundColor="{StaticResource Gray200}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="10"
+                        WidthRequest="40"
+                        HeightRequest="40"
                         VerticalOptions="Center">
-                    <Image Source="logo.svg"
-                           WidthRequest="20"
-                           HeightRequest="20"
-                           VerticalOptions="Center"
-                           SemanticProperties.Description="CookMate Logo" />
+                    <Label Text="🍳"
+                           FontSize="18"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
                 </Border>
-                <VerticalStackLayout VerticalOptions="Center" Spacing="0">
+                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
                     <Label Text="CookMate"
                            TextColor="{StaticResource Foreground}"
                            FontSize="18"
                            FontAttributes="Bold" />
-                    <Label Text="RECIPE PLANNER"
+                    <Label Text="Recipe Planner"
                            TextColor="{StaticResource ForegroundMuted}"
-                           FontSize="8"
-                           CharacterSpacing="1" />
+                           FontSize="11" />
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
             <!-- Navigation Items -->
             <HorizontalStackLayout Grid.Column="1" 
                                    HorizontalOptions="Center"
-                                   Spacing="8"
+                                   Spacing="30"
                                    VerticalOptions="Center">
                 
-                <Button x:Name="DashboardButton"
-                        Text="🏠 Dashboard"
-                        Clicked="OnDashboardClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource ForegroundMuted}"
-                        FontSize="14"
-                        Padding="12,8"
-                        BorderWidth="0" />
+                <VerticalStackLayout x:Name="DashboardStack" Spacing="4">
+                    <Button x:Name="DashboardButton"
+                            Text="Dashboard"
+                            Clicked="OnDashboardClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource ForegroundMuted}"
+                            FontSize="14"
+                            Padding="0"
+                            BorderWidth="0" />
+                    <BoxView x:Name="DashboardUnderline"
+                             BackgroundColor="Transparent"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+                </VerticalStackLayout>
                 
-                <Button x:Name="RecipesButton"
-                        Text="📖 Rezepte"
-                        Clicked="OnRecipesClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource ForegroundMuted}"
-                        FontSize="14"
-                        Padding="12,8"
-                        BorderWidth="0" />
+                <VerticalStackLayout x:Name="RecipesStack" Spacing="4">
+                    <Button x:Name="RecipesButton"
+                            Text="Rezepte"
+                            Clicked="OnRecipesClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource ForegroundMuted}"
+                            FontSize="14"
+                            Padding="0"
+                            BorderWidth="0" />
+                    <BoxView x:Name="RecipesUnderline"
+                             BackgroundColor="Transparent"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+                </VerticalStackLayout>
                 
-                <Button x:Name="WeekPlanButton"
-                        Text="📅 Wochenplan"
-                        Clicked="OnWeekPlanClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource ForegroundMuted}"
-                        FontSize="14"
-                        Padding="12,8"
-                        BorderWidth="0" />
+                <VerticalStackLayout x:Name="WeekPlanStack" Spacing="4">
+                    <Button x:Name="WeekPlanButton"
+                            Text="Wochenplan"
+                            Clicked="OnWeekPlanClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource ForegroundMuted}"
+                            FontSize="14"
+                            Padding="0"
+                            BorderWidth="0" />
+                    <BoxView x:Name="WeekPlanUnderline"
+                             BackgroundColor="Transparent"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+                </VerticalStackLayout>
                 
-                <Button x:Name="FavoritesButton"
-                        Text="❤️ Favoriten"
-                        Clicked="OnFavoritesClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource ForegroundMuted}"
-                        FontSize="14"
-                        Padding="12,8"
-                        BorderWidth="0" />
+                <VerticalStackLayout x:Name="FavoritesStack" Spacing="4">
+                    <Button x:Name="FavoritesButton"
+                            Text="Favoriten"
+                            Clicked="OnFavoritesClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource ForegroundMuted}"
+                            FontSize="14"
+                            Padding="0"
+                            BorderWidth="0" />
+                    <BoxView x:Name="FavoritesUnderline"
+                             BackgroundColor="Transparent"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+                </VerticalStackLayout>
                 
             </HorizontalStackLayout>
 
@@ -85,12 +108,12 @@
                     Text="+ Neues Rezept"
                     Clicked="OnNewRecipeClicked"
                     BackgroundColor="{StaticResource Surface}"
-                    TextColor="{StaticResource Foreground}"
-                    BorderColor="{StaticResource Border}"
-                    BorderWidth="1"
-                    CornerRadius="8"
+                    TextColor="{StaticResource Primary}"
+                    BorderColor="{StaticResource Primary}"
+                    BorderWidth="2"
+                    CornerRadius="20"
                     FontSize="14"
-                    Padding="16,10"
+                    Padding="20,10"
                     VerticalOptions="Center" />
 
         </Grid>

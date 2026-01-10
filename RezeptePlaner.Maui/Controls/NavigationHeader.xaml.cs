@@ -28,27 +28,37 @@ public partial class NavigationHeader : ContentView
     {
         // Reset all buttons to default color
         var defaultColor = (Color)Application.Current!.Resources["ForegroundMuted"];
-        var activeColor = (Color)Application.Current!.Resources["Foreground"];
+        var activeColor = (Color)Application.Current!.Resources["Primary"];
+        var transparent = Colors.Transparent;
 
         DashboardButton.TextColor = defaultColor;
         RecipesButton.TextColor = defaultColor;
         WeekPlanButton.TextColor = defaultColor;
         FavoritesButton.TextColor = defaultColor;
 
-        // Set active button color
+        DashboardUnderline.BackgroundColor = transparent;
+        RecipesUnderline.BackgroundColor = transparent;
+        WeekPlanUnderline.BackgroundColor = transparent;
+        FavoritesUnderline.BackgroundColor = transparent;
+
+        // Set active button color and underline
         switch (currentPage)
         {
             case "Dashboard":
                 DashboardButton.TextColor = activeColor;
+                DashboardUnderline.BackgroundColor = activeColor;
                 break;
             case "Rezepte":
                 RecipesButton.TextColor = activeColor;
+                RecipesUnderline.BackgroundColor = activeColor;
                 break;
             case "Wochenplan":
                 WeekPlanButton.TextColor = activeColor;
+                WeekPlanUnderline.BackgroundColor = activeColor;
                 break;
             case "Favoriten":
                 FavoritesButton.TextColor = activeColor;
+                FavoritesUnderline.BackgroundColor = activeColor;
                 break;
         }
     }
