@@ -103,15 +103,10 @@
                                         VerticalOptions="Start"
                                         WidthRequest="40"
                                         HeightRequest="40">
-                                    <Label FontSize="20"
+                                    <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
+                                           FontSize="20"
                                            HorizontalOptions="Center"
-                                           VerticalOptions="Center">
-                                        <Label.Text>
-                                            <MultiBinding Converter="{StaticResource FavoriteToHeartConverter}">
-                                                <Binding Path="IsFavorite" />
-                                            </MultiBinding>
-                                        </Label.Text>
-                                    </Label>
+                                           VerticalOptions="Center" />
                                 </Border>
                             </Grid>
                             
