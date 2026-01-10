@@ -25,10 +25,11 @@ public partial class App : Application
 				
 				if (appWindow is not null)
 				{
+					var transparentColor = Microsoft.UI.Colors.Transparent;
 					// Hide the default title bar
 					appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-					appWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
-					appWindow.TitleBar.ButtonInactiveBackgroundColor = Microsoft.UI.Colors.Transparent;
+					appWindow.TitleBar.ButtonBackgroundColor = transparentColor;
+					appWindow.TitleBar.ButtonInactiveBackgroundColor = transparentColor;
 				}
 			}
 		};

@@ -89,7 +89,7 @@
                                        HorizontalOptions="Fill">
                                     <Image.Clip>
                                         <RoundRectangleGeometry CornerRadius="20,20,0,0" 
-                                                               Rect="0,0,400,280" />
+                                                               Rect="0,0,1000,280" />
                                     </Image.Clip>
                                 </Image>
                                 
