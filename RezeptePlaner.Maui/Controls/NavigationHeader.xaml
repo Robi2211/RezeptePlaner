@@ -43,36 +43,40 @@
                                    VerticalOptions="Center">
                 
                 <Button x:Name="DashboardButton"
-                        Text="Dashboard"
+                        Text="🏠 Dashboard"
                         Clicked="OnDashboardClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
                         FontSize="14"
-                        Padding="12,8" />
+                        Padding="12,8"
+                        BorderWidth="0" />
                 
                 <Button x:Name="RecipesButton"
-                        Text="Rezepte"
+                        Text="📖 Rezepte"
                         Clicked="OnRecipesClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
                         FontSize="14"
-                        Padding="12,8" />
+                        Padding="12,8"
+                        BorderWidth="0" />
                 
                 <Button x:Name="WeekPlanButton"
-                        Text="Wochenplan"
+                        Text="📅 Wochenplan"
                         Clicked="OnWeekPlanClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
                         FontSize="14"
-                        Padding="12,8" />
+                        Padding="12,8"
+                        BorderWidth="0" />
                 
                 <Button x:Name="FavoritesButton"
-                        Text="Favoriten"
+                        Text="❤️ Favoriten"
                         Clicked="OnFavoritesClicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource ForegroundMuted}"
                         FontSize="14"
-                        Padding="12,8" />
+                        Padding="12,8"
+                        BorderWidth="0" />
                 
             </HorizontalStackLayout>
 

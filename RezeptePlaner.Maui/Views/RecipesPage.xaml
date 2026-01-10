@@ -19,7 +19,10 @@
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
             <Label Text="Rezeptbibliothek" 
-                   Style="{StaticResource PageTitle}" />
+                   TextColor="{StaticResource Foreground}"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,8" />
             <Label Text="Entdecke und verwalte all deine Lieblingsrezepte."
                    TextColor="{StaticResource ForegroundMuted}"
                    FontSize="14" />
@@ -63,44 +66,71 @@
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
-                                 Span="2"
+                                 Span="{OnIdiom Desktop=3, Tablet=2, Phone=1}"
                                  HorizontalItemSpacing="15"
                                  VerticalItemSpacing="15" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Recipe">
-                    <Frame Style="{StaticResource CardFrame}"
-                           Padding="0">
-                        <Grid RowDefinitions="150,*">
+                    <Frame BackgroundColor="{StaticResource Surface}"
+                           BorderColor="{StaticResource Border}"
+                           CornerRadius="20"
+                           Padding="0"
+                           HasShadow="True">
+                        <Grid RowDefinitions="220,*">
                             
                             <!-- Recipe Image -->
                             <Image Grid.Row="0"
                                    Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"
-                                   HeightRequest="150"
+                                   HeightRequest="220"
                                    VerticalOptions="Fill"
                                    HorizontalOptions="Fill">
                                 <Image.Clip>
-                                    <RoundRectangleGeometry CornerRadius="12,12,0,0" 
-                                                           Rect="0,0,400,150" />
+                                    <RoundRectangleGeometry CornerRadius="20,20,0,0" 
+                                                           Rect="0,0,400,220" />
                                 </Image.Clip>
                             </Image>
                             
-                            <!-- Favorite Badge -->
-                            <Frame Grid.Row="0"
-                                   BackgroundColor="{StaticResource Primary}"
-                                   CornerRadius="15"
-                                   Padding="8,4"
-                                   Margin="10"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Start"
-                                   IsVisible="{Binding IsFavorite}">
-                                <Label Text="⭐" FontSize="12" />
-                            </Frame>
+                            <!-- Favorite Heart Button -->
+                            <Border Grid.Row="0"
+                                    BackgroundColor="{StaticResource Surface}"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 20"
+                                    Padding="8"
+                                    Margin="10"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    WidthRequest="36"
+                                    HeightRequest="36">
+                                <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
+                                       FontSize="18"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Border>
                             
                             <!-- Recipe Info -->
-                            <VerticalStackLayout Grid.Row="1" Padding="15">
+                            <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="8">
+                                
+                                <!-- Category + Difficulty Badge -->
+                                <Border BackgroundColor="{StaticResource Primary}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 12"
+                                        Padding="10,5"
+                                        HorizontalOptions="Start"
+                                        Margin="0,0,0,4">
+                                    <Label TextColor="{StaticResource Surface}"
+                                           FontSize="11"
+                                           FontAttributes="Bold">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="CategoryDisplay" />
+                                                <Binding Path="DifficultyDisplay" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Border>
                                 
                                 <!-- Title -->
                                 <Label Text="{Binding Title}"
@@ -108,62 +138,47 @@
                                        FontSize="16"
                                        FontAttributes="Bold"
                                        LineBreakMode="TailTruncation"
-                                       MaxLines="2" />
-                                
-                                <!-- Category Badge -->
-                                <Frame BackgroundColor="{StaticResource Primary}"
-                                       CornerRadius="10"
-                                       Padding="8,4"
-                                       HorizontalOptions="Start"
-                                       Margin="0,8,0,0">
-                                    <Label Text="{Binding CategoryDisplay}"
-                                           TextColor="{StaticResource Background}"
-                                           FontSize="11" />
-                                </Frame>
+                                       MaxLines="2"
+                                       Margin="0,0,0,4" />
                                 
                                 <!-- Meta Info -->
-                                <HorizontalStackLayout Margin="0,10,0,0" Spacing="15">
+                                <HorizontalStackLayout Spacing="15">
                                     <HorizontalStackLayout Spacing="4">
-                                        <Label Text="⏱️" FontSize="12" />
-                                        <Label Text="{Binding TotalTime, StringFormat='{0} min'}"
+                                        <Label Text="🕐" FontSize="14" />
+                                        <Label Text="{Binding TotalTime, StringFormat='{0} Min'}"
                                                TextColor="{StaticResource ForegroundMuted}"
                                                FontSize="12" />
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout Spacing="4">
-                                        <Label Text="👥" FontSize="12" />
-                                        <Label Text="{Binding Servings, StringFormat='{0} Port.'}"
+                                        <Label Text="👥" FontSize="14" />
+                                        <Label Text="{Binding Servings, StringFormat='{0} Portionen'}"
                                                TextColor="{StaticResource ForegroundMuted}"
                                                FontSize="12" />
                                     </HorizontalStackLayout>
                                 </HorizontalStackLayout>
                                 
-                                <!-- Difficulty -->
-                                <Label Text="{Binding DifficultyDisplay, StringFormat='Schwierigkeit: {0}'}"
-                                       TextColor="{StaticResource ForegroundMuted}"
-                                       FontSize="12"
-                                       Margin="0,8,0,0" />
-                                
                                 <!-- Tags -->
-                                <HorizontalStackLayout Margin="0,8,0,0" Spacing="5">
-                                    <CollectionView ItemsSource="{Binding Tags}"
-                                                    HeightRequest="25">
+                                <FlexLayout Wrap="Wrap" Margin="0,4,0,0">
+                                    <CollectionView ItemsSource="{Binding Tags}">
                                         <CollectionView.ItemsLayout>
                                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="x:String">
-                                                <Frame BackgroundColor="{StaticResource Muted}"
-                                                       BorderColor="{StaticResource Border}"
-                                                       CornerRadius="8"
-                                                       Padding="6,2">
-                                                    <Label Text="{Binding}"
+                                                <Border BackgroundColor="{StaticResource Muted}"
+                                                        Stroke="{StaticResource Border}"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 12"
+                                                        Padding="8,4"
+                                                        Margin="0,2">
+                                                    <Label Text="{Binding ., StringFormat='#{0}'}"
                                                            TextColor="{StaticResource ForegroundMuted}"
                                                            FontSize="10" />
-                                                </Frame>
+                                                </Border>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
-                                </HorizontalStackLayout>
+                                </FlexLayout>
                             </VerticalStackLayout>
                         </Grid>
                     </Frame>
