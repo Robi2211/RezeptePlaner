@@ -19,8 +19,8 @@
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
             <Label Text="Rezeptbibliothek" 
-                   TextColor="{StaticResource Foreground}"
-                   FontSize="28"
+                   TextColor="{StaticResource Primary}"
+                   FontSize="32"
                    FontAttributes="Bold"
                    Margin="0,0,0,8" />
             <Label Text="Entdecke und verwalte all deine Lieblingsrezepte."
@@ -67,113 +67,123 @@
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
                                  Span="{OnIdiom Desktop=3, Tablet=2, Phone=1}"
-                                 HorizontalItemSpacing="15"
-                                 VerticalItemSpacing="15" />
+                                 HorizontalItemSpacing="20"
+                                 VerticalItemSpacing="20" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Recipe">
                     <Frame BackgroundColor="{StaticResource Surface}"
-                           BorderColor="{StaticResource Border}"
+                           BorderColor="Transparent"
                            CornerRadius="20"
                            Padding="0"
                            HasShadow="True">
-                        <Grid RowDefinitions="220,*">
+                        <Grid RowDefinitions="280,*">
                             
-                            <!-- Recipe Image -->
-                            <Image Grid.Row="0"
-                                   Source="{Binding ImageUrl}"
-                                   Aspect="AspectFill"
-                                   HeightRequest="220"
-                                   VerticalOptions="Fill"
-                                   HorizontalOptions="Fill">
-                                <Image.Clip>
-                                    <RoundRectangleGeometry CornerRadius="20,20,0,0" 
-                                                           Rect="0,0,400,220" />
-                                </Image.Clip>
-                            </Image>
-                            
-                            <!-- Favorite Heart Button -->
-                            <Border Grid.Row="0"
-                                    BackgroundColor="{StaticResource Surface}"
-                                    Stroke="Transparent"
-                                    StrokeShape="RoundRectangle 20"
-                                    Padding="8"
-                                    Margin="10"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Start"
-                                    WidthRequest="36"
-                                    HeightRequest="36">
-                                <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
-                                       FontSize="18"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center" />
-                            </Border>
-                            
-                            <!-- Recipe Info -->
-                            <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="8">
+                            <!-- Recipe Image with Favorite Button Overlay -->
+                            <Grid Grid.Row="0">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="280"
+                                       VerticalOptions="Fill"
+                                       HorizontalOptions="Fill">
+                                    <Image.Clip>
+                                        <RoundRectangleGeometry CornerRadius="20,20,0,0" 
+                                                               Rect="0,0,400,280" />
+                                    </Image.Clip>
+                                </Image>
                                 
-                                <!-- Category + Difficulty Badge -->
-                                <Border BackgroundColor="{StaticResource Primary}"
+                                <!-- Favorite Heart Button (Overlaid on Image) -->
+                                <Border BackgroundColor="{StaticResource Surface}"
                                         Stroke="Transparent"
-                                        StrokeShape="RoundRectangle 12"
-                                        Padding="10,5"
-                                        HorizontalOptions="Start"
-                                        Margin="0,0,0,4">
-                                    <Label TextColor="{StaticResource Surface}"
-                                           FontSize="11"
-                                           FontAttributes="Bold">
+                                        StrokeShape="RoundRectangle 20"
+                                        Padding="8"
+                                        Margin="12"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        WidthRequest="40"
+                                        HeightRequest="40">
+                                    <Label FontSize="20"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center">
                                         <Label.Text>
-                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                <Binding Path="CategoryDisplay" />
-                                                <Binding Path="DifficultyDisplay" />
+                                            <MultiBinding Converter="{StaticResource FavoriteToHeartConverter}">
+                                                <Binding Path="IsFavorite" />
                                             </MultiBinding>
                                         </Label.Text>
                                     </Label>
+                                </Border>
+                            </Grid>
+                            
+                            <!-- Recipe Info -->
+                            <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="10">
+                                
+                                <!-- Category Badge (Orange Pill) -->
+                                <Border BackgroundColor="{StaticResource Primary}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 15"
+                                        Padding="12,6"
+                                        HorizontalOptions="Start"
+                                        Margin="0,0,0,4">
+                                    <Label Text="{Binding CategoryDisplay}"
+                                           TextColor="{StaticResource Surface}"
+                                           FontSize="12"
+                                           FontAttributes="Bold" />
                                 </Border>
                                 
                                 <!-- Title -->
                                 <Label Text="{Binding Title}"
                                        TextColor="{StaticResource Foreground}"
-                                       FontSize="16"
+                                       FontSize="18"
                                        FontAttributes="Bold"
                                        LineBreakMode="TailTruncation"
                                        MaxLines="2"
                                        Margin="0,0,0,4" />
                                 
-                                <!-- Meta Info -->
-                                <HorizontalStackLayout Spacing="15">
-                                    <HorizontalStackLayout Spacing="4">
-                                        <Label Text="🕐" FontSize="14" />
+                                <!-- Meta Info (Time + Portions) -->
+                                <HorizontalStackLayout Spacing="15" Margin="0,0,0,4">
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label Text="🕐" FontSize="16" />
                                         <Label Text="{Binding TotalTime, StringFormat='{0} Min'}"
                                                TextColor="{StaticResource ForegroundMuted}"
-                                               FontSize="12" />
+                                               FontSize="13" />
                                     </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="4">
-                                        <Label Text="👥" FontSize="14" />
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label Text="👥" FontSize="16" />
                                         <Label Text="{Binding Servings, StringFormat='{0} Portionen'}"
                                                TextColor="{StaticResource ForegroundMuted}"
-                                               FontSize="12" />
+                                               FontSize="13" />
                                     </HorizontalStackLayout>
                                 </HorizontalStackLayout>
                                 
-                                <!-- Tags -->
+                                <!-- Difficulty Text -->
+                                <Label TextColor="{StaticResource ForegroundMuted}"
+                                       FontSize="13"
+                                       Margin="0,0,0,4">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Schwierigkeit: {0}">
+                                            <Binding Path="DifficultyDisplay" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                
+                                <!-- Tags (Gray Pills with #) -->
                                 <FlexLayout Wrap="Wrap" Margin="0,4,0,0">
                                     <CollectionView ItemsSource="{Binding Tags}">
                                         <CollectionView.ItemsLayout>
-                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
+                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="6" />
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="x:String">
-                                                <Border BackgroundColor="{StaticResource Muted}"
-                                                        Stroke="{StaticResource Border}"
+                                                <Border BackgroundColor="{StaticResource Gray200}"
+                                                        Stroke="Transparent"
                                                         StrokeThickness="0"
-                                                        StrokeShape="RoundRectangle 12"
-                                                        Padding="8,4"
+                                                        StrokeShape="RoundRectangle 15"
+                                                        Padding="10,5"
                                                         Margin="0,2">
                                                     <Label Text="{Binding ., StringFormat='#{0}'}"
                                                            TextColor="{StaticResource ForegroundMuted}"
-                                                           FontSize="10" />
+                                                           FontSize="11" />
                                                 </Border>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
