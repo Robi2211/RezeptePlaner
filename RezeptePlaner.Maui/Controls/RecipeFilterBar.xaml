@@ -168,7 +168,9 @@
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="TailTruncation"
+                                   Margin="15,0,35,0" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
@@ -208,7 +210,9 @@
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="TailTruncation"
+                                   Margin="15,0,35,0" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
@@ -257,7 +261,8 @@
                                FontSize="12"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="End"
-                               WidthRequest="75" />
+                               LineBreakMode="NoWrap"
+                               MinimumWidthRequest="80" />
                     </Grid>
                 </Border>
                 
