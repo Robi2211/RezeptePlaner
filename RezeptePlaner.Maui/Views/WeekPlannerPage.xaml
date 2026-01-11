@@ -114,6 +114,14 @@
                                                        CornerRadius="12"
                                                        Padding="0"
                                                        Margin="0">
+                                                    <Frame.Behaviors>
+                                                        <behaviors:PressAnimationBehavior />
+                                                    </Frame.Behaviors>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer 
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=ViewRecipeCommand}"
+                                                            CommandParameter="{Binding Recipe}" />
+                                                    </Frame.GestureRecognizers>
                                                     <Grid RowDefinitions="100,Auto">
                                                         <!-- Meal Image -->
                                                         <Grid Grid.Row="0">
@@ -175,11 +183,6 @@
                                                         
                                                         <!-- Meal Info -->
                                                         <VerticalStackLayout Grid.Row="1" Padding="10">
-                                                            <VerticalStackLayout.GestureRecognizers>
-                                                                <TapGestureRecognizer 
-                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=ViewRecipeCommand}"
-                                                                    CommandParameter="{Binding Recipe}" />
-                                                            </VerticalStackLayout.GestureRecognizers>
                                                             <Label Text="{Binding Recipe.Title}"
                                                                    TextColor="{StaticResource Foreground}"
                                                                    FontSize="12"
