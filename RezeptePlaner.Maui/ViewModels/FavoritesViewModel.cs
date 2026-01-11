@@ -31,7 +31,22 @@ public partial class FavoritesViewModel : ObservableObject
     public FavoritesViewModel(RecipeService recipeService)
     {
         _recipeService = recipeService;
+        
+        // Subscribe to favorites changes
+        _recipeService.FavoritesChanged += OnFavoritesChanged;
+        
         LoadFavorites();
+    }
+
+    private void OnFavoritesChanged(object? sender, EventArgs e)
+    {
+        LoadFavorites();
+    }
+
+    public void Cleanup()
+    {
+        // Unsubscribe from events to prevent memory leaks
+        _recipeService.FavoritesChanged -= OnFavoritesChanged;
     }
 
     [RelayCommand]
@@ -65,7 +80,7 @@ public partial class FavoritesViewModel : ObservableObject
         if (recipe != null)
         {
             _recipeService.ToggleFavorite(recipe.Id);
-            LoadFavorites();
+            // Note: LoadFavorites will be called automatically via OnFavoritesChanged event handler
         }
     }
 

@@ -110,6 +110,7 @@
                                                              CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
                                     <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
+                                           TextColor="{Binding IsFavorite, Converter={StaticResource FavoriteToColorConverter}}"
                                            FontSize="20"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center" />

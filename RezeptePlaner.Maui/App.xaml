@@ -17,6 +17,7 @@
             <converters:BoolToExpandIconConverter x:Key="BoolToExpandIconConverter" />
             <converters:BoolToFavoriteIconConverter x:Key="BoolToFavoriteIconConverter" />
             <converters:FavoriteToHeartConverter x:Key="FavoriteToHeartConverter" />
+            <converters:FavoriteToColorConverter x:Key="FavoriteToColorConverter" />
             <converters:BoolToTodayBorderConverter x:Key="BoolToTodayBorderConverter" />
             <converters:BoolToTodayBackgroundConverter x:Key="BoolToTodayBackgroundConverter" />
             <converters:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
