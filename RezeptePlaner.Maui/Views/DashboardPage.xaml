@@ -17,8 +17,8 @@
             <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,*">
             
             <!-- Page Header -->
-            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
-                <Label Text="🏠 Dashboard" 
+            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,30">
+                <Label Text="Dashboard" 
                        Style="{StaticResource PageTitle}" />
                 <Label Text="{Binding CurrentDate}"
                        TextColor="{StaticResource ForegroundMuted}"
@@ -28,7 +28,7 @@
             <!-- Today's Meals Section -->
             <Frame Grid.Row="1" 
                    Style="{StaticResource CardFrame}"
-                   Margin="0,0,0,20">
+                   Margin="0,0,0,30">
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Heute geplant" 
                            Style="{StaticResource SectionTitle}" />
@@ -115,7 +115,7 @@
                 <!-- Week Overview -->
                 <Frame Grid.Column="0" 
                        Style="{StaticResource CardFrame}">
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="15">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Grid.Column="0"
                                    Text="Wochenübersicht" 
@@ -133,9 +133,9 @@
                                 <DataTemplate x:DataType="viewmodels:WeekDay">
                                     <Frame BackgroundColor="{StaticResource Muted}"
                                            BorderColor="{StaticResource Border}"
-                                           CornerRadius="8"
-                                           Padding="12"
-                                           Margin="0,0,0,8">
+                                           CornerRadius="12"
+                                           Padding="15"
+                                           Margin="0,0,0,30">
                                         <Grid ColumnDefinitions="100,*">
                                             <VerticalStackLayout Grid.Column="0">
                                                 <Label Text="{Binding DayName}"
@@ -161,13 +161,13 @@
                                                             ItemsSource="{Binding Recipes}"
                                                             HeightRequest="50">
                                                 <CollectionView.ItemsLayout>
-                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
+                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="18" />
                                                 </CollectionView.ItemsLayout>
                                                 <CollectionView.ItemTemplate>
                                                     <DataTemplate x:DataType="models:Recipe">
                                                         <Frame BackgroundColor="{StaticResource Surface}"
                                                                BorderColor="{StaticResource Border}"
-                                                               CornerRadius="0"
+                                                               CornerRadius="8"
                                                                Padding="0"
                                                                WidthRequest="180">
                                                             <Frame.GestureRecognizers>
@@ -178,7 +178,7 @@
                                                             <Grid ColumnDefinitions="50,*" ColumnSpacing="8">
                                                                 <Frame Grid.Column="0"
                                                                        BackgroundColor="{StaticResource Surface}"
-                                                                       CornerRadius="0"
+                                                                       CornerRadius="8"
                                                                        Padding="0"
                                                                        WidthRequest="50"
                                                                        HeightRequest="50">
@@ -187,7 +187,7 @@
                                                                            VerticalOptions="Fill"
                                                                            HorizontalOptions="Fill">
                                                                         <Image.Clip>
-                                                                            <RoundRectangleGeometry CornerRadius="0" 
+                                                                            <RoundRectangleGeometry CornerRadius="8" 
                                                                                                    Rect="0,0,50,50" />
                                                                         </Image.Clip>
                                                                     </Image>
