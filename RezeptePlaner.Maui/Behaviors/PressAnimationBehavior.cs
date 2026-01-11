@@ -1,3 +1,5 @@
+using System.Collections.Specialized;
+
 namespace RezeptePlaner.Maui.Behaviors;
 
 /// <summary>
@@ -36,7 +38,7 @@ public class PressAnimationBehavior : Behavior<VisualElement>
         _associatedObject = null;
     }
 
-    private void OnGestureRecognizersChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private void OnGestureRecognizersChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         // Subscribe to any newly added tap gesture recognizers
         if (e.NewItems != null)
@@ -61,10 +63,26 @@ public class PressAnimationBehavior : Behavior<VisualElement>
     {
         if (_associatedObject == null) return;
 
-        // Animate scale down
-        await _associatedObject.ScaleTo(0.9, 50, Easing.CubicOut);
-        
-        // Animate scale back up
-        await _associatedObject.ScaleTo(1.0, 50, Easing.CubicIn);
+        try
+        {
+            // Animate scale down
+            await _associatedObject.ScaleTo(0.9, 50, Easing.CubicOut);
+            
+            // Animate scale back up
+            await _associatedObject.ScaleTo(1.0, 50, Easing.CubicIn);
+        }
+        catch
+        {
+            // Silently handle animation exceptions (e.g., if element is disposed during animation)
+            // Reset scale to default state
+            try
+            {
+                _associatedObject.Scale = 1.0;
+            }
+            catch
+            {
+                // Ignore if we can't reset
+            }
+        }
     }
 }
