@@ -100,7 +100,7 @@
                                    VerticalOptions="Fill"
                                    HorizontalOptions="Fill">
                                 <Image.Clip>
-                                    <RoundRectangleGeometry CornerRadius="20" Rect="0,0,1000,600" />
+                                    <RoundRectangleGeometry CornerRadius="20" />
                                 </Image.Clip>
                             </Image>
                         </Frame>
@@ -303,7 +303,7 @@
                             <CollectionView ItemsSource="{Binding InstructionSteps}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="viewmodels:InstructionStep">
-                                        <Grid ColumnDefinitions="44,*" ColumnSpacing="16" Padding="0,8">
+                                        <Grid ColumnDefinitions="52,*" ColumnSpacing="16" Padding="0,8">
                                             <Border Grid.Column="0"
                                                    BackgroundColor="#FF8C42"
                                                    StrokeShape="Ellipse"
