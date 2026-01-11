@@ -131,7 +131,7 @@
                         <CollectionView ItemsSource="{Binding WeekDays}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="viewmodels:WeekDay">
-                                    <Frame BackgroundColor="{StaticResource Gray100}"
+                                    <Frame BackgroundColor="#F8F8F8"
                                            BorderColor="{StaticResource Border}"
                                            CornerRadius="20"
                                            Padding="20"
