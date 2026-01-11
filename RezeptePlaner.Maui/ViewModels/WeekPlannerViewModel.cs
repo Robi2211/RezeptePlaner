@@ -101,20 +101,31 @@ public partial class WeekPlannerViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void RemoveMeal(PlannedMeal meal)
+    private async Task RemoveMeal(PlannedMeal meal)
     {
-        if (meal != null)
+        if (meal?.Recipe == null) return;
+
+        // Show confirmation dialog
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Mahlzeit entfernen",
+            $"Möchten Sie '{meal.Recipe.Title}' wirklich aus dem Plan entfernen?",
+            "Entfernen",
+            "Abbrechen");
+
+        if (!confirm) return;
+
+        // Remove meal from the day's collection
+        foreach (var day in WeekDays)
         {
-            foreach (var day in WeekDays)
+            if (day.Meals.Contains(meal))
             {
-                if (day.Meals.Contains(meal))
-                {
-                    day.Meals.Remove(meal);
-                    break;
-                }
+                day.Meals.Remove(meal);
+                break;
             }
-            TotalPlannedMeals = WeekDays.Sum(d => d.Meals.Count);
         }
+
+        // Update total count
+        TotalPlannedMeals = WeekDays.Sum(d => d.Meals.Count);
     }
 
     [RelayCommand]

@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:RezeptePlaner.Maui.ViewModels"
              xmlns:models="clr-namespace:RezeptePlaner.Maui.Models"
              xmlns:controls="clr-namespace:RezeptePlaner.Maui.Controls"
+             xmlns:behaviors="clr-namespace:RezeptePlaner.Maui.Behaviors"
              x:Class="RezeptePlaner.Maui.Views.WeekPlannerPage"
              x:DataType="viewmodels:WeekPlannerViewModel"
              Title="Wochenplan"
@@ -147,7 +148,8 @@
                                                             </Frame>
                                                             
                                                             <!-- Remove Button -->
-                                                            <Frame BackgroundColor="{StaticResource Destructive}"
+                                                            <Frame x:Name="RemoveButton"
+                                                                   BackgroundColor="{StaticResource Destructive}"
                                                                    CornerRadius="12"
                                                                    WidthRequest="24"
                                                                    HeightRequest="24"
@@ -155,11 +157,30 @@
                                                                    Margin="8"
                                                                    HorizontalOptions="End"
                                                                    VerticalOptions="Start">
+                                                                <Frame.Behaviors>
+                                                                    <behaviors:PressAnimationBehavior />
+                                                                </Frame.Behaviors>
                                                                 <Frame.GestureRecognizers>
                                                                     <TapGestureRecognizer 
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=RemoveMealCommand}"
                                                                         CommandParameter="{Binding .}" />
                                                                 </Frame.GestureRecognizers>
+                                                                <VisualStateManager.VisualStateGroups>
+                                                                    <VisualStateGroup x:Name="CommonStates">
+                                                                        <VisualState x:Name="Normal">
+                                                                            <VisualState.Setters>
+                                                                                <Setter Property="Scale" Value="1" />
+                                                                                <Setter Property="Opacity" Value="1" />
+                                                                            </VisualState.Setters>
+                                                                        </VisualState>
+                                                                        <VisualState x:Name="PointerOver">
+                                                                            <VisualState.Setters>
+                                                                                <Setter Property="Scale" Value="1.1" />
+                                                                                <Setter Property="Opacity" Value="0.8" />
+                                                                            </VisualState.Setters>
+                                                                        </VisualState>
+                                                                    </VisualStateGroup>
+                                                                </VisualStateManager.VisualStateGroups>
                                                                 <Label Text="✕"
                                                                        FontSize="12"
                                                                        TextColor="{StaticResource White}"
@@ -193,15 +214,36 @@
                                     </CollectionView>
 
                                     <!-- Add Meal Button -->
-                                    <Frame BackgroundColor="Transparent"
+                                    <Frame x:Name="AddMealButton"
+                                           BackgroundColor="Transparent"
                                            BorderColor="{StaticResource Border}"
                                            CornerRadius="12"
-                                           Padding="16">
+                                           Padding="16"
+                                           HasShadow="False">
+                                        <Frame.Behaviors>
+                                            <behaviors:PressAnimationBehavior />
+                                        </Frame.Behaviors>
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer 
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=AddMealCommand}"
                                                 CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Scale" Value="1" />
+                                                        <Setter Property="Opacity" Value="1" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="PointerOver">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Scale" Value="1.02" />
+                                                        <Setter Property="BackgroundColor" Value="{StaticResource Muted}" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
                                         <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
                                             <Label Text="+"
                                                    TextColor="{StaticResource ForegroundMuted}"
