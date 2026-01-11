@@ -129,7 +129,7 @@
                                     </VisualState.Setters>
                                 </VisualState>
                                 
-                                <!-- Medium screens (Width 600-1200): 2 columns -->
+                                <!-- Medium screens (Width 600-1199): 2 columns -->
                                 <VisualState x:Name="Medium">
                                     <VisualState.StateTriggers>
                                         <AdaptiveTrigger MinWindowWidth="600" />
@@ -146,7 +146,7 @@
                                     </VisualState.Setters>
                                 </VisualState>
                                 
-                                <!-- Large/desktop screens (Width > 1200): 3 columns -->
+                                <!-- Large/desktop screens (Width >= 1200): 3 columns -->
                                 <VisualState x:Name="Large">
                                     <VisualState.StateTriggers>
                                         <AdaptiveTrigger MinWindowWidth="1200" />
@@ -210,7 +210,7 @@
                                                    HorizontalOptions="FillAndExpand">
                                                 <Image.Clip>
                                                     <RoundRectangleGeometry CornerRadius="20,20,0,0" 
-                                                                           Rect="0,0,1000,280" />
+                                                                           Rect="0,0,5000,280" />
                                                 </Image.Clip>
                                             </Image>
                                             <Label Text="🍽️"
@@ -302,11 +302,13 @@
                                             </Grid>
                                             
                                             <!-- Tags with wrap -->
-                                            <HorizontalStackLayout Spacing="6" 
-                                                                   HorizontalOptions="FillAndExpand"
-                                                                   BindableLayout.ItemsSource="{Binding Tags}">
-                                                <HorizontalStackLayout.Resources>
-                                                    <DataTemplate x:Key="TagTemplate" x:DataType="x:String">
+                                            <FlexLayout Direction="Row" 
+                                                        Wrap="Wrap"
+                                                        JustifyContent="Start"
+                                                        AlignItems="Start"
+                                                        BindableLayout.ItemsSource="{Binding Tags}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="x:String">
                                                         <Frame BackgroundColor="{StaticResource Muted}"
                                                                CornerRadius="12"
                                                                Padding="10,4"
@@ -317,15 +319,12 @@
                                                                    FontSize="11" />
                                                         </Frame>
                                                     </DataTemplate>
-                                                </HorizontalStackLayout.Resources>
-                                                <BindableLayout.ItemTemplate>
-                                                    <StaticResource Key="TagTemplate" />
                                                 </BindableLayout.ItemTemplate>
-                                            </HorizontalStackLayout>
+                                            </FlexLayout>
                                             
                                             <!-- "Als Favorit gespeichert" Banner -->
-                                            <Border BackgroundColor="#E8F5E9"
-                                                    Stroke="#A5D6A7"
+                                            <Border BackgroundColor="{StaticResource FavoriteBannerBackground}"
+                                                    Stroke="{StaticResource FavoriteBannerBorder}"
                                                     StrokeThickness="1"
                                                     StrokeShape="RoundRectangle 12"
                                                     Padding="12,8"
