@@ -49,6 +49,7 @@ RezeptePlaner.Maui/
 ├── ViewModels/
 │   ├── RecipeListViewModel.cs    # Rezeptliste
 │   ├── AddRecipeViewModel.cs     # Rezept hinzufügen
+│   ├── WeekPlannerViewModel.cs   # Wochenplaner
 │   ├── InfoViewModel.cs          # Info-Seite
 │   ├── HelpViewModel.cs          # Hilfe/FAQ
 │   └── SummaryViewModel.cs       # Zusammenfassung
@@ -56,6 +57,7 @@ RezeptePlaner.Maui/
 ├── Views/
 │   ├── RecipesPage.xaml(.cs)     # Rezeptübersicht
 │   ├── AddRecipePage.xaml(.cs)   # Neues Rezept
+│   ├── WeekPlannerPage.xaml(.cs) # Wochenplan
 │   ├── InfoPage.xaml(.cs)        # Info/Über
 │   ├── HelpPage.xaml(.cs)        # FAQ
 │   └── SummaryPage.xaml(.cs)     # Zusammenfassung
@@ -66,6 +68,9 @@ RezeptePlaner.Maui/
 │
 ├── Converters/
 │   └── ValueConverters.cs # Bool/String Converters
+│
+├── Behaviors/
+│   └── PressAnimationBehavior.cs # Tap-Animation für Buttons
 │
 └── Resources/
     ├── Styles/
@@ -145,7 +150,43 @@ dotnet run --project RezeptePlaner.Maui/RezeptePlaner.Maui.csproj
 4. **Schwierigkeitsgrade** - Einfach, Mittel, Schwer
 5. **Diät-Filter** - Vegetarisch, Vegan, Glutenfrei
 6. **Favoriten** - Rezepte markieren
-7. **FAQ-Hilfe** - Durchsuchbarer Hilfebereich
+7. **Wochenplan** - Mahlzeiten für die ganze Woche planen (siehe unten)
+8. **FAQ-Hilfe** - Durchsuchbarer Hilfebereich
+
+### Wochenplan-Feature
+
+Der Wochenplan ermöglicht es Ihnen, Ihre Mahlzeiten für die gesamte Woche zu organisieren:
+
+#### Funktionen
+- **Wochenansicht**: Zeigt alle 7 Tage der aktuellen Woche in einer übersichtlichen horizontalen Ansicht
+- **Heutiger Tag hervorgehoben**: Der aktuelle Tag wird mit einem orangen Rahmen und "Heute"-Badge markiert
+- **Mahlzeiten hinzufügen** (+ Button):
+  - Klicken Sie auf den "+" Button unter einem Tag
+  - Wählen Sie ein Rezept aus der Liste
+  - Wählen Sie den Mahlzeitentyp (Frühstück, Mittagessen, Abendessen)
+  - Das Rezept wird sofort dem Tag hinzugefügt
+  - Visuelles Feedback: Sanfte Druckanimation beim Klicken
+  
+- **Mahlzeiten entfernen** (✕ Button):
+  - Klicken Sie auf das rote X rechts oben auf einer Mahlzeitenkarte
+  - Bestätigungsdialog erscheint: "Möchten Sie '[Rezeptname]' wirklich aus dem Plan entfernen?"
+  - Nach Bestätigung wird die Mahlzeit sofort entfernt
+  - Visuelles Feedback: Skalierungs- und Hover-Effekte
+  
+- **Dynamischer Zähler**: Zeigt immer die aktuelle Anzahl geplanter Mahlzeiten ("X Mahlzeiten geplant")
+- **Wochennavigation**: Mit ◀ und ▶ können Sie zwischen Wochen wechseln
+
+#### Technische Implementierung
+- **MVVM-Architektur**: Saubere Trennung von UI und Logik
+- **ObservableCollection**: Automatische UI-Updates bei Änderungen
+- **Behaviors**: `PressAnimationBehavior` für visuelles Feedback
+- **Commands**:
+  - `AddMealCommand`: Fügt eine Mahlzeit zu einem Tag hinzu
+  - `RemoveMealCommand`: Entfernt eine Mahlzeit mit Bestätigungsdialog
+  - `ViewRecipeCommand`: Navigiert zu den Rezeptdetails
+  - `NavigatePreviousWeekCommand`: Vorherige Woche
+  - `NavigateNextWeekCommand`: Nächste Woche
+
 
 ## 📄 Lizenz
 
