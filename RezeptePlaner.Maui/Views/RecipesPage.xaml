@@ -19,7 +19,7 @@
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
             <Label Text="Rezeptbibliothek" 
-                   TextColor="{StaticResource Primary}"
+                   TextColor="{StaticResource Foreground}"
                    FontSize="32"
                    FontAttributes="Bold"
                    Margin="0,0,0,8" />
@@ -41,6 +41,7 @@
 
         <!-- Recipe List (CollectionView) -->
         <CollectionView Grid.Row="2"
+                        x:Name="RecipeCollectionView"
                         ItemsSource="{Binding FilteredRecipes}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedRecipe}">
@@ -66,9 +67,10 @@
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
-                                 Span="{OnIdiom Desktop=3, Tablet=2, Phone=1}"
-                                 HorizontalItemSpacing="20"
-                                 VerticalItemSpacing="20" />
+                                 x:Name="GridLayout"
+                                 Span="1"
+                                 HorizontalItemSpacing="24"
+                                 VerticalItemSpacing="24" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
@@ -103,6 +105,10 @@
                                         VerticalOptions="Start"
                                         WidthRequest="40"
                                         HeightRequest="40">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecipeListViewModel}}, Path=ToggleFavoriteCommand}"
+                                                             CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
                                     <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
                                            FontSize="20"
                                            HorizontalOptions="Center"
@@ -151,18 +157,7 @@
                                     </HorizontalStackLayout>
                                 </HorizontalStackLayout>
                                 
-                                <!-- Difficulty Text -->
-                                <Label TextColor="{StaticResource ForegroundMuted}"
-                                       FontSize="13"
-                                       Margin="0,0,0,4">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="Schwierigkeit: {0}">
-                                            <Binding Path="DifficultyDisplay" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                
-                                <!-- Tags (Gray Pills with #) -->
+                                <!-- Tags (Gray Pills without #) -->
                                 <FlexLayout Wrap="Wrap" Margin="0,4,0,0">
                                     <CollectionView ItemsSource="{Binding Tags}">
                                         <CollectionView.ItemsLayout>
@@ -176,7 +171,7 @@
                                                         StrokeShape="RoundRectangle 15"
                                                         Padding="10,5"
                                                         Margin="0,2">
-                                                    <Label Text="{Binding ., StringFormat='#{0}'}"
+                                                    <Label Text="{Binding .}"
                                                            TextColor="{StaticResource ForegroundMuted}"
                                                            FontSize="11" />
                                                 </Border>
