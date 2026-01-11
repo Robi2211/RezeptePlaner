@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Text.Json;
 using RezeptePlaner.Maui.Models;
 
 namespace RezeptePlaner.Maui.Services;
@@ -8,11 +9,67 @@ namespace RezeptePlaner.Maui.Services;
 /// </summary>
 public class RecipeService
 {
+    private const string FavoritesKey = "FavoriteRecipeIds";
     private ObservableCollection<Recipe> _recipes;
+    private HashSet<string> _favoriteIds;
+
+    public event EventHandler? FavoritesChanged;
 
     public RecipeService()
     {
+        LoadFavoriteIds();
         _recipes = new ObservableCollection<Recipe>(GetSampleRecipes());
+        ApplyFavoriteStatus();
+    }
+
+    /// <summary>
+    /// Load favorite IDs from preferences
+    /// </summary>
+    private void LoadFavoriteIds()
+    {
+        try
+        {
+            var favoritesJson = Preferences.Get(FavoritesKey, string.Empty);
+            if (!string.IsNullOrEmpty(favoritesJson))
+            {
+                _favoriteIds = JsonSerializer.Deserialize<HashSet<string>>(favoritesJson) ?? new HashSet<string>();
+            }
+            else
+            {
+                _favoriteIds = new HashSet<string>();
+            }
+        }
+        catch
+        {
+            _favoriteIds = new HashSet<string>();
+        }
+    }
+
+    /// <summary>
+    /// Save favorite IDs to preferences
+    /// </summary>
+    private void SaveFavoriteIds()
+    {
+        try
+        {
+            var favoritesJson = JsonSerializer.Serialize(_favoriteIds);
+            Preferences.Set(FavoritesKey, favoritesJson);
+        }
+        catch
+        {
+            // Silently fail if preferences can't be saved
+        }
+    }
+
+    /// <summary>
+    /// Apply favorite status to all recipes based on saved IDs
+    /// </summary>
+    private void ApplyFavoriteStatus()
+    {
+        foreach (var recipe in _recipes)
+        {
+            recipe.IsFavorite = _favoriteIds.Contains(recipe.Id);
+        }
     }
 
     /// <summary>
@@ -39,6 +96,22 @@ public class RecipeService
         if (recipe != null)
         {
             recipe.IsFavorite = !recipe.IsFavorite;
+            
+            // Update the favorites set
+            if (recipe.IsFavorite)
+            {
+                _favoriteIds.Add(recipeId);
+            }
+            else
+            {
+                _favoriteIds.Remove(recipeId);
+            }
+            
+            // Persist changes
+            SaveFavoriteIds();
+            
+            // Notify listeners
+            FavoritesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -119,6 +119,7 @@
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
+                                     x:Name="FavoritesGridLayout"
                                      Span="3"
                                      HorizontalItemSpacing="20"
                                      VerticalItemSpacing="20" />
@@ -164,7 +165,8 @@
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}}, Path=ToggleFavoriteCommand}"
                                                 CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
-                                        <Label Text="❤️"
+                                        <Label Text="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
+                                               TextColor="{Binding IsFavorite, Converter={StaticResource FavoriteToColorConverter}}"
                                                FontSize="24"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center" />

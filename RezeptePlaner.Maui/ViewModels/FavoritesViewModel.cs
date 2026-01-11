@@ -31,6 +31,10 @@ public partial class FavoritesViewModel : ObservableObject
     public FavoritesViewModel(RecipeService recipeService)
     {
         _recipeService = recipeService;
+        
+        // Subscribe to favorites changes
+        _recipeService.FavoritesChanged += (s, e) => LoadFavorites();
+        
         LoadFavorites();
     }
 

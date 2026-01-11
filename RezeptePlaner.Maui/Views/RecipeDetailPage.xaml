@@ -33,17 +33,38 @@
                 <Grid RowDefinitions="280,*">
                     
                     <!-- Recipe Image -->
-                    <Image Grid.Row="0"
-                           Source="{Binding Recipe.ImageUrl}"
-                           Aspect="AspectFill"
-                           HeightRequest="280"
-                           VerticalOptions="Fill"
-                           HorizontalOptions="Fill">
-                        <Image.Clip>
-                            <RoundRectangleGeometry CornerRadius="12,12,0,0" 
-                                                   Rect="0,0,800,280" />
-                        </Image.Clip>
-                    </Image>
+                    <Grid Grid.Row="0">
+                        <Image Source="{Binding Recipe.ImageUrl}"
+                               Aspect="AspectFill"
+                               HeightRequest="280"
+                               VerticalOptions="Fill"
+                               HorizontalOptions="Fill">
+                            <Image.Clip>
+                                <RoundRectangleGeometry CornerRadius="12,12,0,0" 
+                                                       Rect="0,0,800,280" />
+                            </Image.Clip>
+                        </Image>
+                        
+                        <!-- Favorite Heart Button (Overlaid on Image) -->
+                        <Border BackgroundColor="{StaticResource Surface}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 24"
+                                Padding="12"
+                                Margin="16"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                WidthRequest="48"
+                                HeightRequest="48">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}" />
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
+                                   TextColor="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToColorConverter}}"
+                                   FontSize="24"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
 
                     <!-- Recipe Info -->
                     <VerticalStackLayout Grid.Row="1" Padding="24" Spacing="16">

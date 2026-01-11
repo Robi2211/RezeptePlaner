@@ -95,9 +95,29 @@ public class FavoriteToHeartConverter : IValueConverter
     {
         if (value is bool isFavorite)
         {
-            return isFavorite ? "❤️" : "🤍";
+            return isFavorite ? "❤" : "♡";
         }
-        return "🤍";
+        return "♡";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Converts a boolean favorite status to heart color (red if favorite, gray if not)
+/// </summary>
+public class FavoriteToColorConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isFavorite)
+        {
+            return isFavorite ? Color.FromArgb("#EF4444") : Color.FromArgb("#9E9E9E");
+        }
+        return Color.FromArgb("#9E9E9E");
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
