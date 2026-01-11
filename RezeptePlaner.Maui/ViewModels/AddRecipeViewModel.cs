@@ -43,6 +43,9 @@ public partial class AddRecipeViewModel : ObservableObject
     private string tagsText = string.Empty;
 
     [ObservableProperty]
+    private string imageUrl = string.Empty;
+
+    [ObservableProperty]
     private bool isVegetarian;
 
     [ObservableProperty]
@@ -186,6 +189,7 @@ public partial class AddRecipeViewModel : ObservableObject
             PrepTime = PrepTime,
             CookTime = CookTime,
             Servings = Servings,
+            ImageUrl = ImageUrl.Trim(),
             Ingredients = new ObservableCollection<string>(
                 IngredientsText.Split('\n', StringSplitOptions.RemoveEmptyEntries)
                     .Select(i => i.Trim())
@@ -224,6 +228,7 @@ public partial class AddRecipeViewModel : ObservableObject
         IngredientsText = string.Empty;
         InstructionsText = string.Empty;
         TagsText = string.Empty;
+        ImageUrl = string.Empty;
         IsVegetarian = false;
         IsVegan = false;
         IsGlutenFree = false;
