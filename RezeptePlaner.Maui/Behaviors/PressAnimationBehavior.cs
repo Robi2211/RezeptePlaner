@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using Microsoft.Maui.Controls;
 
 namespace RezeptePlaner.Maui.Behaviors;
 
@@ -71,17 +72,39 @@ public class PressAnimationBehavior : Behavior<VisualElement>
             // Animate scale back up
             await _associatedObject.ScaleTo(1.0, 50, Easing.CubicIn);
         }
-        catch
+        catch (ObjectDisposedException)
         {
-            // Silently handle animation exceptions (e.g., if element is disposed during animation)
-            // Reset scale to default state
-            try
+            // Element was disposed during animation - this is expected in some scenarios
+            // No action needed
+        }
+        catch (InvalidOperationException)
+        {
+            // Animation was cancelled or invalid state - try to reset scale
+            if (_associatedObject != null)
             {
-                _associatedObject.Scale = 1.0;
+                try
+                {
+                    _associatedObject.Scale = 1.0;
+                }
+                catch
+                {
+                    // If we can't reset, just ignore
+                }
             }
-            catch
+        }
+        catch (Exception)
+        {
+            // Unexpected exception during animation - reset scale if possible
+            if (_associatedObject != null)
             {
-                // Ignore if we can't reset
+                try
+                {
+                    _associatedObject.Scale = 1.0;
+                }
+                catch
+                {
+                    // If we can't reset, just ignore
+                }
             }
         }
     }
