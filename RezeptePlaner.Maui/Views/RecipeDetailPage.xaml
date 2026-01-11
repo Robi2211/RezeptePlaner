@@ -104,7 +104,7 @@
                         <Border BackgroundColor="{StaticResource Surface}"
                                 Stroke="Transparent"
                                 StrokeShape="Ellipse"
-                                Padding="12"
+                                Padding="0"
                                 Margin="16"
                                 HorizontalOptions="End"
                                 VerticalOptions="Start"
@@ -121,9 +121,11 @@
                             </Border.GestureRecognizers>
                             <Label Text="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
                                    TextColor="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToColorConverter}}"
-                                   FontSize="24"
+                                   FontSize="22"
                                    HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" />
                         </Border>
                     </Grid>
 
