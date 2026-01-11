@@ -133,9 +133,9 @@
                                 <DataTemplate x:DataType="viewmodels:WeekDay">
                                     <Frame BackgroundColor="{StaticResource Muted}"
                                            BorderColor="{StaticResource Border}"
-                                           CornerRadius="12"
-                                           Padding="15"
-                                           Margin="0,0,0,40">
+                                           CornerRadius="20"
+                                           Padding="20"
+                                           Margin="0,0,0,70">
                                         <Grid ColumnDefinitions="100,*">
                                             <VerticalStackLayout Grid.Column="0">
                                                 <Label Text="{Binding DayName}"
