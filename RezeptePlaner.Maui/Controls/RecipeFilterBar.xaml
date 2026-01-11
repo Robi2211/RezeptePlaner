@@ -12,10 +12,100 @@
                CornerRadius="20"
                Padding="20"
                HasShadow="True">
-            <Grid RowDefinitions="Auto" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10">
+            <Grid x:Name="FilterGrid">
+                
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="LayoutStates">
+                        <!-- Small screens: Stack all vertically -->
+                        <VisualState x:Name="Small">
+                            <VisualState.Setters>
+                                <Setter TargetName="FilterGrid" Property="Grid.RowDefinitions" Value="Auto,Auto,Auto,Auto" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnDefinitions" Value="*" />
+                                <Setter TargetName="FilterGrid" Property="Grid.RowSpacing" Value="10" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnSpacing" Value="0" />
+                                
+                                <Setter TargetName="SearchBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="CategoryBorder" Property="Grid.Row" Value="1" />
+                                <Setter TargetName="CategoryBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="CategoryBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Row" Value="2" />
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="DifficultyBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="TimeBorder" Property="Grid.Row" Value="3" />
+                                <Setter TargetName="TimeBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="-1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        
+                        <!-- Medium screens: Horizontal with wrapping -->
+                        <VisualState x:Name="Medium">
+                            <VisualState.Setters>
+                                <Setter TargetName="FilterGrid" Property="Grid.RowDefinitions" Value="Auto,Auto,Auto" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnDefinitions" Value="*,*" />
+                                <Setter TargetName="FilterGrid" Property="Grid.RowSpacing" Value="10" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnSpacing" Value="10" />
+                                
+                                <Setter TargetName="SearchBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Grid.ColumnSpan" Value="2" />
+                                <Setter TargetName="SearchBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="CategoryBorder" Property="Grid.Row" Value="1" />
+                                <Setter TargetName="CategoryBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="CategoryBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="CategoryBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Row" Value="1" />
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="DifficultyBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="DifficultyBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="TimeBorder" Property="Grid.Row" Value="2" />
+                                <Setter TargetName="TimeBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="TimeBorder" Property="Grid.ColumnSpan" Value="2" />
+                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="-1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        
+                        <!-- Large screens: Full horizontal row -->
+                        <VisualState x:Name="Large">
+                            <VisualState.Setters>
+                                <Setter TargetName="FilterGrid" Property="Grid.RowDefinitions" Value="Auto" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnDefinitions" Value="*,Auto,Auto,Auto" />
+                                <Setter TargetName="FilterGrid" Property="Grid.RowSpacing" Value="0" />
+                                <Setter TargetName="FilterGrid" Property="Grid.ColumnSpacing" Value="10" />
+                                
+                                <Setter TargetName="SearchBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Grid.Column" Value="0" />
+                                <Setter TargetName="SearchBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="SearchBorder" Property="Border.WidthRequest" Value="-1" />
+                                
+                                <Setter TargetName="CategoryBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="CategoryBorder" Property="Grid.Column" Value="1" />
+                                <Setter TargetName="CategoryBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="CategoryBorder" Property="Border.WidthRequest" Value="180" />
+                                
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="DifficultyBorder" Property="Grid.Column" Value="2" />
+                                <Setter TargetName="DifficultyBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="DifficultyBorder" Property="Border.WidthRequest" Value="200" />
+                                
+                                <Setter TargetName="TimeBorder" Property="Grid.Row" Value="0" />
+                                <Setter TargetName="TimeBorder" Property="Grid.Column" Value="3" />
+                                <Setter TargetName="TimeBorder" Property="Grid.ColumnSpan" Value="1" />
+                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="220" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
                 
                 <!-- Search Bar with Icon -->
-                <Border Grid.Column="0"
+                <Border x:Name="SearchBorder"
                         BackgroundColor="{StaticResource Muted}"
                         Stroke="{StaticResource Border}"
                         StrokeShape="RoundRectangle 8"
@@ -40,12 +130,11 @@
                 </Border>
                 
                 <!-- Category Dropdown -->
-                <Border Grid.Column="1"
+                <Border x:Name="CategoryBorder"
                         BackgroundColor="{StaticResource Muted}"
                         Stroke="{StaticResource Border}"
                         StrokeShape="RoundRectangle 8"
-                        Padding="12,8"
-                        WidthRequest="180">
+                        Padding="12,8">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <Label Grid.Column="0"
                                Text="▼"
@@ -67,12 +156,11 @@
                 </Border>
                 
                 <!-- Difficulty Dropdown -->
-                <Border Grid.Column="2"
+                <Border x:Name="DifficultyBorder"
                         BackgroundColor="{StaticResource Muted}"
                         Stroke="{StaticResource Border}"
                         StrokeShape="RoundRectangle 8"
-                        Padding="12,8"
-                        WidthRequest="200">
+                        Padding="12,8">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <Label Grid.Column="0"
                                Text="▼"
@@ -94,12 +182,11 @@
                 </Border>
                 
                 <!-- Time Slider -->
-                <Border Grid.Column="3"
+                <Border x:Name="TimeBorder"
                         BackgroundColor="{StaticResource Muted}"
                         Stroke="{StaticResource Border}"
                         StrokeShape="RoundRectangle 8"
-                        Padding="12,8"
-                        WidthRequest="220">
+                        Padding="12,8">
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                         <!-- Clock Icon -->
                         <Label Grid.Column="0"
