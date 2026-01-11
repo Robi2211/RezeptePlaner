@@ -42,14 +42,17 @@
                                    VerticalOptions="Center">
                 
                 <VerticalStackLayout x:Name="DashboardStack" Spacing="4">
-                    <Button x:Name="DashboardButton"
-                            Text="Dashboard"
-                            Clicked="OnDashboardClicked"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource ForegroundMuted}"
-                            FontSize="14"
-                            Padding="0"
-                            BorderWidth="0" />
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="🏠" FontSize="16" VerticalOptions="Center" />
+                        <Button x:Name="DashboardButton"
+                                Text="Dashboard"
+                                Clicked="OnDashboardClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource ForegroundMuted}"
+                                FontSize="14"
+                                Padding="0"
+                                BorderWidth="0" />
+                    </HorizontalStackLayout>
                     <BoxView x:Name="DashboardUnderline"
                              BackgroundColor="Transparent"
                              HeightRequest="2"
@@ -57,14 +60,17 @@
                 </VerticalStackLayout>
                 
                 <VerticalStackLayout x:Name="RecipesStack" Spacing="4">
-                    <Button x:Name="RecipesButton"
-                            Text="Rezepte"
-                            Clicked="OnRecipesClicked"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource ForegroundMuted}"
-                            FontSize="14"
-                            Padding="0"
-                            BorderWidth="0" />
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="📖" FontSize="16" VerticalOptions="Center" />
+                        <Button x:Name="RecipesButton"
+                                Text="Rezepte"
+                                Clicked="OnRecipesClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource ForegroundMuted}"
+                                FontSize="14"
+                                Padding="0"
+                                BorderWidth="0" />
+                    </HorizontalStackLayout>
                     <BoxView x:Name="RecipesUnderline"
                              BackgroundColor="Transparent"
                              HeightRequest="2"
@@ -72,14 +78,17 @@
                 </VerticalStackLayout>
                 
                 <VerticalStackLayout x:Name="WeekPlanStack" Spacing="4">
-                    <Button x:Name="WeekPlanButton"
-                            Text="Wochenplan"
-                            Clicked="OnWeekPlanClicked"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource ForegroundMuted}"
-                            FontSize="14"
-                            Padding="0"
-                            BorderWidth="0" />
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="📅" FontSize="16" VerticalOptions="Center" />
+                        <Button x:Name="WeekPlanButton"
+                                Text="Wochenplan"
+                                Clicked="OnWeekPlanClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource ForegroundMuted}"
+                                FontSize="14"
+                                Padding="0"
+                                BorderWidth="0" />
+                    </HorizontalStackLayout>
                     <BoxView x:Name="WeekPlanUnderline"
                              BackgroundColor="Transparent"
                              HeightRequest="2"
@@ -87,14 +96,17 @@
                 </VerticalStackLayout>
                 
                 <VerticalStackLayout x:Name="FavoritesStack" Spacing="4">
-                    <Button x:Name="FavoritesButton"
-                            Text="Favoriten"
-                            Clicked="OnFavoritesClicked"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource ForegroundMuted}"
-                            FontSize="14"
-                            Padding="0"
-                            BorderWidth="0" />
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="❤️" FontSize="16" VerticalOptions="Center" />
+                        <Button x:Name="FavoritesButton"
+                                Text="Favoriten"
+                                Clicked="OnFavoritesClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource ForegroundMuted}"
+                                FontSize="14"
+                                Padding="0"
+                                BorderWidth="0" />
+                    </HorizontalStackLayout>
                     <BoxView x:Name="FavoritesUnderline"
                              BackgroundColor="Transparent"
                              HeightRequest="2"
