@@ -122,8 +122,6 @@
                             <Label Text="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToHeartConverter}}"
                                    TextColor="{Binding Recipe.IsFavorite, Converter={StaticResource FavoriteToColorConverter}}"
                                    FontSize="22"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center" />
                         </Border>
