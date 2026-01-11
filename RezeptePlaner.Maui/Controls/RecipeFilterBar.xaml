@@ -159,20 +159,15 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid ColumnDefinitions="*,Auto" 
-                              InputTransparent="True"
-                              ColumnSpacing="0">
-                            <Label Grid.Column="0"
-                                   Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, TargetNullValue='Alle Kategorien', FallbackValue='Alle Kategorien'}"
+                        <Grid InputTransparent="True">
+                            <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, TargetNullValue='Alle Kategorien', FallbackValue='Alle Kategorien'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                   Padding="20,0" />
-                            <Label Grid.Column="1"
-                                   Text="▼"
+                                   HorizontalOptions="Center" />
+                            <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
@@ -204,20 +199,15 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid ColumnDefinitions="*,Auto" 
-                              InputTransparent="True"
-                              ColumnSpacing="0">
-                            <Label Grid.Column="0"
-                                   Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, TargetNullValue='Alle Schwierigkeiten', FallbackValue='Alle Schwierigkeiten'}"
+                        <Grid InputTransparent="True">
+                            <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, TargetNullValue='Alle Schwierigkeiten', FallbackValue='Alle Schwierigkeiten'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                   Padding="20,0" />
-                            <Label Grid.Column="1"
-                                   Text="▼"
+                                   HorizontalOptions="Center" />
+                            <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
