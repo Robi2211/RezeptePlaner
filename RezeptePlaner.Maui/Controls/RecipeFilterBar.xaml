@@ -84,6 +84,7 @@
                                 <Setter TargetName="SearchBorder" Property="Grid.Column" Value="0" />
                                 <Setter TargetName="SearchBorder" Property="Grid.ColumnSpan" Value="1" />
                                 <Setter TargetName="SearchBorder" Property="Border.WidthRequest" Value="-1" />
+                                <Setter TargetName="SearchBorder" Property="Border.MinimumWidthRequest" Value="300" />
                                 
                                 <Setter TargetName="CategoryBorder" Property="Grid.Row" Value="0" />
                                 <Setter TargetName="CategoryBorder" Property="Grid.Column" Value="1" />
@@ -98,7 +99,7 @@
                                 <Setter TargetName="TimeBorder" Property="Grid.Row" Value="0" />
                                 <Setter TargetName="TimeBorder" Property="Grid.Column" Value="3" />
                                 <Setter TargetName="TimeBorder" Property="Grid.ColumnSpan" Value="1" />
-                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="220" />
+                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="250" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -261,8 +262,7 @@
                                FontSize="12"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="End"
-                               LineBreakMode="NoWrap"
-                               MinimumWidthRequest="80" />
+                               LineBreakMode="NoWrap" />
                     </Grid>
                 </Border>
                 
