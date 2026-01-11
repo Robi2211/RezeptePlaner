@@ -5,15 +5,13 @@ namespace RezeptePlaner.Maui.Views;
 public partial class FavoritesPage : ContentPage
 {
     private readonly FavoritesViewModel _viewModel;
+    private bool _isSizeChangeSubscribed;
 
     public FavoritesPage(FavoritesViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = viewModel;
-        
-        // Set up responsive layout based on window width
-        SizeChanged += OnPageSizeChanged;
     }
 
     private void OnPageSizeChanged(object? sender, EventArgs e)
@@ -51,6 +49,14 @@ public partial class FavoritesPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        
+        // Subscribe to SizeChanged event only if not already subscribed
+        if (!_isSizeChangeSubscribed)
+        {
+            SizeChanged += OnPageSizeChanged;
+            _isSizeChangeSubscribed = true;
+        }
+        
         UpdateGridColumns();
         _viewModel.LoadFavoritesCommand.Execute(null);
     }
@@ -58,7 +64,15 @@ public partial class FavoritesPage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        // Unsubscribe from event to prevent memory leaks
-        SizeChanged -= OnPageSizeChanged;
+        
+        // Unsubscribe from SizeChanged event if subscribed
+        if (_isSizeChangeSubscribed)
+        {
+            SizeChanged -= OnPageSizeChanged;
+            _isSizeChangeSubscribed = false;
+        }
+        
+        // Cleanup ViewModel event subscriptions
+        _viewModel.Cleanup();
     }
 }

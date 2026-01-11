@@ -4,13 +4,12 @@ namespace RezeptePlaner.Maui.Views;
 
 public partial class RecipesPage : ContentPage
 {
+    private bool _isSizeChangeSubscribed;
+
     public RecipesPage(RecipeListViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        
-        // Set up responsive layout based on window width
-        SizeChanged += OnPageSizeChanged;
     }
 
     private void OnPageSizeChanged(object? sender, EventArgs e)
@@ -48,13 +47,26 @@ public partial class RecipesPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        
+        // Subscribe to SizeChanged event only if not already subscribed
+        if (!_isSizeChangeSubscribed)
+        {
+            SizeChanged += OnPageSizeChanged;
+            _isSizeChangeSubscribed = true;
+        }
+        
         UpdateGridColumns();
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        // Unsubscribe from event to prevent memory leaks
-        SizeChanged -= OnPageSizeChanged;
+        
+        // Unsubscribe from SizeChanged event if subscribed
+        if (_isSizeChangeSubscribed)
+        {
+            SizeChanged -= OnPageSizeChanged;
+            _isSizeChangeSubscribed = false;
+        }
     }
 }
