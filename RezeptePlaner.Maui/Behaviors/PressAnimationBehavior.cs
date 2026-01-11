@@ -88,7 +88,8 @@ public class PressAnimationBehavior : Behavior<VisualElement>
                 }
                 catch
                 {
-                    // If we can't reset, just ignore
+                    // Safely ignore - element may be disposed or in invalid state
+                    // This is a best-effort recovery and failure is acceptable
                 }
             }
         }
@@ -103,7 +104,8 @@ public class PressAnimationBehavior : Behavior<VisualElement>
                 }
                 catch
                 {
-                    // If we can't reset, just ignore
+                    // Safely ignore - element may be disposed or in invalid state
+                    // This is a best-effort recovery and failure is acceptable
                 }
             }
         }
