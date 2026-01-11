@@ -12,18 +12,11 @@
             <HorizontalStackLayout Grid.Column="0" 
                                    Spacing="12"
                                    VerticalOptions="Center">
-                <Border BackgroundColor="{StaticResource Gray200}"
-                        StrokeThickness="0"
-                        StrokeShape="RoundRectangle 20"
-                        Padding="10"
-                        WidthRequest="40"
-                        HeightRequest="40"
-                        VerticalOptions="Center">
-                    <Label Text="🍳"
-                           FontSize="18"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </Border>
+                <Image Source="logo.svg"
+                       WidthRequest="45"
+                       HeightRequest="45"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center" />
                 <VerticalStackLayout VerticalOptions="Center" Spacing="2">
                     <Label Text="CookMate"
                            TextColor="{StaticResource Foreground}"
