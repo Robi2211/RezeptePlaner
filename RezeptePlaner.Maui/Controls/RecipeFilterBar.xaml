@@ -174,8 +174,7 @@
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="End"
-                                   Margin="0,0,0,0" />
+                                   HorizontalOptions="End" />
                         </Grid>
                     </Grid>
                 </Border>
@@ -215,8 +214,7 @@
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="End"
-                                   Margin="0,0,0,0" />
+                                   HorizontalOptions="End" />
                         </Grid>
                     </Grid>
                 </Border>
