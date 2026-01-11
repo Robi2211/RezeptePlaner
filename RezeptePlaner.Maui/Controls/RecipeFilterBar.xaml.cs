@@ -143,6 +143,45 @@ public partial class RecipeFilterBar : ContentView
     public RecipeFilterBar()
     {
         InitializeComponent();
+        SizeChanged += OnControlSizeChanged;
+    }
+
+    private void OnControlSizeChanged(object? sender, EventArgs e)
+    {
+        UpdateVisualState();
+    }
+
+    private void UpdateVisualState()
+    {
+        var width = Width;
+
+        // Validate width to handle initial layout phases
+        if (width <= 0 || double.IsNaN(width) || double.IsInfinity(width))
+        {
+            return;
+        }
+
+        string stateName;
+        if (width < 600)
+        {
+            stateName = "Small";
+        }
+        else if (width < 1000)
+        {
+            stateName = "Medium";
+        }
+        else
+        {
+            stateName = "Large";
+        }
+
+        VisualStateManager.GoToState(FilterGrid, stateName);
+    }
+
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+        UpdateVisualState();
     }
 
     #region Property Changed Handlers

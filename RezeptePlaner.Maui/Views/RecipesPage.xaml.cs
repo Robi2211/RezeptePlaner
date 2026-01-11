@@ -15,6 +15,7 @@ public partial class RecipesPage : ContentPage
     private void OnPageSizeChanged(object? sender, EventArgs e)
     {
         UpdateGridColumns();
+        UpdateVisualState();
     }
 
     private void UpdateGridColumns()
@@ -27,21 +28,62 @@ public partial class RecipesPage : ContentPage
             return;
         }
         
-        if (width > 1200)
+        // Adaptive item spacing based on screen size
+        if (width < 600)
         {
-            // Large/desktop: 3 columns
-            GridLayout.Span = 3;
+            // Small/mobile: 1 column, reduced spacing
+            GridLayout.Span = 1;
+            GridLayout.HorizontalItemSpacing = 16;
+            GridLayout.VerticalItemSpacing = 16;
         }
-        else if (width > 800)
+        else if (width < 1200)
         {
-            // Medium: 2 columns
+            // Medium/tablet: 2 columns, standard spacing
             GridLayout.Span = 2;
+            GridLayout.HorizontalItemSpacing = 20;
+            GridLayout.VerticalItemSpacing = 20;
         }
         else
         {
-            // Small/mobile: 1 column
-            GridLayout.Span = 1;
+            // Large/desktop: 3 columns, larger spacing
+            GridLayout.Span = 3;
+            GridLayout.HorizontalItemSpacing = 24;
+            GridLayout.VerticalItemSpacing = 24;
         }
+    }
+
+    private void UpdateVisualState()
+    {
+        var width = Width;
+
+        // Validate width to handle initial layout phases
+        if (width <= 0 || double.IsNaN(width) || double.IsInfinity(width))
+        {
+            return;
+        }
+
+        string stateName;
+        if (width < 600)
+        {
+            stateName = "Small";
+        }
+        else if (width < 1200)
+        {
+            stateName = "Medium";
+        }
+        else
+        {
+            stateName = "Large";
+        }
+
+        VisualStateManager.GoToState(MainContentGrid, stateName);
+    }
+
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+        UpdateGridColumns();
+        UpdateVisualState();
     }
 
     protected override void OnAppearing()
@@ -56,6 +98,7 @@ public partial class RecipesPage : ContentPage
         }
         
         UpdateGridColumns();
+        UpdateVisualState();
     }
 
     protected override void OnDisappearing()
