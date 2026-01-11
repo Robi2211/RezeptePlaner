@@ -161,20 +161,21 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid InputTransparent="True">
+                        <Grid InputTransparent="True" Padding="15,0,15,0">
                             <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, TargetNullValue='Alle Kategorien', FallbackValue='Alle Kategorien'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="TailTruncation" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   Margin="0,0,15,0" />
+                                   Margin="0,0,0,0" />
                         </Grid>
                     </Grid>
                 </Border>
@@ -201,20 +202,21 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid InputTransparent="True">
+                        <Grid InputTransparent="True" Padding="15,0,15,0">
                             <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, TargetNullValue='Alle Schwierigkeiten', FallbackValue='Alle Schwierigkeiten'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="TailTruncation" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   Margin="0,0,15,0" />
+                                   Margin="0,0,0,0" />
                         </Grid>
                     </Grid>
                 </Border>
@@ -257,7 +259,7 @@
                                FontSize="12"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="End"
-                               WidthRequest="75" />
+                               MinimumWidthRequest="60" />
                     </Grid>
                 </Border>
                 
