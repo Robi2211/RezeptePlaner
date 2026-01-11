@@ -7,6 +7,10 @@ namespace RezeptePlaner.Maui.Controls;
 /// </summary>
 public partial class RecipeFilterBar : ContentView
 {
+    // Responsive breakpoints - consistent with RecipesPage
+    private const double SmallScreenMaxWidth = 600;
+    private const double MediumScreenMaxWidth = 1200;
+
     #region Bindable Properties
 
     /// <summary>
@@ -143,7 +147,6 @@ public partial class RecipeFilterBar : ContentView
     public RecipeFilterBar()
     {
         InitializeComponent();
-        SizeChanged += OnControlSizeChanged;
     }
 
     private void OnControlSizeChanged(object? sender, EventArgs e)
@@ -162,11 +165,11 @@ public partial class RecipeFilterBar : ContentView
         }
 
         string stateName;
-        if (width < 600)
+        if (width < SmallScreenMaxWidth)
         {
             stateName = "Small";
         }
-        else if (width < 1000)
+        else if (width < MediumScreenMaxWidth)
         {
             stateName = "Medium";
         }
@@ -182,6 +185,22 @@ public partial class RecipeFilterBar : ContentView
     {
         base.OnSizeAllocated(width, height);
         UpdateVisualState();
+    }
+
+    protected override void OnHandlerChanged()
+    {
+        base.OnHandlerChanged();
+        
+        if (Handler != null)
+        {
+            // Subscribe to SizeChanged when handler is attached
+            SizeChanged += OnControlSizeChanged;
+        }
+        else
+        {
+            // Unsubscribe when handler is detached to prevent memory leaks
+            SizeChanged -= OnControlSizeChanged;
+        }
     }
 
     #region Property Changed Handlers

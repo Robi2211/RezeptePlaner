@@ -4,6 +4,10 @@ namespace RezeptePlaner.Maui.Views;
 
 public partial class RecipesPage : ContentPage
 {
+    // Responsive breakpoints - consistent with RecipeFilterBar
+    private const double SmallScreenMaxWidth = 600;
+    private const double MediumScreenMaxWidth = 1200;
+    
     private bool _isSizeChangeSubscribed;
 
     public RecipesPage(RecipeListViewModel viewModel)
@@ -29,14 +33,14 @@ public partial class RecipesPage : ContentPage
         }
         
         // Adaptive item spacing based on screen size
-        if (width < 600)
+        if (width < SmallScreenMaxWidth)
         {
             // Small/mobile: 1 column, reduced spacing
             GridLayout.Span = 1;
             GridLayout.HorizontalItemSpacing = 16;
             GridLayout.VerticalItemSpacing = 16;
         }
-        else if (width < 1200)
+        else if (width < MediumScreenMaxWidth)
         {
             // Medium/tablet: 2 columns, standard spacing
             GridLayout.Span = 2;
@@ -63,11 +67,11 @@ public partial class RecipesPage : ContentPage
         }
 
         string stateName;
-        if (width < 600)
+        if (width < SmallScreenMaxWidth)
         {
             stateName = "Small";
         }
-        else if (width < 1200)
+        else if (width < MediumScreenMaxWidth)
         {
             stateName = "Medium";
         }
