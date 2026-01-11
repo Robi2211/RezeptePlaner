@@ -133,6 +133,7 @@
                                TextColor="{StaticResource Foreground}"
                                BackgroundColor="Transparent"
                                FontSize="16"
+                               HorizontalTextAlignment="Center"
                                VerticalOptions="Center" />
                     </Grid>
                 </Border>
@@ -223,7 +224,7 @@
                         Stroke="{StaticResource Border}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 25"
-                        Padding="15,10"
+                        Padding="15,10,15,10"
                         HeightRequest="45">
                     <Border.Shadow>
                         <Shadow Brush="{StaticResource Gray300}"
@@ -231,7 +232,7 @@
                                 Radius="5"
                                 Opacity="0.2" />
                     </Border.Shadow>
-                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
                         <!-- Clock Icon -->
                         <Label Grid.Column="0"
                                Text="🕐"
@@ -246,14 +247,16 @@
                                 MinimumTrackColor="{StaticResource Primary}"
                                 MaximumTrackColor="{StaticResource Gray300}"
                                 ThumbColor="{StaticResource Primary}"
-                                VerticalOptions="Center" />
+                                VerticalOptions="Center"
+                                Margin="0,0,5,0" />
                         <!-- Time Label -->
                         <Label Grid.Column="2"
                                Text="{Binding Source={x:Reference FilterBarControl}, Path=MaxTimeMinutes, StringFormat='{0}+ Min'}"
                                TextColor="{StaticResource Foreground}"
                                FontSize="12"
                                VerticalOptions="Center"
-                               WidthRequest="70" />
+                               HorizontalTextAlignment="End"
+                               WidthRequest="75" />
                     </Grid>
                 </Border>
                 
