@@ -6,35 +6,58 @@ namespace RezeptePlaner.Maui.Behaviors;
 public class PressAnimationBehavior : Behavior<VisualElement>
 {
     private VisualElement? _associatedObject;
-    private TapGestureRecognizer? _tapGestureRecognizer;
 
     protected override void OnAttachedTo(VisualElement bindable)
     {
         base.OnAttachedTo(bindable);
         _associatedObject = bindable;
 
-        // Add tap gesture recognizer for animation
-        _tapGestureRecognizer = new TapGestureRecognizer();
-        _tapGestureRecognizer.Tapped += OnTapped;
-        bindable.GestureRecognizers.Add(_tapGestureRecognizer);
+        // Subscribe to existing gesture recognizers
+        foreach (var gesture in bindable.GestureRecognizers.OfType<TapGestureRecognizer>())
+        {
+            gesture.Tapped += OnElementTapped;
+        }
+
+        // Listen for changes to gesture recognizers collection
+        bindable.GestureRecognizers.CollectionChanged += OnGestureRecognizersChanged;
     }
 
     protected override void OnDetachingFrom(VisualElement bindable)
     {
         base.OnDetachingFrom(bindable);
         
-        // Remove the specific gesture recognizer we added
-        if (_tapGestureRecognizer != null)
+        // Unsubscribe from gesture recognizers
+        foreach (var gesture in bindable.GestureRecognizers.OfType<TapGestureRecognizer>())
         {
-            _tapGestureRecognizer.Tapped -= OnTapped;
-            bindable.GestureRecognizers.Remove(_tapGestureRecognizer);
-            _tapGestureRecognizer = null;
+            gesture.Tapped -= OnElementTapped;
         }
-        
+
+        bindable.GestureRecognizers.CollectionChanged -= OnGestureRecognizersChanged;
         _associatedObject = null;
     }
 
-    private async void OnTapped(object? sender, EventArgs e)
+    private void OnGestureRecognizersChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        // Subscribe to any newly added tap gesture recognizers
+        if (e.NewItems != null)
+        {
+            foreach (var item in e.NewItems.OfType<TapGestureRecognizer>())
+            {
+                item.Tapped += OnElementTapped;
+            }
+        }
+
+        // Unsubscribe from removed tap gesture recognizers
+        if (e.OldItems != null)
+        {
+            foreach (var item in e.OldItems.OfType<TapGestureRecognizer>())
+            {
+                item.Tapped -= OnElementTapped;
+            }
+        }
+    }
+
+    private async void OnElementTapped(object? sender, EventArgs e)
     {
         if (_associatedObject == null) return;
 

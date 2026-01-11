@@ -165,22 +165,6 @@
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=RemoveMealCommand}"
                                                                         CommandParameter="{Binding .}" />
                                                                 </Frame.GestureRecognizers>
-                                                                <VisualStateManager.VisualStateGroups>
-                                                                    <VisualStateGroup x:Name="CommonStates">
-                                                                        <VisualState x:Name="Normal">
-                                                                            <VisualState.Setters>
-                                                                                <Setter Property="Scale" Value="1" />
-                                                                                <Setter Property="Opacity" Value="1" />
-                                                                            </VisualState.Setters>
-                                                                        </VisualState>
-                                                                        <VisualState x:Name="PointerOver">
-                                                                            <VisualState.Setters>
-                                                                                <Setter Property="Scale" Value="1.1" />
-                                                                                <Setter Property="Opacity" Value="0.8" />
-                                                                            </VisualState.Setters>
-                                                                        </VisualState>
-                                                                    </VisualStateGroup>
-                                                                </VisualStateManager.VisualStateGroups>
                                                                 <Label Text="✕"
                                                                        FontSize="12"
                                                                        TextColor="{StaticResource White}"
@@ -227,22 +211,6 @@
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WeekPlannerViewModel}}, Path=AddMealCommand}"
                                                 CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="Scale" Value="1" />
-                                                        <Setter Property="Opacity" Value="1" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="PointerOver">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="Scale" Value="1.02" />
-                                                        <Setter Property="BackgroundColor" Value="{StaticResource Muted}" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
                                         <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
                                             <Label Text="+"
                                                    TextColor="{StaticResource ForegroundMuted}"
