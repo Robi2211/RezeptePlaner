@@ -96,7 +96,7 @@ public partial class RecipeDetailViewModel : ObservableObject
         if (Recipe != null)
         {
             _recipeService.ToggleFavorite(Recipe.Id);
-            // The service will toggle IsFavorite, so we just need to notify
+            // Force UI update since Recipe object reference doesn't change
             OnPropertyChanged(nameof(Recipe));
         }
     }

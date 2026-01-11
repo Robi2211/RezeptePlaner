@@ -80,7 +80,7 @@ public partial class FavoritesViewModel : ObservableObject
         if (recipe != null)
         {
             _recipeService.ToggleFavorite(recipe.Id);
-            LoadFavorites();
+            // Note: LoadFavorites will be called automatically via OnFavoritesChanged event handler
         }
     }
 

@@ -41,6 +41,7 @@ public class RecipeService
         }
         catch
         {
+            // Fall back to empty set if deserialization fails (e.g., corrupted data)
             _favoriteIds = new HashSet<string>();
         }
     }
@@ -57,7 +58,8 @@ public class RecipeService
         }
         catch
         {
-            // Silently fail if preferences can't be saved
+            // Silently fail if preferences can't be saved - favorites will still work for current session
+            // In a production app, consider logging this error or showing a non-intrusive notification
         }
     }
 
