@@ -88,17 +88,17 @@
                                 <Setter TargetName="CategoryBorder" Property="Grid.Row" Value="0" />
                                 <Setter TargetName="CategoryBorder" Property="Grid.Column" Value="1" />
                                 <Setter TargetName="CategoryBorder" Property="Grid.ColumnSpan" Value="1" />
-                                <Setter TargetName="CategoryBorder" Property="Border.WidthRequest" Value="180" />
+                                <Setter TargetName="CategoryBorder" Property="Border.WidthRequest" Value="200" />
                                 
                                 <Setter TargetName="DifficultyBorder" Property="Grid.Row" Value="0" />
                                 <Setter TargetName="DifficultyBorder" Property="Grid.Column" Value="2" />
                                 <Setter TargetName="DifficultyBorder" Property="Grid.ColumnSpan" Value="1" />
-                                <Setter TargetName="DifficultyBorder" Property="Border.WidthRequest" Value="200" />
+                                <Setter TargetName="DifficultyBorder" Property="Border.WidthRequest" Value="230" />
                                 
                                 <Setter TargetName="TimeBorder" Property="Grid.Row" Value="0" />
                                 <Setter TargetName="TimeBorder" Property="Grid.Column" Value="3" />
                                 <Setter TargetName="TimeBorder" Property="Grid.ColumnSpan" Value="1" />
-                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="220" />
+                                <Setter TargetName="TimeBorder" Property="Border.WidthRequest" Value="250" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -161,20 +161,21 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid InputTransparent="True">
+                        <Grid InputTransparent="True" Padding="15,0,15,0">
                             <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, TargetNullValue='Alle Kategorien', FallbackValue='Alle Kategorien'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
-                                   HorizontalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Start"
+                                   LineBreakMode="TailTruncation" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   Margin="0,0,15,0" />
+                                   Margin="0,0,0,0" />
                         </Grid>
                     </Grid>
                 </Border>
@@ -201,20 +202,21 @@
                                 Opacity="0"
                                 BackgroundColor="Transparent" />
                         <!-- Visual layer with centered text -->
-                        <Grid InputTransparent="True">
+                        <Grid InputTransparent="True" Padding="15,0,15,0">
                             <Label Text="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, TargetNullValue='Alle Schwierigkeiten', FallbackValue='Alle Schwierigkeiten'}"
                                    TextColor="{StaticResource Foreground}"
                                    FontSize="16"
-                                   HorizontalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="Center"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Start"
+                                   LineBreakMode="TailTruncation" />
                             <Label Text="▼"
                                    TextColor="{StaticResource ForegroundMuted}"
                                    FontSize="12"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   Margin="0,0,15,0" />
+                                   Margin="0,0,0,0" />
                         </Grid>
                     </Grid>
                 </Border>
@@ -257,7 +259,8 @@
                                FontSize="12"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="End"
-                               WidthRequest="75" />
+                               LineBreakMode="NoWrap"
+                               MinimumWidthRequest="70" />
                     </Grid>
                 </Border>
                 
