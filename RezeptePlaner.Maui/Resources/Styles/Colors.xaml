@@ -32,6 +32,10 @@
     <Color x:Key="TodayHighlight">#FFF3E0</Color>
     <Color x:Key="TodayBorder">#FFB74D</Color>
     
+    <!-- Favorite Banner Colors -->
+    <Color x:Key="FavoriteBannerBackground">#E8F5E9</Color>
+    <Color x:Key="FavoriteBannerBorder">#A5D6A7</Color>
+    
     <!-- Basic Colors -->
     <Color x:Key="White">#FFFFFF</Color>
     <Color x:Key="Black">#000000</Color>
