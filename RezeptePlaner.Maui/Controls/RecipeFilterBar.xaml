@@ -153,9 +153,7 @@
                     </Border.Shadow>
                     <Grid>
                         <!-- Invisible Picker for functionality -->
-                        <Picker Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Categories}"
+                        <Picker ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Categories}"
                                 SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, Mode=TwoWay}"
                                 Title="Alle Kategorien"
                                 Opacity="0"
@@ -200,9 +198,7 @@
                     </Border.Shadow>
                     <Grid>
                         <!-- Invisible Picker for functionality -->
-                        <Picker Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Difficulties}"
+                        <Picker ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Difficulties}"
                                 SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, Mode=TwoWay}"
                                 Title="Alle Schwierigkeiten"
                                 Opacity="0"
