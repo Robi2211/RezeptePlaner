@@ -45,7 +45,7 @@
                         <!-- Medium screens: Horizontal with wrapping -->
                         <VisualState x:Name="Medium">
                             <VisualState.Setters>
-                                <Setter TargetName="FilterGrid" Property="Grid.RowDefinitions" Value="Auto,Auto" />
+                                <Setter TargetName="FilterGrid" Property="Grid.RowDefinitions" Value="Auto,Auto,Auto" />
                                 <Setter TargetName="FilterGrid" Property="Grid.ColumnDefinitions" Value="*,*" />
                                 <Setter TargetName="FilterGrid" Property="Grid.RowSpacing" Value="10" />
                                 <Setter TargetName="FilterGrid" Property="Grid.ColumnSpacing" Value="10" />
