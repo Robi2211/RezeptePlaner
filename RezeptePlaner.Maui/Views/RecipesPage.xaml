@@ -144,8 +144,8 @@
                                                 StrokeShape="RoundRectangle 20"
                                                 Padding="8"
                                                 Margin="12"
-                                                HorizontalOptions="End"
-                                                VerticalOptions="Start"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
                                                 WidthRequest="40"
                                                 HeightRequest="40">
                                             <Border.GestureRecognizers>
