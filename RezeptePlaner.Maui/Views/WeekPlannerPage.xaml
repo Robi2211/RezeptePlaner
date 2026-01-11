@@ -218,8 +218,7 @@
                                            BackgroundColor="Transparent"
                                            BorderColor="{StaticResource Border}"
                                            CornerRadius="12"
-                                           Padding="16"
-                                           HasShadow="False">
+                                           Padding="16">
                                         <Frame.Behaviors>
                                             <behaviors:PressAnimationBehavior />
                                         </Frame.Behaviors>

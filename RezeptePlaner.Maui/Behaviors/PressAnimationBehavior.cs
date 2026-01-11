@@ -6,6 +6,7 @@ namespace RezeptePlaner.Maui.Behaviors;
 public class PressAnimationBehavior : Behavior<VisualElement>
 {
     private VisualElement? _associatedObject;
+    private TapGestureRecognizer? _tapGestureRecognizer;
 
     protected override void OnAttachedTo(VisualElement bindable)
     {
@@ -13,20 +14,21 @@ public class PressAnimationBehavior : Behavior<VisualElement>
         _associatedObject = bindable;
 
         // Add tap gesture recognizer for animation
-        var tapGesture = new TapGestureRecognizer();
-        tapGesture.Tapped += OnTapped;
-        bindable.GestureRecognizers.Insert(0, tapGesture);
+        _tapGestureRecognizer = new TapGestureRecognizer();
+        _tapGestureRecognizer.Tapped += OnTapped;
+        bindable.GestureRecognizers.Add(_tapGestureRecognizer);
     }
 
     protected override void OnDetachingFrom(VisualElement bindable)
     {
         base.OnDetachingFrom(bindable);
         
-        // Remove the gesture recognizer
-        var tapGesture = bindable.GestureRecognizers.FirstOrDefault(g => g is TapGestureRecognizer);
-        if (tapGesture != null)
+        // Remove the specific gesture recognizer we added
+        if (_tapGestureRecognizer != null)
         {
-            ((TapGestureRecognizer)tapGesture).Tapped -= OnTapped;
+            _tapGestureRecognizer.Tapped -= OnTapped;
+            bindable.GestureRecognizers.Remove(_tapGestureRecognizer);
+            _tapGestureRecognizer = null;
         }
         
         _associatedObject = null;
