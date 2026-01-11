@@ -10,6 +10,8 @@ public partial class RecipeFilterBar : ContentView
     // Responsive breakpoints - consistent with RecipesPage
     private const double SmallScreenMaxWidth = 600;
     private const double MediumScreenMaxWidth = 1200;
+    
+    private bool _isSizeChangeSubscribed;
 
     #region Bindable Properties
 
@@ -191,15 +193,17 @@ public partial class RecipeFilterBar : ContentView
     {
         base.OnHandlerChanged();
         
-        if (Handler != null)
+        if (Handler != null && !_isSizeChangeSubscribed)
         {
             // Subscribe to SizeChanged when handler is attached
             SizeChanged += OnControlSizeChanged;
+            _isSizeChangeSubscribed = true;
         }
-        else
+        else if (Handler == null && _isSizeChangeSubscribed)
         {
             // Unsubscribe when handler is detached to prevent memory leaks
             SizeChanged -= OnControlSizeChanged;
+            _isSizeChangeSubscribed = false;
         }
     }
 

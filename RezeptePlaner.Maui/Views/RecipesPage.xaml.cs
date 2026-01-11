@@ -18,6 +18,11 @@ public partial class RecipesPage : ContentPage
 
     private void OnPageSizeChanged(object? sender, EventArgs e)
     {
+        UpdateLayout();
+    }
+
+    private void UpdateLayout()
+    {
         UpdateGridColumns();
         UpdateVisualState();
     }
@@ -32,7 +37,7 @@ public partial class RecipesPage : ContentPage
             return;
         }
         
-        // Adaptive item spacing based on screen size
+        // Adaptive grid layout and item spacing based on screen size
         if (width < SmallScreenMaxWidth)
         {
             // Small/mobile: 1 column, reduced spacing
@@ -86,8 +91,7 @@ public partial class RecipesPage : ContentPage
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-        UpdateGridColumns();
-        UpdateVisualState();
+        UpdateLayout();
     }
 
     protected override void OnAppearing()
@@ -101,8 +105,7 @@ public partial class RecipesPage : ContentPage
             _isSizeChangeSubscribed = true;
         }
         
-        UpdateGridColumns();
-        UpdateVisualState();
+        UpdateLayout();
     }
 
     protected override void OnDisappearing()
