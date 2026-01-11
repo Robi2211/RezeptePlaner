@@ -75,7 +75,8 @@
                                                 SelectedItem="{Binding SelectedCategory}"
                                                 TextColor="{StaticResource Foreground}"
                                                 TitleColor="{StaticResource ForegroundMuted}"
-                                                BackgroundColor="Transparent" />
+                                                BackgroundColor="Transparent"
+                                                Title="Kategorie wählen" />
                                     </Border>
                                 </VerticalStackLayout>
 
@@ -93,7 +94,8 @@
                                                 SelectedItem="{Binding SelectedDifficulty}"
                                                 TextColor="{StaticResource Foreground}"
                                                 TitleColor="{StaticResource ForegroundMuted}"
-                                                BackgroundColor="Transparent" />
+                                                BackgroundColor="Transparent"
+                                                Title="Schwierigkeit wählen" />
                                     </Border>
                                 </VerticalStackLayout>
                             </Grid>
@@ -102,57 +104,39 @@
                             <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                                 <!-- Prep Time -->
                                 <VerticalStackLayout Grid.Column="0">
-                                    <Label Text="Vorbereitung (Min)" 
+                                    <Label Text="{Binding PrepTime, StringFormat='Vorbereitung: {0} Min'}" 
                                            TextColor="{StaticResource Foreground}"
                                            FontSize="14"
                                            Margin="0,0,0,5" />
-                                    <Border BackgroundColor="{StaticResource Muted}"
-                                            Stroke="{StaticResource Border}"
-                                            StrokeShape="RoundRectangle 8"
-                                            Padding="12,8">
-                                        <Entry Text="{Binding PrepTime}"
-                                               Keyboard="Numeric"
-                                               TextColor="{StaticResource Foreground}"
-                                               BackgroundColor="Transparent"
-                                               FontSize="14" />
-                                    </Border>
+                                    <Stepper Minimum="{Binding MinPrepTime}"
+                                             Maximum="{Binding MaxPrepTime}"
+                                             Value="{Binding PrepTime}"
+                                             Increment="5" />
                                 </VerticalStackLayout>
 
                                 <!-- Cook Time -->
                                 <VerticalStackLayout Grid.Column="1">
-                                    <Label Text="Kochzeit (Min)" 
+                                    <Label Text="{Binding CookTime, StringFormat='Kochzeit: {0} Min'}" 
                                            TextColor="{StaticResource Foreground}"
                                            FontSize="14"
                                            Margin="0,0,0,5" />
-                                    <Border BackgroundColor="{StaticResource Muted}"
-                                            Stroke="{StaticResource Border}"
-                                            StrokeShape="RoundRectangle 8"
-                                            Padding="12,8">
-                                        <Entry Text="{Binding CookTime}"
-                                               Keyboard="Numeric"
-                                               TextColor="{StaticResource Foreground}"
-                                               BackgroundColor="Transparent"
-                                               FontSize="14" />
-                                    </Border>
+                                    <Stepper Minimum="{Binding MinCookTime}"
+                                             Maximum="{Binding MaxCookTime}"
+                                             Value="{Binding CookTime}"
+                                             Increment="5" />
                                 </VerticalStackLayout>
                             </Grid>
 
                             <!-- Servings -->
                             <VerticalStackLayout>
-                                <Label Text="Portionen" 
+                                <Label Text="{Binding Servings, StringFormat='Portionen: {0}'}" 
                                        TextColor="{StaticResource Foreground}"
                                        FontSize="14"
                                        Margin="0,0,0,5" />
-                                <Border BackgroundColor="{StaticResource Muted}"
-                                        Stroke="{StaticResource Border}"
-                                        StrokeShape="RoundRectangle 8"
-                                        Padding="12,8">
-                                    <Entry Text="{Binding Servings}"
-                                           Keyboard="Numeric"
-                                           TextColor="{StaticResource Foreground}"
-                                           BackgroundColor="Transparent"
-                                           FontSize="14" />
-                                </Border>
+                                <Stepper Minimum="{Binding MinServings}"
+                                         Maximum="{Binding MaxServings}"
+                                         Value="{Binding Servings}"
+                                         Increment="1" />
                             </VerticalStackLayout>
                         </VerticalStackLayout>
                         </Frame>
