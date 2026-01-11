@@ -141,7 +141,7 @@
                         
                         <!-- Category & Difficulty Badges -->
                         <HorizontalStackLayout Spacing="10">
-                            <Border BackgroundColor="#FF8C42"
+                            <Border BackgroundColor="{StaticResource Primary}"
                                    StrokeShape="RoundRectangle 20"
                                    Stroke="Transparent"
                                    Padding="16,8">
@@ -305,7 +305,7 @@
                                     <DataTemplate x:DataType="viewmodels:InstructionStep">
                                         <Grid ColumnDefinitions="52,*" ColumnSpacing="16" Padding="0,8">
                                             <Border Grid.Column="0"
-                                                   BackgroundColor="#FF8C42"
+                                                   BackgroundColor="{StaticResource Primary}"
                                                    StrokeShape="Ellipse"
                                                    Stroke="Transparent"
                                                    WidthRequest="36"
