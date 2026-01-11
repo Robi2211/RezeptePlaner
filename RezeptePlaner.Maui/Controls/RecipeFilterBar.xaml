@@ -106,10 +106,18 @@
                 
                 <!-- Search Bar with Icon -->
                 <Border x:Name="SearchBorder"
-                        BackgroundColor="{StaticResource Muted}"
+                        BackgroundColor="{StaticResource Gray100}"
                         Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="12,8">
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 25"
+                        Padding="15,10"
+                        HeightRequest="45">
+                    <Border.Shadow>
+                        <Shadow Brush="LightGray"
+                                Offset="0,2"
+                                Radius="5"
+                                Opacity="0.2" />
+                    </Border.Shadow>
                     <Grid ColumnDefinitions="Auto,*">
                         <!-- Search Icon -->
                         <Label Grid.Column="0"
@@ -122,71 +130,97 @@
                                Text="{Binding Source={x:Reference FilterBarControl}, Path=SearchText, Mode=TwoWay}"
                                Placeholder="Rezepte oder Zutaten suchen..."
                                PlaceholderColor="{StaticResource ForegroundMuted}"
-                               TextColor="{StaticResource Foreground}"
+                               TextColor="#333333"
                                BackgroundColor="Transparent"
-                               FontSize="14"
+                               FontSize="16"
                                VerticalOptions="Center" />
                     </Grid>
                 </Border>
                 
                 <!-- Category Dropdown -->
                 <Border x:Name="CategoryBorder"
-                        BackgroundColor="{StaticResource Muted}"
+                        BackgroundColor="{StaticResource Gray100}"
                         Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="12,8">
-                    <Grid ColumnDefinitions="Auto,*,Auto">
-                        <Label Grid.Column="0"
-                               Text="▼"
-                               TextColor="{StaticResource ForegroundMuted}"
-                               FontSize="10"
-                               VerticalOptions="Center"
-                               Margin="0,0,8,0" />
-                        <Picker Grid.Column="1"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 25"
+                        Padding="15,10"
+                        HeightRequest="45">
+                    <Border.Shadow>
+                        <Shadow Brush="LightGray"
+                                Offset="0,2"
+                                Radius="5"
+                                Opacity="0.2" />
+                    </Border.Shadow>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Picker Grid.Column="0"
                                 ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Categories}"
                                 SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedCategory, Mode=TwoWay}"
                                 Title="Alle Kategorien"
-                                TextColor="{StaticResource Foreground}"
-                                TitleColor="{StaticResource ForegroundMuted}"
+                                TextColor="#333333"
+                                TitleColor="#333333"
                                 BackgroundColor="Transparent"
-                                FontSize="14"
+                                FontSize="16"
                                 VerticalOptions="Center"
-                                HorizontalOptions="FillAndExpand" />
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" />
+                        <Label Grid.Column="1"
+                               Text="▼"
+                               TextColor="{StaticResource ForegroundMuted}"
+                               FontSize="12"
+                               VerticalOptions="Center"
+                               Margin="8,0,0,0" />
                     </Grid>
                 </Border>
                 
                 <!-- Difficulty Dropdown -->
                 <Border x:Name="DifficultyBorder"
-                        BackgroundColor="{StaticResource Muted}"
+                        BackgroundColor="{StaticResource Gray100}"
                         Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="12,8">
-                    <Grid ColumnDefinitions="Auto,*,Auto">
-                        <Label Grid.Column="0"
-                               Text="▼"
-                               TextColor="{StaticResource ForegroundMuted}"
-                               FontSize="10"
-                               VerticalOptions="Center"
-                               Margin="0,0,8,0" />
-                        <Picker Grid.Column="1"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 25"
+                        Padding="15,10"
+                        HeightRequest="45">
+                    <Border.Shadow>
+                        <Shadow Brush="LightGray"
+                                Offset="0,2"
+                                Radius="5"
+                                Opacity="0.2" />
+                    </Border.Shadow>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Picker Grid.Column="0"
                                 ItemsSource="{Binding Source={x:Reference FilterBarControl}, Path=Difficulties}"
                                 SelectedItem="{Binding Source={x:Reference FilterBarControl}, Path=SelectedDifficulty, Mode=TwoWay}"
                                 Title="Alle Schwierigkeiten"
-                                TextColor="{StaticResource Foreground}"
-                                TitleColor="{StaticResource ForegroundMuted}"
+                                TextColor="#333333"
+                                TitleColor="#333333"
                                 BackgroundColor="Transparent"
-                                FontSize="14"
+                                FontSize="16"
                                 VerticalOptions="Center"
-                                HorizontalOptions="FillAndExpand" />
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start" />
+                        <Label Grid.Column="1"
+                               Text="▼"
+                               TextColor="{StaticResource ForegroundMuted}"
+                               FontSize="12"
+                               VerticalOptions="Center"
+                               Margin="8,0,0,0" />
                     </Grid>
                 </Border>
                 
                 <!-- Time Slider -->
                 <Border x:Name="TimeBorder"
-                        BackgroundColor="{StaticResource Muted}"
+                        BackgroundColor="{StaticResource Gray100}"
                         Stroke="{StaticResource Border}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="12,8">
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 25"
+                        Padding="15,10"
+                        HeightRequest="45">
+                    <Border.Shadow>
+                        <Shadow Brush="LightGray"
+                                Offset="0,2"
+                                Radius="5"
+                                Opacity="0.2" />
+                    </Border.Shadow>
                     <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                         <!-- Clock Icon -->
                         <Label Grid.Column="0"
@@ -206,7 +240,7 @@
                         <!-- Time Label -->
                         <Label Grid.Column="2"
                                Text="{Binding Source={x:Reference FilterBarControl}, Path=MaxTimeMinutes, StringFormat='{0}+ Min'}"
-                               TextColor="{StaticResource Foreground}"
+                               TextColor="#333333"
                                FontSize="12"
                                VerticalOptions="Center"
                                WidthRequest="70" />
