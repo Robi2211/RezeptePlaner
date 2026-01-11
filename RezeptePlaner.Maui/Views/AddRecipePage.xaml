@@ -25,147 +25,139 @@
                        FontSize="14" />
             </VerticalStackLayout>
 
-            <!-- Form Content -->
-            <VerticalStackLayout Grid.Row="1" Spacing="20" IsVisible="{Binding ShowSuccessMessage, Converter={StaticResource InvertedBoolConverter}}">
+            <!-- Form Content with Two-Column Layout -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="24" IsVisible="{Binding ShowSuccessMessage, Converter={StaticResource InvertedBoolConverter}}">
                 
-                <!-- Basic Information Card -->
-                <Frame Style="{StaticResource CardFrame}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="Grundinformationen" 
-                               Style="{StaticResource SectionTitle}" />
-                        
-                        <!-- Recipe Title (Entry) -->
-                        <VerticalStackLayout>
-                            <Label Text="Rezeptname *" 
-                                   TextColor="{StaticResource Foreground}"
-                                   FontSize="14"
-                                   Margin="0,0,0,5" />
-                            <Border BackgroundColor="{StaticResource Muted}"
-                                    Stroke="{StaticResource Border}"
-                                    StrokeShape="RoundRectangle 8"
-                                    Padding="12,8">
-                                <Entry Text="{Binding Title}"
-                                       Placeholder="z.B. Spaghetti Carbonara"
-                                       PlaceholderColor="{StaticResource ForegroundMuted}"
-                                       TextColor="{StaticResource Foreground}"
-                                       BackgroundColor="Transparent"
-                                       FontSize="14" />
-                            </Border>
-                            <Label Text="{Binding TitleError}"
-                                   Style="{StaticResource ErrorText}"
-                                   IsVisible="{Binding TitleError, Converter={StaticResource StringToBoolConverter}}" />
-                        </VerticalStackLayout>
-
-                        <!-- Category Picker -->
-                        <VerticalStackLayout>
-                            <Label Text="Kategorie *" 
-                                   TextColor="{StaticResource Foreground}"
-                                   FontSize="14"
-                                   Margin="0,0,0,5" />
-                            <Border BackgroundColor="{StaticResource Muted}"
-                                    Stroke="{StaticResource Border}"
-                                    StrokeShape="RoundRectangle 8"
-                                    Padding="12,8">
-                                <Picker ItemsSource="{Binding Categories}"
-                                        SelectedItem="{Binding SelectedCategory}"
-                                        TextColor="{StaticResource Foreground}"
-                                        TitleColor="{StaticResource ForegroundMuted}"
-                                        BackgroundColor="Transparent"
-                                        Title="Kategorie wählen" />
-                            </Border>
-                        </VerticalStackLayout>
-
-                        <!-- Difficulty Picker -->
-                        <VerticalStackLayout>
-                            <Label Text="Schwierigkeitsgrad *" 
-                                   TextColor="{StaticResource Foreground}"
-                                   FontSize="14"
-                                   Margin="0,0,0,5" />
-                            <Border BackgroundColor="{StaticResource Muted}"
-                                    Stroke="{StaticResource Border}"
-                                    StrokeShape="RoundRectangle 8"
-                                    Padding="12,8">
-                                <Picker ItemsSource="{Binding DifficultyLevels}"
-                                        SelectedItem="{Binding SelectedDifficulty}"
-                                        TextColor="{StaticResource Foreground}"
-                                        TitleColor="{StaticResource ForegroundMuted}"
-                                        BackgroundColor="Transparent"
-                                        Title="Schwierigkeit wählen" />
-                            </Border>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Time and Servings Card -->
-                <Frame Style="{StaticResource CardFrame}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="Zeit und Portionen" 
-                               Style="{StaticResource SectionTitle}" />
-                        
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="15">
+                <!-- Left Column -->
+                <VerticalStackLayout Grid.Column="0" Spacing="20">
+                
+                    <!-- Basic Information Card -->
+                    <Frame Style="{StaticResource CardFrame}">
+                        <VerticalStackLayout Spacing="15">
+                            <Label Text="Grundinformationen" 
+                                   Style="{StaticResource SectionTitle}" />
                             
-                            <!-- Prep Time Slider -->
-                            <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                                <Label Text="{Binding PrepTime, StringFormat='Vorbereitungszeit: {0} min'}" 
+                            <!-- Recipe Title (Entry) -->
+                            <VerticalStackLayout>
+                                <Label Text="Rezeptname *" 
                                        TextColor="{StaticResource Foreground}"
-                                       FontSize="14" />
-                                <Slider Minimum="{Binding MinPrepTime}"
-                                        Maximum="{Binding MaxPrepTime}"
-                                        Value="{Binding PrepTime}"
-                                        MinimumTrackColor="{StaticResource Primary}"
-                                        MaximumTrackColor="{StaticResource Muted}"
-                                        ThumbColor="{StaticResource Primary}" />
+                                       FontSize="14"
+                                       Margin="0,0,0,5" />
+                                <Border BackgroundColor="{StaticResource Muted}"
+                                        Stroke="{StaticResource Border}"
+                                        StrokeShape="RoundRectangle 8"
+                                        Padding="12,8">
+                                    <Entry Text="{Binding Title}"
+                                           Placeholder="z.B. Spaghetti Carbonara"
+                                           PlaceholderColor="{StaticResource ForegroundMuted}"
+                                           TextColor="{StaticResource Foreground}"
+                                           BackgroundColor="Transparent"
+                                           FontSize="14" />
+                                </Border>
+                                <Label Text="{Binding TitleError}"
+                                       Style="{StaticResource ErrorText}"
+                                       IsVisible="{Binding TitleError, Converter={StaticResource StringToBoolConverter}}" />
                             </VerticalStackLayout>
 
-                            <!-- Cook Time Slider -->
-                            <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                                <Label Text="{Binding CookTime, StringFormat='Kochzeit: {0} min'}" 
-                                       TextColor="{StaticResource Foreground}"
-                                       FontSize="14" />
-                                <Slider Minimum="{Binding MinCookTime}"
-                                        Maximum="{Binding MaxCookTime}"
-                                        Value="{Binding CookTime}"
-                                        MinimumTrackColor="{StaticResource Primary}"
-                                        MaximumTrackColor="{StaticResource Muted}"
-                                        ThumbColor="{StaticResource Primary}" />
-                            </VerticalStackLayout>
+                            <!-- Category and Difficulty in Grid -->
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                                <!-- Category Picker -->
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="Kategorie" 
+                                           TextColor="{StaticResource Foreground}"
+                                           FontSize="14"
+                                           Margin="0,0,0,5" />
+                                    <Border BackgroundColor="{StaticResource Muted}"
+                                            Stroke="{StaticResource Border}"
+                                            StrokeShape="RoundRectangle 8"
+                                            Padding="12,8">
+                                        <Picker ItemsSource="{Binding Categories}"
+                                                SelectedItem="{Binding SelectedCategory}"
+                                                TextColor="{StaticResource Foreground}"
+                                                TitleColor="{StaticResource ForegroundMuted}"
+                                                BackgroundColor="Transparent" />
+                                    </Border>
+                                </VerticalStackLayout>
 
-                            <!-- Servings Stepper -->
-                            <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                                <!-- Difficulty Picker -->
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Text="Schwierigkeit" 
+                                           TextColor="{StaticResource Foreground}"
+                                           FontSize="14"
+                                           Margin="0,0,0,5" />
+                                    <Border BackgroundColor="{StaticResource Muted}"
+                                            Stroke="{StaticResource Border}"
+                                            StrokeShape="RoundRectangle 8"
+                                            Padding="12,8">
+                                        <Picker ItemsSource="{Binding DifficultyLevels}"
+                                                SelectedItem="{Binding SelectedDifficulty}"
+                                                TextColor="{StaticResource Foreground}"
+                                                TitleColor="{StaticResource ForegroundMuted}"
+                                                BackgroundColor="Transparent" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <!-- Prep Time and Cook Time in Grid -->
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                                <!-- Prep Time -->
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="Vorbereitung (Min)" 
+                                           TextColor="{StaticResource Foreground}"
+                                           FontSize="14"
+                                           Margin="0,0,0,5" />
+                                    <Border BackgroundColor="{StaticResource Muted}"
+                                            Stroke="{StaticResource Border}"
+                                            StrokeShape="RoundRectangle 8"
+                                            Padding="12,8">
+                                        <Entry Text="{Binding PrepTime}"
+                                               Keyboard="Numeric"
+                                               TextColor="{StaticResource Foreground}"
+                                               BackgroundColor="Transparent"
+                                               FontSize="14" />
+                                    </Border>
+                                </VerticalStackLayout>
+
+                                <!-- Cook Time -->
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Text="Kochzeit (Min)" 
+                                           TextColor="{StaticResource Foreground}"
+                                           FontSize="14"
+                                           Margin="0,0,0,5" />
+                                    <Border BackgroundColor="{StaticResource Muted}"
+                                            Stroke="{StaticResource Border}"
+                                            StrokeShape="RoundRectangle 8"
+                                            Padding="12,8">
+                                        <Entry Text="{Binding CookTime}"
+                                               Keyboard="Numeric"
+                                               TextColor="{StaticResource Foreground}"
+                                               BackgroundColor="Transparent"
+                                               FontSize="14" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <!-- Servings -->
+                            <VerticalStackLayout>
                                 <Label Text="Portionen" 
                                        TextColor="{StaticResource Foreground}"
                                        FontSize="14"
                                        Margin="0,0,0,5" />
-                                <HorizontalStackLayout Spacing="10">
-                                    <Stepper Minimum="{Binding MinServings}"
-                                             Maximum="{Binding MaxServings}"
-                                             Value="{Binding Servings}"
-                                             Increment="1" />
-                                    <Label Text="{Binding Servings}"
-                                           TextColor="{StaticResource Primary}"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center" />
-                                </HorizontalStackLayout>
+                                <Border BackgroundColor="{StaticResource Muted}"
+                                        Stroke="{StaticResource Border}"
+                                        StrokeShape="RoundRectangle 8"
+                                        Padding="12,8">
+                                    <Entry Text="{Binding Servings}"
+                                           Keyboard="Numeric"
+                                           TextColor="{StaticResource Foreground}"
+                                           BackgroundColor="Transparent"
+                                           FontSize="14" />
+                                </Border>
                             </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        </Frame>
 
-                            <!-- Planned Date -->
-                            <VerticalStackLayout Grid.Row="1" Grid.Column="1">
-                                <Label Text="Geplant für" 
-                                       TextColor="{StaticResource Foreground}"
-                                       FontSize="14"
-                                       Margin="0,0,0,5" />
-                                <DatePicker Date="{Binding PlannedDate}"
-                                            TextColor="{StaticResource Foreground}"
-                                            BackgroundColor="{StaticResource Muted}"
-                                            MinimumDate="{x:Static sys:DateTime.Today}"
-                                            xmlns:sys="clr-namespace:System;assembly=netstandard" />
-                            </VerticalStackLayout>
-                        </Grid>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Ingredients Card -->
+                    <!-- Ingredients Card -->
                 <Frame Style="{StaticResource CardFrame}">
                     <VerticalStackLayout Spacing="10">
                         <Label Text="Zutaten *" 
@@ -215,82 +207,104 @@
                                Style="{StaticResource ErrorText}"
                                IsVisible="{Binding InstructionsError, Converter={StaticResource StringToBoolConverter}}" />
                     </VerticalStackLayout>
-                </Frame>
+                    </Frame>
+                </VerticalStackLayout>
 
-                <!-- Dietary Options Card -->
-                <Frame Style="{StaticResource CardFrame}">
+                <!-- Right Column -->
+                <VerticalStackLayout Grid.Column="1" Spacing="20">
+                    
+                    <!-- Recipe Image Card -->
+                    <Frame Style="{StaticResource CardFrame}">
+                        <VerticalStackLayout Spacing="15">
+                            <Label Text="Rezeptbild" 
+                                   Style="{StaticResource SectionTitle}" />
+                            
+                            <!-- Image Placeholder -->
+                            <Border BackgroundColor="{StaticResource Muted}"
+                                    Stroke="{StaticResource Border}"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="2"
+                                    StrokeDashArray="5,5"
+                                    Padding="40"
+                                    HeightRequest="200">
+                                <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="🖼️"
+                                           FontSize="48"
+                                           HorizontalOptions="Center" />
+                                    <Label Text="Bild-URL hinzufügen"
+                                           TextColor="{StaticResource ForegroundMuted}"
+                                           FontSize="14"
+                                           HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                            
+                            <!-- Image URL Input -->
+                            <Border BackgroundColor="{StaticResource Muted}"
+                                    Stroke="{StaticResource Border}"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="12,8">
+                                <Entry Placeholder="https://..."
+                                       PlaceholderColor="{StaticResource ForegroundMuted}"
+                                       TextColor="{StaticResource Foreground}"
+                                       BackgroundColor="Transparent"
+                                       FontSize="14" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Tags Card -->
+                    <Frame Style="{StaticResource CardFrame}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Tags" 
+                                   Style="{StaticResource SectionTitle}" />
+                            
+                            <!-- Tags Input with Add Button -->
+                            <HorizontalStackLayout Spacing="10">
+                                <Border BackgroundColor="{StaticResource Muted}"
+                                        Stroke="{StaticResource Border}"
+                                        StrokeShape="RoundRectangle 8"
+                                        Padding="12,8"
+                                        HorizontalOptions="FillAndExpand">
+                                    <Entry Text="{Binding TagsText}"
+                                           Placeholder="Tag eingeben..."
+                                           PlaceholderColor="{StaticResource ForegroundMuted}"
+                                           TextColor="{StaticResource Foreground}"
+                                           BackgroundColor="Transparent"
+                                           FontSize="14"
+                                           HorizontalOptions="FillAndExpand" />
+                                </Border>
+                                <Border BackgroundColor="{StaticResource Primary}"
+                                        StrokeShape="RoundRectangle 8"
+                                        Stroke="Transparent"
+                                        WidthRequest="48"
+                                        HeightRequest="48"
+                                        Padding="0">
+                                    <Label Text="+"
+                                           TextColor="{StaticResource White}"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Border>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Action Buttons -->
                     <VerticalStackLayout Spacing="15">
-                        <Label Text="Diätoptionen" 
-                               Style="{StaticResource SectionTitle}" />
-                        
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
-                            <!-- Vegetarian Switch -->
-                            <HorizontalStackLayout Grid.Column="0" Spacing="10">
-                                <Switch IsToggled="{Binding IsVegetarian}"
-                                        OnColor="{StaticResource Primary}"
-                                        ThumbColor="{StaticResource Foreground}" />
-                                <Label Text="🥗 Vegetarisch"
-                                       TextColor="{StaticResource Foreground}"
-                                       VerticalOptions="Center" />
-                            </HorizontalStackLayout>
-
-                            <!-- Vegan Switch -->
-                            <HorizontalStackLayout Grid.Column="1" Spacing="10">
-                                <Switch IsToggled="{Binding IsVegan}"
-                                        OnColor="{StaticResource Primary}"
-                                        ThumbColor="{StaticResource Foreground}" />
-                                <Label Text="🌱 Vegan"
-                                       TextColor="{StaticResource Foreground}"
-                                       VerticalOptions="Center" />
-                            </HorizontalStackLayout>
-
-                            <!-- Gluten Free Switch -->
-                            <HorizontalStackLayout Grid.Column="2" Spacing="10">
-                                <Switch IsToggled="{Binding IsGlutenFree}"
-                                        OnColor="{StaticResource Primary}"
-                                        ThumbColor="{StaticResource Foreground}" />
-                                <Label Text="🌾 Glutenfrei"
-                                       TextColor="{StaticResource Foreground}"
-                                       VerticalOptions="Center" />
-                            </HorizontalStackLayout>
-                        </Grid>
+                        <Button Text="Rezept speichern"
+                                Command="{Binding SaveRecipeCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                HeightRequest="56" />
+                        <Button Text="Abbrechen"
+                                Command="{Binding ResetFormCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource ForegroundMuted}"
+                                BorderColor="Transparent"
+                                FontSize="14" />
                     </VerticalStackLayout>
-                </Frame>
-
-                <!-- Tags Card -->
-                <Frame Style="{StaticResource CardFrame}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Tags (optional)" 
-                               Style="{StaticResource SectionTitle}" />
-                        <Label Text="Kommagetrennte Tags eingeben"
-                               TextColor="{StaticResource ForegroundMuted}"
-                               FontSize="12" />
-                        <Border BackgroundColor="{StaticResource Muted}"
-                                Stroke="{StaticResource Border}"
-                                StrokeShape="RoundRectangle 8"
-                                Padding="12,8">
-                            <Entry Text="{Binding TagsText}"
-                                   Placeholder="z.B. italienisch, pasta, klassiker"
-                                   PlaceholderColor="{StaticResource ForegroundMuted}"
-                                   TextColor="{StaticResource Foreground}"
-                                   BackgroundColor="Transparent"
-                                   FontSize="14" />
-                        </Border>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Action Buttons -->
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,20,0,40">
-                    <Button Grid.Column="0"
-                            Text="Zurücksetzen"
-                            Command="{Binding ResetFormCommand}"
-                            Style="{StaticResource SecondaryButton}" />
-                    <Button Grid.Column="1"
-                            Text="Rezept speichern"
-                            Command="{Binding SaveRecipeCommand}"
-                            Style="{StaticResource PrimaryButton}" />
-                </Grid>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
 
             <!-- Success Message -->
             <Frame Grid.Row="1"
