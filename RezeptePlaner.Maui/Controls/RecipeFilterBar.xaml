@@ -113,7 +113,7 @@
                         Padding="15,10"
                         HeightRequest="45">
                     <Border.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="{StaticResource Gray300}"
                                 Offset="0,2"
                                 Radius="5"
                                 Opacity="0.2" />
@@ -146,7 +146,7 @@
                         Padding="15,10"
                         HeightRequest="45">
                     <Border.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="{StaticResource Gray300}"
                                 Offset="0,2"
                                 Radius="5"
                                 Opacity="0.2" />
@@ -181,7 +181,7 @@
                         Padding="15,10"
                         HeightRequest="45">
                     <Border.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="{StaticResource Gray300}"
                                 Offset="0,2"
                                 Radius="5"
                                 Opacity="0.2" />
@@ -216,7 +216,7 @@
                         Padding="15,10"
                         HeightRequest="45">
                     <Border.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="{StaticResource Gray300}"
                                 Offset="0,2"
                                 Radius="5"
                                 Opacity="0.2" />
