@@ -19,18 +19,11 @@
             <VerticalStackLayout Grid.Row="0" Margin="0,0,0,30" HorizontalOptions="Center">
                 
                 <!-- App Logo -->
-                <Frame BackgroundColor="{StaticResource Surface}"
-                       BorderColor="{StaticResource Primary}"
-                       CornerRadius="60"
+                <Image Source="logo.svg"
                        WidthRequest="120"
                        HeightRequest="120"
-                       Padding="0"
-                       HorizontalOptions="Center">
-                    <Label Text="🍳"
-                           FontSize="60"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </Frame>
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center" />
                 
                 <Label Text="{Binding AppName}" 
                        TextColor="{StaticResource Primary}"
