@@ -110,7 +110,7 @@
                         Stroke="{StaticResource Border}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 25"
-                        Padding="15,10"
+                        Padding="0"
                         HeightRequest="45">
                     <Border.Shadow>
                         <Shadow Brush="{StaticResource Gray300}"
@@ -118,10 +118,11 @@
                                 Radius="5"
                                 Opacity="0.2" />
                     </Border.Shadow>
-                    <Grid ColumnDefinitions="Auto,*">
+                    <Grid ColumnDefinitions="Auto,*" Padding="15,12,20,12">
                         <!-- Search Icon -->
                         <Label Grid.Column="0"
                                Text="🔍"
+                               TextColor="{StaticResource Primary}"
                                FontSize="16"
                                VerticalOptions="Center"
                                Margin="0,0,8,0" />
@@ -129,11 +130,11 @@
                         <Entry Grid.Column="1"
                                Text="{Binding Source={x:Reference FilterBarControl}, Path=SearchText, Mode=TwoWay}"
                                Placeholder="Rezepte oder Zutaten suchen..."
-                               PlaceholderColor="{StaticResource ForegroundMuted}"
-                               TextColor="{StaticResource Foreground}"
+                               PlaceholderColor="#333333"
+                               TextColor="{StaticResource Black}"
                                BackgroundColor="Transparent"
                                FontSize="16"
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                VerticalOptions="Center" />
                     </Grid>
                 </Border>
