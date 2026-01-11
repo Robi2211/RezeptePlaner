@@ -243,7 +243,8 @@
                                     Stroke="{StaticResource Border}"
                                     StrokeShape="RoundRectangle 8"
                                     Padding="12,8">
-                                <Entry Placeholder="https://..."
+                                <Entry Text="{Binding ImageUrl}"
+                                       Placeholder="https://..."
                                        PlaceholderColor="{StaticResource ForegroundMuted}"
                                        TextColor="{StaticResource Foreground}"
                                        BackgroundColor="Transparent"
