@@ -96,19 +96,14 @@
                                    Source="{Binding Recipe.ImageUrl}"
                                    Aspect="AspectFill"
                                    HeightRequest="400"
-                                   MaximumHeightRequest="600"
                                    VerticalOptions="Fill"
-                                   HorizontalOptions="Fill">
-                                <Image.Clip>
-                                    <RoundRectangleGeometry CornerRadius="20" />
-                                </Image.Clip>
-                            </Image>
+                                   HorizontalOptions="Fill" />
                         </Frame>
                         
                         <!-- Favorite Heart Button (Overlaid on Image) -->
                         <Border BackgroundColor="{StaticResource Surface}"
                                 Stroke="Transparent"
-                                StrokeShape="RoundRectangle 24"
+                                StrokeShape="Ellipse"
                                 Padding="12"
                                 Margin="16"
                                 HorizontalOptions="End"
