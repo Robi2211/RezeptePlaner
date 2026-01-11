@@ -22,6 +22,12 @@ public partial class RecipesPage : ContentPage
     {
         var width = Width;
         
+        // Validate width to handle initial layout phases
+        if (width <= 0 || double.IsNaN(width) || double.IsInfinity(width))
+        {
+            return;
+        }
+        
         if (width > 1200)
         {
             // Large/desktop: 3 columns
@@ -43,5 +49,12 @@ public partial class RecipesPage : ContentPage
     {
         base.OnAppearing();
         UpdateGridColumns();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        // Unsubscribe from event to prevent memory leaks
+        SizeChanged -= OnPageSizeChanged;
     }
 }
